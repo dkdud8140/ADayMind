@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@import url("basic.css");
+body {
+	background-image: url("../BG-V2_1.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+
+.main_bubble {
+	width: 40%;
+	height: 75%;
+	margin: 2.5% auto;
+	transition: all 1s;
+	background: url("../bubbleAndperson.png") no-repeat;
+	background-size: 100%;
+}
+
+.bubble_box {
+	font-family: "cafe24sa";
+	width: 100%;
+	height: 45%;
+	align-content: center;
+	padding: 4%;
+	position: relative;
+}
+
+.p1 {
+	color: #3f6d84;
+	font-size: 1.2vw;
+	text-align: center;
+	margin: 0 auto;
+	height: 10%;
+}
+
+.p2 {
+	color: black;
+	font-size: 1.8vw;
+	text-align: center;
+	width: 75%;
+	margin: 2.5% auto;
+	line-height: 150%;
+	word-break: keep-all;
+	height: 75%;
+	overflow: auto;
+}
+
+.p3 {
+	color: black;
+	font-size: 1.2vw;
+	text-align: center;
+	margin: 2.5% auto;
+	height: 12%;
+}
+
+.siren {
+	width: 13%;
+	position: absolute;
+	left: 10%;
+	top: 13%;
+	user-select: none;
+	cursor: pointer;
+}
+
+.siren img {
+	width: 30%;
+}
+
+#siren {
+	display: none;
+}
+
+
+h4#siren_title {
+	border-bottom : 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: #3f6d84;
+}
+
+
+#body_size_box {
+	width: 100vw;
+	height: 85vh;
+	perspective: 1500px;
+	background: rgba(0, 0, 0, 0);
+}
+
+
+
+.main_bubble.active {
+	transform: translateZ(-500px);
+}
+
+.main_bubble.active2 {
+	transform: translateZ(-1500px) scale(0);
+	transform-origin: 50% 0%;
+}
+
+.main_bubble.active3 {
+	transform: translateZ(-500px);
+	animation: move 1s forwards;
+}
+
+
+
+@keyframes unfoldIn { 
+	0% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+	50% {
+		transform : scaleX(1) scaleY(0.005);
+	}
+	100% {
+		transform : scaleY(1) scaleX(1);
+	}
+}
+
+@keyframes move { 
+	100% {
+		transform: translateZ(0px);
+	}
+}

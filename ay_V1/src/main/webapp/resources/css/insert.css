@@ -1,0 +1,137 @@
+@charset "UTF-8";
+@import url("basic.css");
+
+body {
+  background-image: url("../BG-V2_1.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+
+/* 가장 큰 틀 */
+#b_container2 {
+position: relative;
+width: 100%;
+height: 85%;
+perspective: 1500px;
+}
+/* 활동1 */
+#b2_con.active{
+transform:translateZ(-500px);
+}
+/* 활동2 */
+#b2_con.active2{
+transform:translateZ(-1500px) scale(0);
+transform-origin: 50% 0%;
+}
+/* 활동3 */
+#b2_con.active3 {
+	transform: translateZ(-500px);
+	animation: move 1s forwards;
+}
+
+@keyframes move { 
+	100% {
+		transform: translateZ(0px);
+	}
+}
+/* b_container 다음 큰 틀 */
+#b2_con {
+width: 100%;
+height: 85vh;
+position: relative;
+transition: all 1s;
+ /* animation: move 1s; */
+}
+ /*@keyframes move {
+100% {
+transform: translateZ(-500px);
+}
+} */
+/* 버블박스 안에 내용들을 정리할 틀 */
+#grid{
+display:grid;
+position: absolute;
+top:2%;
+left:38%;
+z-index: 1;
+justify-items: center;
+align-items: center;
+
+}
+#coment{
+color: steelblue;
+}
+/* b2_con 다음으로 큰 틀 */
+#imgntext {
+
+top:0;
+left:20%;
+width: 52%;
+height: 30%;
+margin: auto;
+padding: 70px;
+
+background: transparent;
+}
+/* 인풋 2개 같은 클래스이름 */
+.img0 {
+font-size:2vh;
+background-color:white;
+outline: none;
+border: none;
+/* text-align: center; */
+}
+/* 인풋1 */
+#text1 {
+position: absolute;
+left:0;
+border-bottom: 3px solid black;
+width:30vw;
+height: 12vh;
+background-color: transparent;
+}
+/* 인풋2 */
+#text2 {
+position: absolute;
+top:650%;
+left:0;
+width:23vw;
+height: 10vh;
+}
+.save {
+	background-color:steelblue;
+	color: white;
+	position:absolute;
+	top:37%;
+	left:36%;
+	width:8%;
+	height:5%;
+	border: none;
+	outline: none;
+}
+.save:hover {
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+/* 아래 사람이미지 */
+#bottom {
+/*
+background-image: url("../person.png");
+background-repeat:no-repeat;
+position: absolute;
+left: 40%;
+top: 70%;
+width: 25%;
+height: 20%;
+margin: auto;
+padding: 1px;
+*/
+width: 40%;
+   height: 75%;
+   margin: 2.5% auto;
+   transition: all 1s;
+   background: url("../bubbleAndperson.png") no-repeat;
+   background-size: 100%;
+
+}

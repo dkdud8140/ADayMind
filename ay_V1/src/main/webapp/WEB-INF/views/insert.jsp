@@ -13,6 +13,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 
+	<form>
 	<div id="b_container2">
 		<section id="b2_con" class="active3">
 			<!-- bottom 상자 위로 위동 -->
@@ -21,7 +22,7 @@
 				 <img src="resources/bubble_white.svg" alt="">
 				<div id="grid">
 					<div id="coment">
-						<h3>"익명"님의 이름으로 하루생각을 보냅니다.</h3>
+						<h3>""님의 이름으로 하루생각을 보냅니다.</h3>
 					</div>
 					<div>
 						<input type="text" id="text1" class="img0" placeholder="하루생각을 입력하세요." />
@@ -36,6 +37,7 @@
 			</div>
 		</section>
 	</div>
+	</form>
 </body>
 <script>
 	let box = document.querySelector("#b2_con");
@@ -43,6 +45,13 @@
 	setTimeout(function() {
 		box.classList.remove("active3");
 	}, 1000);
+	
+	let button = document.querySelector("button")
+	
+	button.addEventListener("click")
+	
+	
+	
 </script>
 </body>
 </html>

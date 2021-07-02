@@ -1,4 +1,4 @@
-package com.callor.mind.model;
+package com.callor.mind.model.vo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

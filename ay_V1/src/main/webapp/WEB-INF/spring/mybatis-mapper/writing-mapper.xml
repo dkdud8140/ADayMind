@@ -8,11 +8,66 @@
  	<select id="selectAll"></select>
  	<select id="findById"></select>
 
+	<select id="selectOrderByLike" resultType="WriteListDTO">
+		SELECT 
+			W.wr_seq AS vw_seq,
+		    U.u_seq AS vw_user_seq,
+			U.u_nick AS vw_nick,
+			W.wr_content AS vw_content,
+			W.wr_like_count AS vw_like_conunt,
+			W.wr_warning_count AS vw_warning_conunt,
+			W.wr_write_date AS vw_write_date,
+			W.wr_last_date AS vw_last_date,
+			W.wr_origin AS wv_origin
+		FROM tbl_writing W
+			LEFT JOIN tbl_user U
+				ON W.wr_user = U.u_seq
+		WHERE wr_like_count > 0
+		ORDER BY wr_like_count 
+	
+	</select>
+	
+	<select id="selectByUserLike" resultType="LikeListDTO">
+		SELECT
+			W.wr_content AS vl_content,
+		    W.wr_origin AS vl_origin,
+		    U.u_nick AS vl_user,
+			L.li_date AS vl_like_date,
+		    W.wr_like_count AS vl_like_count
+		FROM tbl_like L
+			LEFT JOIN tbl_writing W
+				ON L.li_wr_seq = W.wr_seq
+		    LEFT JOIN tbl_user U
+				ON W.wr_user = U.u_seq
+	        
+		WHERE L.li_fan = #{user}
+		ORDER BY L.li_date DESC
+	</select>
+	
+	<select id="selectMyWriting" resultType="WriteListDTO">
+		SELECT 
+			W.wr_seq AS vw_seq,
+		    U.u_seq AS vw_user_seq,
+			U.u_nick AS vw_nick,
+			W.wr_content AS vw_content,
+			W.wr_like_count AS vw_like_conunt,
+			W.wr_warning_count AS vw_warning_conunt,
+			W.wr_write_date AS vw_write_date,
+			W.wr_last_date AS vw_last_date,
+			W.wr_origin AS wv_origin
+		FROM tbl_writing W
+			LEFT JOIN tbl_user U
+				ON W.wr_user = U.u_seq
+		WHERE u_seq = #{user}
+		ORDER BY wr_last_date 
+	</select>
+
+
  	<insert id="insert" parameterType="WritingVO">
  		INSERT INTO tbl_writing
- 			(wr_seq,wr_user,wr_content,wr_origin)
- 		VALUSE
- 			(#{wr_seq},#{wr_user},#{wr_content},#{wr_origin})
+ 			(wr_user,wr_content,wr_origin)
+ 		VALUES
+ 			(#{wr_user},#{wr_content},#{wr_origin})
  	</insert>
  	
  	

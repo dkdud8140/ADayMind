@@ -24,99 +24,33 @@
 	<section>
 	
 		<div id="b_container" class="active3">
+		    
 		       <!-- 리스트 타이틀 6월 13일 -->
 	        <div id="list_title">
 	          <span id="list_span"></span>
 	          <span id="list_span2"></span>
 	        </div>
        			<!-- 리스트 타이틀 끝-->
-			<div class="board item1">
-				<a class="card"> <img class="abc"
-					src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span> <img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이
-							공감하였어요!
-						</span>
-					</article>
-				</a>
-			</div>
+       			
+       		<c:forEach items="${LISTS}" var="LIST" >	
+				<div class="board item1">
+					<a class="card"> <img class="abc"
+						src="${rootPath}/resources/board_white.svg" />
+						<article>
+							<img class="profile" src="${rootPath}/resources/profile.png" />
+							<h1>${LIST.vl_content}</h1>
+							<span> <img class="heart"
+								src="${rootPath}/resources/heart_red.png" /> "${LIST.vl_like_count}"명이
+								공감하였어요!
+							</span>
+						</article>
+					</a>
+				</div>
+			</c:forEach>
 			
 			
-			<div class="board item2">
-				<a class="card"> <img class="abc"
-					src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item3">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item4">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item5">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item6">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item7">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
-			<div class="board item7">
-				<a class="card"> <img class="abc" src="${rootPath}/resources/board_white.svg" />
-					<article>
-						<img class="profile" src="${rootPath}/resources/profile.png" />
-						<h1>수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해 수고했어 오늘도</h1>
-						<span><img class="heart"
-							src="${rootPath}/resources/heart_red.png" /> 15,201,299명이 공감하였어요!</span>
-					</article>
-				</a>
-			</div>
 		</div>
+		
 	</section>
 </body>
 <script> // 6월 13일

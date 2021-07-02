@@ -1,4 +1,4 @@
-package com.callor.mind.model;
+package com.callor.mind.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LikeListVO {
+public class LikeVO {
 
 	private String li_seq;			// 공감번호 정수형
 	private String li_wr_seq;		// 글번호 정수형

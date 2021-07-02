@@ -1,4 +1,4 @@
-package com.callor.mind.model;
+package com.callor.mind.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WarningListVO {
+public class WarningVO {
 	private String wa_seq;			// 신고번호 정수형
 	private String wa_writing;		// 글번호 정수형
 	private String wa_user;			// 유저번호 정수형

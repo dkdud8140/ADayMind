@@ -1,9 +1,19 @@
 package com.callor.mind.service;
 
-import com.callor.mind.model.WritingVO;
+import java.util.List;
+
+import com.callor.mind.model.dto.LikeListDTO;
+import com.callor.mind.model.dto.WriteListDTO;
+import com.callor.mind.model.vo.WritingVO;
 
 public interface WritingService {
 
+	public List<WriteListDTO> selectOrderByLike();
+	
+	public List<WriteListDTO> selectMyWriting(String user);
+	public List<LikeListDTO> selectByUserLike(String user);
+	
+	
 	public int insert(WritingVO wtVO);
 	
 	

@@ -23,6 +23,6 @@ public class WriteListDTO {
 	private int vw_warning_conunt;
 	private String vw_write_date;
 	private String vw_last_date;
-	private String wv_origin;
+	private String vw_origin;
 	
 }

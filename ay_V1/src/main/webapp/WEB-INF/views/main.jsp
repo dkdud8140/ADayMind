@@ -140,10 +140,10 @@ div#background1 {
 				<input type="checkbox" id="siren" />
 
 				<p class="p1">
-					<b>“익명”</b>님이 보내온 하루 생각입니다.
+					<b>“${WRITING.vw_nick}”</b>님이 보내온 하루 생각입니다.
 				</p>
-				<p class="p2">수고했어 오늘도 아무도 너의 슬픔에 관심 없대도 난 늘 응원해, 수고했어 오늘도</p>
-				<p class="p3">수고했어 오늘도 - 옥상달빛</p>
+				<p class="p2">${WRITING.vw_content}</p>
+				<p class="p3">${WRITING.vw_origin}</p>
 				<div class="heart-box">
 					<div class="content">
 						<span class="heart"></span>

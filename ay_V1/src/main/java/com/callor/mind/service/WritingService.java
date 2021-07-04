@@ -8,6 +8,8 @@ import com.callor.mind.model.vo.WritingVO;
 
 public interface WritingService {
 
+	public WriteListDTO selectByRandom();
+	
 	public List<WriteListDTO> selectOrderByLike();
 	
 	public List<WriteListDTO> selectMyWriting(String user);

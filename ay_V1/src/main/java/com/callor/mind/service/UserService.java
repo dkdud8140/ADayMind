@@ -18,8 +18,15 @@ public interface UserService {
 	
 	public int expire(String seq);		// 탈퇴
 
+	
+	// 유저 경고횟수 업데이트
+	public int updateWarning(UserVO userVO); 	
+	
+	
 	//일단 보류
 	// 정보는 그대로 두고 접근제한만. 
+	// 워닝 테이블에서 유저ID 셀렉트 카운트수가 20이상이면 자동 밴
+	// if 문 넣기
 //	public int ban(String seq);
 	
 }

@@ -10,6 +10,8 @@ import com.callor.mind.dao.ext.WritingDao;
 import com.callor.mind.dao.ext.WritingViewDao;
 import com.callor.mind.model.dto.LikeListDTO;
 import com.callor.mind.model.dto.WriteListDTO;
+import com.callor.mind.model.vo.LikeVO;
+import com.callor.mind.model.vo.WarningVO;
 import com.callor.mind.model.vo.WritingVO;
 import com.callor.mind.service.WritingService;
 
@@ -80,6 +82,41 @@ public class WritingServiceImplV1 implements WritingService {
 	public List<LikeListDTO> selectByUserLike(String user) {
 		// TODO 내가 좋아요한 글 list
 		return wtVDao.selectByUserLike(user);
+	}
+
+
+	@Override
+	public List<WarningVO> selectByWarning() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int delete(WritingVO wtVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int update(WritingVO wtVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int like(LikeVO likeVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int warning(WarningVO wrVO) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

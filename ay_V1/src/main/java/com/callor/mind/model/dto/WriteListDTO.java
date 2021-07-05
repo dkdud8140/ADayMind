@@ -17,7 +17,9 @@ public class WriteListDTO {
 
 	private String vw_seq;
 	private String vw_user_seq;
+	
 	private String vw_nick;
+	
 	private String vw_content;
 	private int vw_like_conunt;
 	private int vw_warning_conunt;

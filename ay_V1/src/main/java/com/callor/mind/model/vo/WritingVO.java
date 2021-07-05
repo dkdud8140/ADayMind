@@ -16,6 +16,7 @@ public class WritingVO {
 
 	private String wr_seq;			// 글번호 정수형
 	private String wr_user;			// 유저번호 정수형
+	
 	private String wr_content;		// 글내용 가변문자열(3000)
 	private int wr_like_count;		// 글공감 정수형
 	private int wr_warning_count;	// 글신고 정수형

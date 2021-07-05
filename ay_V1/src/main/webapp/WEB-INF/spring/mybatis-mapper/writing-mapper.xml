@@ -7,7 +7,11 @@
  
  	<select id="selectAll">
  		SELECT * FROM tbl_writing
+ 			FROM tbl_writing W
+			LEFT JOIN tbl_user U
+				ON W.wr_user = U.u_seq
  	</select>
+ 	
  	<select id="findById"></select>
 
 

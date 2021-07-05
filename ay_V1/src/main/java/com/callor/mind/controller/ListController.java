@@ -41,9 +41,13 @@ public class ListController {
 	}
 	
 	@RequestMapping(value="/iwrite", method=RequestMethod.GET)
-	public String mylist(Model model) {
+	public String mylist(Model model, String seq) {
 		
+		seq = "7";
 		
+		List<WriteListDTO> wrList = wrSer.selectMyWriting(seq);
+		
+		model.addAttribute("LISTS", wrList);
 		model.addAttribute("title", "내가 쓴 하루 생각");
 		return "list/list";
 	}
@@ -51,8 +55,9 @@ public class ListController {
 	@RequestMapping(value="/bestlist", method=RequestMethod.GET)
 	public String bestlist(Model model) {
 		
+		List<WriteListDTO> wrList = wrSer.selectOrderByLike();
 		
-		
+		model.addAttribute("LISTS", wrList);
 		model.addAttribute("title", "인기 하루 생각");
 		return "list/list";
 	}

@@ -15,6 +15,7 @@ CREATE TABLE tbl_user (
 CREATE TABLE tbl_writing (
 	wr_seq				BIGINT	AUTO_INCREMENT	PRIMARY KEY,
 	wr_user				BIGINT	NOT NULL	,
+    wr_nick				VARCHAR(256) NOT NULL,
 	wr_content			VARCHAR(3000)	NOT NULL	,
     wr_origin			VARCHAR(50),
 	wr_like_count		INT		,
@@ -52,7 +53,8 @@ DROP TABLE tbl_warning;
 DROP TABLE tbl_writing;
 DROP TABLE tbl_like;
 
-
+DELETE FROM tbl_writing
+WHERE 1=1;
 
 SELECT *  FROM tbl_writing ;
 SELECT *  FROM tbl_user ;
@@ -78,34 +80,35 @@ SELECT* FROM tbl_writing
 WHERE wr_like_count > 0
 ORDER BY wr_like_count ;
 
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (18, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (15, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (13, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (20, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (2, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (8, 6, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (11, 6, 1);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (18, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (15, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (13, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (20, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (2, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (8, 6);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (11, 6);
 
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (18, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (15, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (11, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (20, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (6, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (5, 7, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (10, 7, 1);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (18, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (15, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (11, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (20, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (6, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (5, 7);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (10, 7);
 
 
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (2, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (4, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (6, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (8, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (10, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (12, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (14, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (16, 4, 1);
-INSERT INTO tbl_like ( li_wr_seq, li_fan, li_check) VALUES (18, 4, 1);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (2, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (4, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (6, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (8, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (10, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (12, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (14, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (16, 2);
+INSERT INTO tbl_like ( li_wr_seq, li_fan) VALUES (18, 2);
 
 SELECT * FROM tbl_like;
+SELECT * FROM tbl_user;
 
 CREATE VIEW view_write 
 AS(
@@ -146,7 +149,7 @@ FROM tbl_like L
         
 SHOW columns FROM view_write;
 
-
+DESC tbl_writing;
 
 
 

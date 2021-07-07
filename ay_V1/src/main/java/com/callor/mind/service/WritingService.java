@@ -2,21 +2,19 @@ package com.callor.mind.service;
 
 import java.util.List;
 
-import com.callor.mind.model.dto.LikeListDTO;
-import com.callor.mind.model.dto.WriteListDTO;
-import com.callor.mind.model.vo.LikeVO;
-import com.callor.mind.model.vo.WarningVO;
-import com.callor.mind.model.vo.WritingVO;
+import com.callor.mind.model.LikeVO;
+import com.callor.mind.model.WarningVO;
+import com.callor.mind.model.WritingVO;
 
 public interface WritingService {
 
-	public WriteListDTO selectByRandom();		
+	public WritingVO selectByRandom();		
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	
-	public List<WriteListDTO> selectOrderByLike();
+	public List<WritingVO> selectOrderByLike();
 	
-	public List<WriteListDTO> selectMyWriting(String user);
-	public List<LikeListDTO> selectByUserLike(String user);
+	public List<WritingVO> selectMyWriting(Long user);
+	public List<WritingVO> selectByUserLike(Long user);
 	
 	public int insert(WritingVO wtVO);
 	public int delete(WritingVO wtVO);

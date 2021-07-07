@@ -1,4 +1,4 @@
-package com.callor.mind.model.dto;
+package com.callor.mind.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,12 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LikeListDTO {
+public class UserProfVO {
 
-	private String vl_content;
-	private String vl_origin;
-	private String vl_user ;
-	private String vl_like_date;
-	private String vl_like_count;
-		
+	private Long prof_seq;		// 사진번호 정수형
+	private String prof_url;		// 사진URL 가변문자열(300)
+
 }

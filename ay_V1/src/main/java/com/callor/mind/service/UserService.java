@@ -2,7 +2,7 @@ package com.callor.mind.service;
 
 import java.util.List;
 
-import com.callor.mind.model.vo.UserVO;
+import com.callor.mind.model.UserVO;
 
 public interface UserService {
 

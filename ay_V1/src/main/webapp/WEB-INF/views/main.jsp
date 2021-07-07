@@ -140,10 +140,10 @@ div#background1 {
 				<input type="checkbox" id="siren" />
 
 				<p class="p1">
-					<b>“${WRITING.vw_nick}”</b>님이 보내온 하루 생각입니다.
+					<b>“${WRITING.wr_nick}”</b>님이 보내온 하루 생각입니다.
 				</p>
-				<p class="p2">${WRITING.vw_content}</p>
-				<p class="p3">${WRITING.vw_origin}</p>
+				<p class="p2">${WRITING.wr_content}</p>
+				<p class="p3">${WRITING.wr_origin}</p>
 				<div class="heart-box">
 					<div class="content">
 						<span class="heart"></span>
@@ -165,19 +165,19 @@ div#background1 {
 					for="r1"> 성적인 콘텐츠</label>
 			</div>
 			<div>
-				<input type="radio" name="r1" id="r1" value="1"><label
+				<input type="radio" name="r2" id="r2" value="1"><label
 					for="r1"> 폭력적 또는 혐오스러운 콘텐츠</label>
 			</div>
 			<div>
-				<input type="radio" name="r1" id="r1" value="1"><label
+				<input type="radio" name="r3" id="r3" value="1"><label
 					for="r1"> 증오 또는 악의적인 콘텐츠</label>
 			</div>
 			<div>
-				<input type="radio" name="r1" id="r1" value="1"><label
+				<input type="radio" name="r4" id="r4" value="1"><label
 					for="r1"> 희롱 또는 괴롭힘</label>
 			</div>
 			<div>
-				<input type="radio" name="r1" id="r1" value="1"><label
+				<input type="radio" name="r5" id="r5" value="1"><label
 					for="r1"> 유해하거나 위험한 행위</label>
 			</div>
 			<textarea rows="" cols=""></textarea>

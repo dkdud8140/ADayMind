@@ -1,4 +1,6 @@
-package com.callor.mind.model.vo;
+package com.callor.mind.model;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +17,9 @@ import lombok.ToString;
 @Builder
 public class LikeVO {
 
-	private String li_seq;			// 공감번호 정수형
-	private String li_wr_seq;		// 글번호 정수형
+	private Long li_seq;			// 공감번호 정수형
+	private Long li_wr_seq;		// 글번호 정수형
 	private String li_fan;			// 공감한유저 정수형
-	private String li_date;			// 공감일자 TIMESTAMP
-	private Boolean li_check;		// 공감여부 BOOLEAN
+	private Date li_date;			// 공감일자 TIMESTAMP
 
 }

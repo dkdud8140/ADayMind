@@ -1,7 +1,6 @@
 package com.callor.mind.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,8 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.callor.mind.model.dto.LikeListDTO;
-import com.callor.mind.model.dto.WriteListDTO;
+import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.WritingService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,27 +25,27 @@ public class ListController {
 	protected final WritingService wrSer;
 
 	@RequestMapping(value="/ilike", method=RequestMethod.GET)
-	public String list(String seq, Model model) {
+	public String list(Long seq, Model model) {
 		
-		seq = "7";
+		seq = 7L;
 		
-		List<LikeListDTO> likeList = wrSer.selectByUserLike(seq);
+		List<WritingVO> likeList = wrSer.selectByUserLike(seq);
 		
 		log.debug(likeList.toString());
 		
-		model.addAttribute("LISTS", likeList);
+		model.addAttribute("LIKELIST", likeList);
 		model.addAttribute("title", "나의 공감리스트");
 		return "list/list";
 	}
 	
 	@RequestMapping(value="/iwrite", method=RequestMethod.GET)
-	public String mylist(Model model, String seq) {
+	public String mylist(Model model, Long seq) {
 		
-		seq = "7";
+		seq = 5L;
 		
-		List<WriteListDTO> wrList = wrSer.selectMyWriting(seq);
+		List<WritingVO> wrList = wrSer.selectMyWriting(seq);
 		
-		model.addAttribute("LISTS", wrList);
+		model.addAttribute("MYWRITING", wrList);
 		model.addAttribute("title", "내가 쓴 하루 생각");
 		return "list/list";
 	}
@@ -55,9 +53,9 @@ public class ListController {
 	@RequestMapping(value="/bestlist", method=RequestMethod.GET)
 	public String bestlist(Model model) {
 		
-		List<WriteListDTO> wrList = wrSer.selectOrderByLike();
+		List<WritingVO> wrList = wrSer.selectOrderByLike();
 		
-		model.addAttribute("LISTS", wrList);
+		model.addAttribute("LIKELIST", wrList);
 		model.addAttribute("title", "인기 하루 생각");
 		return "list/list";
 	}

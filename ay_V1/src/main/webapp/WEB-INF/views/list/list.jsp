@@ -24,33 +24,24 @@
 	<section>
 	
 		<div id="b_container" class="active3">
-		    
 		       <!-- 리스트 타이틀 6월 13일 -->
 	        <div id="list_title">
 	          <span id="list_span"></span>
 	          <span id="list_span2"></span>
 	        </div>
        			<!-- 리스트 타이틀 끝-->
-       			
-       		<c:forEach items="${LISTS}" var="LIST" >	
-				<div class="board item1">
-					<a class="card"> <img class="abc"
-						src="${rootPath}/resources/board_white.svg" />
-						<article>
-							<img class="profile" src="${rootPath}/resources/profile.png" />
-							<h1>${LIST.vl_content}</h1>
-							<span> <img class="heart"
-								src="${rootPath}/resources/heart_red.png" /> "${LIST.vl_like_count}"명이
-								공감하였어요!
-							</span>
-						</article>
-					</a>
-				</div>
-			</c:forEach>
-			
-			
+			<c:choose>
+				<c:when test="${title eq '인기 하루 생각'}">
+					<%@ include file="/WEB-INF/views/list/bestlist.jsp"%>
+				</c:when>
+				<c:when test="${title eq '내가 쓴 하루 생각'}">
+					<%@ include file="/WEB-INF/views/list/iwrite.jsp"%>
+				</c:when>
+				<c:when test="${title eq '나의 공감리스트'}">
+					<%@ include file="/WEB-INF/views/list/ilike.jsp"%>
+				</c:when>
+			</c:choose>
 		</div>
-		
 	</section>
 </body>
 <script> // 6월 13일

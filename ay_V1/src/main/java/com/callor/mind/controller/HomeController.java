@@ -8,8 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.callor.mind.dao.ext.WritingViewDao;
-import com.callor.mind.model.dto.WriteListDTO;
+import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.WritingService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		
-		WriteListDTO wrtDTO = wtSer.selectByRandom();
+		WritingVO wrtDTO = wtSer.selectByRandom();
 		model.addAttribute("WRITING", wrtDTO);
 		
 		return "main";

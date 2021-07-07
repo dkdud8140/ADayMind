@@ -5,15 +5,46 @@
   
  <mapper namespace="com.callor.mind.dao.ext.WritingDao">
  
- 	<select id="selectAll">
+ 	<select id="selectAll" resultType="WritingVO">>
  		SELECT * FROM tbl_writing
- 			FROM tbl_writing W
-			LEFT JOIN tbl_user U
-				ON W.wr_user = U.u_seq
  	</select>
  	
- 	<select id="findById"></select>
-
+ 	<select id="selectById" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing
+		WHERE wr_seq = #{seq}	
+ 	</select>
+	
+	<select id="selectOrderByLike" resultType="WritingVO">
+		SELECT * FROM tbl_writing 
+		WHERE wr_like_count > 0
+		ORDER BY wr_like_count DESC
+	
+	</select>
+	
+	<select id="selectByUserLike" resultType="WritingVO">
+		SELECT *
+		FROM tbl_writing W 
+			LEFT JOIN tbl_like L
+				ON L.li_wr_seq = W.wr_seq
+		WHERE L.li_fan = #{user}
+		ORDER BY L.li_date DESC
+	</select>
+	
+	<select id="selectMyWriting" resultType="WritingVO">
+		SELECT *
+		FROM tbl_writing W
+			LEFT JOIN tbl_user U
+				ON W.wr_user = U.u_seq
+		WHERE u_seq = #{user}
+		ORDER BY wr_last_date 
+	</select>
+	
+	<select id="selectByRandom" resultType="WritingVO">
+		SELECT * FROM tbl_writing
+		ORDER BY RAND() LIMIT 1
+	</select>
+	
+	
 
  	<insert id="insert" parameterType="WritingVO">
  		INSERT INTO tbl_writing

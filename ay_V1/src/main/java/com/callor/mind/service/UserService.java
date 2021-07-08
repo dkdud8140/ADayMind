@@ -9,14 +9,15 @@ public interface UserService {
 	// 관리자용 리스트출력
 	public List<UserVO> selectAll();
 	
-	public UserVO findById(String seq);
+	public UserVO findById(Long seq);
 	
-	public UserVO login(String id, String pw);
+//	public UserVO login(String id, String pw);
+	public UserVO login(UserVO userVO);
 	
 	public int join(UserVO uservo);
 	public int update(UserVO uservo);	// 회원정보 수정
 	
-	public int expire(String seq);		// 탈퇴
+	public int expire(Long seq);		// 탈퇴
 
 	
 	// 유저 경고횟수 업데이트

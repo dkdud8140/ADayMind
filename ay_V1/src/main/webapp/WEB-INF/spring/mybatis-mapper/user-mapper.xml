@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.callor.mind.dao.ext.UserDao">
+	
+	<select id="selectAll" resultType="UserVO">
+		SELECT * FROM tbl_user
+	</select>
+	
+	
+	<select id="findById" resultType="UserVO">
+	</select>
+	
+	<select id="login" resultType="UserVO">
+		SELECT u_id, u_pw FROM tbl_user
+		WHERE u_id = #{us_id}
+		AND u_pw = #{us_pw}
+	</select>
+	
+	
+	<!-- 회원가입  -->
+	<insert id="insert" parameterType="UserVO">
+		INSERT INTO tbl_user (
+			u_id, u_pw, u_nick, u_mail
+		) 
+		VALUES (
+		#{u_id}, #{u_pw}, #{u_nick}, #{u_mail}
+		)
+	</insert>
+	
+	<update id="update" parameterType="UserVO">
+	</update>
+	
+	<delete id="DELETE">
+	</delete>
+	
+	
+</mapper>

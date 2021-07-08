@@ -1,4 +1,5 @@
 
+USE adaymind;
 
 CREATE TABLE tbl_user (
 	u_seq	BIGINT			auto_increment	PRIMARY KEY,
@@ -103,3 +104,27 @@ ALTER TABLE tbl_like
 ADD CONSTRAINT fk_li_user
 FOREIGN KEY(li_fan)
 REFERENCES tbl_user(u_seq);
+
+
+SELECT * FROM tbl_writing 
+WHERE wr_like_count > 0
+ORDER BY wr_like_count DESC;
+
+SELECT *
+FROM tbl_writing W 
+	LEFT JOIN tbl_like L
+		ON L.li_wr_seq = W.wr_seq
+WHERE L.li_fan = 2
+ORDER BY L.li_date DESC;
+
+
+SELECT *
+FROM tbl_writing W
+	LEFT JOIN tbl_user U
+		ON W.wr_user = U.u_seq
+WHERE u_seq = 5
+ORDER BY wr_last_date; 
+
+SELECT * FROM tbl_writing 
+		WHERE wr_like_count > 0
+		ORDER BY wr_like_count DESC;

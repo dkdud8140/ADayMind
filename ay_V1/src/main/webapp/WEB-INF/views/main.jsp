@@ -12,6 +12,129 @@
 <link href="${rootPath}/resources/css/main.css?ver-013" rel="stylesheet" />
 
 <style>
+@import url("basic.css");
+body {
+	background-image: url("resources/BG-V2_1.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+
+.main_bubble {
+	width: 40%;
+	height: 75%;
+	margin: 2.5% auto;
+	transition: all 1s;
+	background: url("resources/bubbleAndperson.png") no-repeat;
+	background-size: 100%;
+}
+
+.bubble_box {
+	font-family: "cafe24sa";
+	width: 100%;
+	height: 45%;
+	align-content: center;
+	padding: 4%;
+	position: relative;
+}
+
+.p1 {
+	color: #3f6d84;
+	font-size: 20px;
+	text-align: center;
+	margin: 0 auto;
+	height: 10%;
+}
+
+.p2 {
+	color: black;
+	font-size: 30px;
+	text-align: center;
+	width: 75%;
+	margin: 2.5% auto;
+	line-height: 150%;
+	word-break: keep-all;
+	height: 75%;
+	overflow: auto;
+}
+
+.p3 {
+	color: black;
+	font-size: 20px;
+	text-align: center;
+	margin: 2.5% auto;
+	height: 12%;
+}
+
+.siren {
+	width: 13%;
+	position: absolute;
+	left: 10%;
+	top: 13%;
+	user-select: none;
+	cursor: pointer;
+}
+
+.siren img {
+	width: 30%;
+}
+
+#siren {
+	display: none;
+}
+
+
+h4#siren_title {
+	border-bottom : 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: #3f6d84;
+}
+
+
+#body_size_box {
+	width: 100vw;
+	height: 85vh;
+	perspective: 1500px;
+	background: rgba(0, 0, 0, 0);
+}
+
+
+
+.main_bubble.active {
+	transform: translateZ(-500px);
+}
+
+.main_bubble.active2 {
+	transform: translateZ(-1500px) scale(0);
+	transform-origin: 50% 0%;
+}
+
+.main_bubble.active3 {
+	transform: translateZ(-500px);
+	animation: move 1s forwards;
+}
+
+
+
+@keyframes unfoldIn { 
+	0% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+	50% {
+		transform : scaleX(1) scaleY(0.005);
+	}
+	100% {
+		transform : scaleY(1) scaleX(1);
+	}
+}
+
+@keyframes move { 
+	100% {
+		transform: translateZ(0px);
+	}
+}
 body {
 position: relative;
 
@@ -33,7 +156,7 @@ div.siren_box {
 	height: auto;
 	border-radius: 10px;
 	font-family: 'Noto Sans KR';
-	font-size: 1.2vw;
+	font-size: 20px;
 	background-color: #fff;
 	border-radius: 5px;
 	position: absolute;
@@ -87,32 +210,24 @@ div.siren_box {
 }
 
 .heart-box {
-	width: 30px;
-	height: 30px;
+	width: auto;
+	height: auto;
 	position: absolute;
 	left: 45%;
 	transform: translate(-50%, -50%);
-	margin: 8px;
+	text-align: center;
+	margin: 2.5% auto;
+	font-size: 18px;
 }
 
-.content {
-	display: flex;
-	cursor: pointer;
+.heart-box span#like_it {
+	color: red;
 }
 
-.content .heart {
-	width: 30px;
-	height: 30px;
-	background: url("resources/heart_black.png") no-repeat;
-	background-size: 28px 28px;
-	position: absolute;
+.heart-box p {
+	display: inline-block;
 }
 
-.heart:hover {
-	width: 30px;
-	height: 30px;
-	background: url("resources/heart_red.png") no-repeat;
-}
 
 div#background1 {
 	top: 0;
@@ -146,8 +261,9 @@ div#background1 {
 				<p class="p3">${WRITING.wr_origin}</p>
 				<div class="heart-box">
 					<div class="content">
-						<span class="heart"></span>
-						<span class="num"></span>
+						<c:if test="${empty LIKE}"><span id="dont like_it">♡</span></c:if>
+						<c:if test="${not empty LIKE}"><span id="like_it">♥</span></c:if>
+						<p>${WRITING.wr_like_count}명이 공감중</p>
 					</div>
 				</div>
 			</div>

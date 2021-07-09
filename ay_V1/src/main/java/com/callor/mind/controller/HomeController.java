@@ -63,6 +63,9 @@ public class HomeController {
 		
 		int check = lSer.check_like(likeVO);
 		
+		// 좋아요 테이블 find한 결과 값
+		// check = 1 ; 현재 로그인한 유저가 좋아요 누른 글
+		// check = 0 ; 현재 로그인한 유저가 좋아요를 누르지 않은 글
 		model.addAttribute("CHECK",check);
 		model.addAttribute("WRITING", wrtVO);
 		

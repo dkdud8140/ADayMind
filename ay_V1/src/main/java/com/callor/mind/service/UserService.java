@@ -5,23 +5,19 @@ import java.util.List;
 import com.callor.mind.model.UserVO;
 
 public interface UserService {
-
-	// 관리자용 리스트출력
+	
+	// 관리자용 리스트출력 
 	public List<UserVO> selectAll();
 	
-	public UserVO findById(Long seq);
-	
-//	public UserVO login(String id, String pw);
+	public UserVO findById(String u_id);
 	public UserVO login(UserVO userVO);
 	
-	public int join(UserVO uservo);
-	public int update(UserVO uservo);	// 회원정보 수정
+	public UserVO join(UserVO userVO);	// 회원가입 
+	public int update(UserVO userVO); // 회원정보 수정 
+	public int expire(Long seq); // 회원탈퇴 
 	
-	public int expire(Long seq);		// 탈퇴
-
-	
-	// 유저 경고횟수 업데이트
-	public int updateWarning(UserVO userVO); 	
+	// 유저경고 업데이트 횟수 
+	public int updateWarning(UserVO userVO);
 	
 	
 	//일단 보류

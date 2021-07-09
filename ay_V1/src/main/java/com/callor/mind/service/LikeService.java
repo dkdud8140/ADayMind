@@ -4,7 +4,8 @@ import com.callor.mind.model.LikeVO;
 
 public interface LikeService {
 
-	public void likeCountUp();
-	public void likeCountDown();
-	public LikeVO check_like();
+	public int likeCount(LikeVO likeVO);
+	
+	public int check_like(LikeVO likeVO);
+	
 }

@@ -11,30 +11,36 @@
 	
 	
 	<select id="findById" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_id = #{u_id}
 	</select>
-	
 	<select id="login" resultType="UserVO">
-		SELECT u_id, u_pw FROM tbl_user
-		WHERE u_id = #{us_id}
-		AND u_pw = #{us_pw}
+		SELECT * FROM tbl_user
+		WHERE u_id = #{u_id}
+			AND u_pw = #{u_pw}
+		
 	</select>
-	
-	
-	<!-- 회원가입  -->
-	<insert id="insert" parameterType="UserVO">
-		INSERT INTO tbl_user (
-			u_id, u_pw, u_nick, u_mail
-		) 
-		VALUES (
-		#{u_id}, #{u_pw}, #{u_nick}, #{u_mail}
-		)
+	<insert id="insert" >
 	</insert>
-	
-	<update id="update" parameterType="UserVO">
+	<!-- join -->
+	<insert id="insertOrUpdate" parameterType="UserVO">
+		INSERT INTO tbl_user (
+			u_id, u_pw, u_mail, u_nick, u_level
+		)
+		VALUES(
+			#{u_id}, #{u_pw}, #{u_mail}, #{u_nick}, #{u_level}
+		)
+		ON DUPLICATE KEY UPDATE
+			u_id = #{u_id},
+			u_pw = #{u_pw},
+			u_mail = #{u_mail},
+			u_nick = #{u_nick},
+			u_level = #{u_level}
+	</insert>
+	<update id="update" >
 	</update>
 	
 	<delete id="DELETE">
 	</delete>
-	
 	
 </mapper>

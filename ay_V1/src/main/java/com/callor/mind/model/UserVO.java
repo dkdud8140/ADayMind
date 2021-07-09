@@ -23,5 +23,7 @@ public class UserVO {
 	private String u_mail;		// 유저이메일 가변문자열(125)
 	private int u_warning;		// 유저경고 정수형
 	private int ban ; //		// 유저 밴 , 접근제한
+	
+	private int u_level;
 
 }

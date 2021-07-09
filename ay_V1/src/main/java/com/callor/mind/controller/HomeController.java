@@ -2,6 +2,8 @@ package com.callor.mind.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,17 +42,29 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
+	public String main(Locale locale, Model model, HttpSession session) {
 		
-		//d
-		UserVO userVO = uSer.findById(5L);
 		
-		WritingVO wrtDTO = wtSer.selectByRandom();
+		WritingVO wrtVO = wtSer.selectByRandom();
 		
-		LikeVO likeVO = lSer.check_like();
+		Long seq = wrtVO.getWr_seq();
+		UserVO userVO = (UserVO) session.getAttribute("USER");
 		
-		model.addAttribute("LIKE", likeVO);
-		model.addAttribute("WRITING", wrtDTO);
+		if(userVO == null) {
+			model.addAttribute("WRITING", wrtVO);
+			return "main";
+		}
+		
+		Long user = userVO.getU_seq();
+		
+		LikeVO likeVO = new LikeVO();
+		likeVO.setLi_seq(seq);
+		likeVO.setLi_fan(user);
+		
+		int check = lSer.check_like(likeVO);
+		
+		model.addAttribute("CHECK",check);
+		model.addAttribute("WRITING", wrtVO);
 		
 		return "main";
 	}

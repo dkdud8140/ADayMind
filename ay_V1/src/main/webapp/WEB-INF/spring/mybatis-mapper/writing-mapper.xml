@@ -55,6 +55,20 @@
  	
  	
  	<update id="update"></update>
+ 	
+ 	<update id="likeCountUp">
+ 		UPDATE tbl_writing
+ 		SET wr_like_count = wr_like_count +1
+ 		WHERE wr_seq = #{seq} 
+ 	</update>
+ 	
+ 	<update id="likeCountDown">
+ 		UPDATE tbl_writing
+ 		SET wr_like_count = wr_like_count -1
+ 		WHERE wr_seq = #{seq} 
+ 	</update>
+ 	
+ 	
  	<delete id="delete"></delete>
  
  </mapper> 

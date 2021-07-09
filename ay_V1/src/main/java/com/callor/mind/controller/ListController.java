@@ -27,8 +27,6 @@ public class ListController {
 	@RequestMapping(value="/ilike", method=RequestMethod.GET)
 	public String list(Long seq, Model model) {
 		
-		seq = 7L;
-		
 		List<WritingVO> likeList = wrSer.selectByUserLike(seq);
 		
 		log.debug(likeList.toString());
@@ -40,8 +38,6 @@ public class ListController {
 	
 	@RequestMapping(value="/iwrite", method=RequestMethod.GET)
 	public String mylist(Model model, Long seq) {
-		
-		seq = 5L;
 		
 		List<WritingVO> wrList = wrSer.selectMyWriting(seq);
 		

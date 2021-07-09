@@ -15,19 +15,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service("userServiceV1")
 public class UserServiceImplV1 implements UserService{
-	
-	protected final UserDao userDao;
 
+	protected final UserDao userDao;
+	
 	@Override
 	public List<UserVO> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 아이디 중복검사 
 	@Override
-	public UserVO findById(Long seq) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserVO findById(String u_id) {
+		UserVO userVO = userDao.findById(u_id);
+		if(userVO == null) {
+			log.debug("사용할 수 있는 아이디 : {}", u_id);
+		}else {
+			log.debug("사용할 수 없는 아이디 : {}",userVO.toString());
+		}
+		return userVO;
 	}
 
 	@Override
@@ -35,9 +41,19 @@ public class UserServiceImplV1 implements UserService{
 		return userDao.login(userVO);
 	}
 
+	// 회원가입 
 	@Override
-	public int join(UserVO userVO) {
-		return userDao.insert(userVO);
+	public UserVO join(UserVO userVO) {
+		List<UserVO> uList = userDao.selectAll();
+		
+		
+		if(uList == null || uList.size() < 1) {
+			userVO.setU_level(0);
+		}else {
+			userVO.setU_level(9);
+		}
+		userDao.insertOrUpdate(userVO);
+		return userVO;
 	}
 
 	@Override
@@ -58,8 +74,4 @@ public class UserServiceImplV1 implements UserService{
 		return 0;
 	}
 
-	
-	
-	
 }
-	

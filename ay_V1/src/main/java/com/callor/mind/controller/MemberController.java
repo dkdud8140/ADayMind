@@ -3,11 +3,11 @@ package com.callor.mind.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.callor.mind.model.UserVO;
@@ -18,71 +18,66 @@ import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(value="/member")
 @Controller
+@RequestMapping(value = "/member")
 public class MemberController {
-	
-	@Qualifier("userServiceV1")
-	protected final UserService uService;
-	
 
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UserVO userVO, 
-				HttpSession hSession, 
-				RedirectAttributes rttr, 
-				HttpServletRequest req ) throws Exception {
-		hSession = req.getSession();
-		UserVO login = uService.login(userVO);
-		
-		if(login == null) {
-			hSession.setAttribute("USER", null);
-			rttr.addFlashAttribute("msg", false);
-		}else {
-			hSession.setAttribute("USER", login);
-		}
-		log.debug("로그인 : {}",login);
-		log.debug("세션 : {}", hSession);
-		return "redirect:/";
-	}
-	
-	
-	@RequestMapping(value="/logout", method=RequestMethod.POST)
-	public String logout(HttpSession hSession) throws Exception {
-		hSession.invalidate();
-		return "redirect:/";
-	}
-	
-	
-	@RequestMapping(value="/mypage", method=RequestMethod.GET)
+	protected final UserService uService;
+
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypage() {
-		
+
 		return "member/mypage";
 	}
-	
-	
-	@RequestMapping(value="/join", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Model model) {
-		
-		UserVO uVO = new UserVO();
-		model.addAttribute("USER", uVO);
 		return "header";
 	}
-	
-	
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(UserVO userVO) {
+
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(UserVO userVO, Model model) {
 		
-		uService.join(userVO);
+		log.debug("가입정보 : {}", userVO.toString());
+		userVO = uService.join(userVO);
+		return "redirect:/main";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/id_check", method = RequestMethod.GET)
+	public String idChk(String u_id) {
 		
-		return "redirect:/";
+		log.debug("아이디 중복검사 : {}", u_id);
+		UserVO userVO = uService.findById(u_id);
+		if (userVO == null) {
+			return "NOT_USE_ID";
+		} else {
+			return "USE_ID";
+		}
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(UserVO userVO, HttpSession hSession, HttpServletRequest req, RedirectAttributes rttr) {
+		
+		hSession = req.getSession();
+		UserVO login = uService.login(userVO);
+
+		if (login == null) {
+			hSession.setAttribute("USER", null);
+			rttr.addFlashAttribute("msg", false);
+		} else {
+			hSession.setAttribute("USER", login);
+		}
+
+		return "redirect:/main";
 	}
 
 	
-	
-	
-	
-	
+	@RequestMapping(value = "logout", method = RequestMethod.POST)
+	public String logout(HttpSession hSession) {
+		
+		hSession.removeAttribute("USER");
+		return "redirect:/";
+	}
+
 }
-	
-	
-	

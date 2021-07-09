@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <link rel="stylesheet"
-	href="${rootPath}/resources/css/mypage.css?ver-007" />
-<script defer src="${rootPath}/resources/js/mypage.js?ver-006"></script>
+	href="${rootPath}/resources/css/mypage.css?ver-008" />
+<script defer src="${rootPath}/resources/js/mypage.js?ver-004"></script>
 
 </head>
 <body>
@@ -22,31 +22,31 @@
 					<img src="${rootPath}/resources/profile.png" />
 				</div>
 				<div class="proname">
-					<h2>익명000님</h2>
+					<h2>${USER.u_nick}</h2>
 				</div>
 				<p class="bt"></p>
 				<div class="id">
 					<p>아 이 디</p>
 					<div>
-						<input type="text" id="id_input" placeholder="아이디를 입력하세요" />
+						<input type="text" id="id_input" value="${USER.u_id}" disabled />
 					</div>
 				</div>
 				<div class="pw">
 					<p>비 밀 번 호</p>
 					<div>
-						<input type="password" id="pw_input" placeholder="패스워드를 입력하세요" />
+						<input type="password" id="pw_input" value="${USER.u_pw}" disabled/>
 					</div>
 				</div>
 				<div class="nick">
 					<p>닉 네 임</p>
 					<div>
-						<input type="text" id="nick_input" placeholder="닉네임을 입력하세요" />
+						<input type="text" id="nick_input" value="${USER.u_nick}" />
 					</div>
 				</div>
 				<div class="email">
 					<p>이 메 일</p>
 					<div>
-						<input type="email" id="email_input" placeholder="이메일을 입력하세요" />
+						<input type="email" id="email_input" value="${USER.u_mail}" />
 					</div>
 				</div>
 				<div class="infos">

@@ -10,6 +10,7 @@ header {
   width: 100%;
   height: 15%;
 }
+
 div.h_container {
   height: 100%;
   padding-top: 15px;
@@ -285,4 +286,3 @@ cursor: pointer;
     width: 10%;
   }
 }
-

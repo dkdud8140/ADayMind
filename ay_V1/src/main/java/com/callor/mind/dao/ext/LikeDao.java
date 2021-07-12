@@ -7,6 +7,6 @@ import com.callor.mind.model.LikeVO;
 
 public interface LikeDao extends GenericDao<LikeVO, Long> {
 	
-	public int check_like( @Param("li_wr_seq") Long seq, @Param("li_fan")Long user); 
+	public int check_like(LikeVO likeVO); 
 
 }

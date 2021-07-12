@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-<link href="${rootPath}/resources/css/header.css?ver-0032"	rel="stylesheet" />
+<link href="${rootPath}/resources/css/header.css?ver-0034"	rel="stylesheet" />
 
-<script defer src="${rootPath}/resources/js/header.js?ver=053"></script>
+<script defer src="${rootPath}/resources/js/header.js?ver=054"></script>
 <style>
 	div.msg {
 		font-size : 10px;
@@ -30,7 +30,7 @@
               	${USER.u_nick}님
               </c:if>
                <c:if test="${USER == null}">
-               	<label>로그인을 해주세요.</label>
+               	<label>로그인 필요</label>
                </c:if>
             </li>
             <li class="items item2" id="insert">
@@ -54,7 +54,8 @@
             </li>
             </c:if>
             <c:if test="${USER != null}">
-            	<button type="submit">로그아웃</button>
+            	<button type="submit" class="items item7" >로그아웃</button>
+            	<ul><li id="mypage">내정보보기</li></ul>
             </c:if>
           </ul>
           <div id="button">
@@ -128,7 +129,6 @@
 		<span class="shooting_star"></span>
 		
 <script>
-
 	let user_id = document.getElementById("user_id")
 	let msg_user_id = document.querySelector("div.join.id")
 	
@@ -142,7 +142,7 @@
 			if(u_id === ""){
 				msg_user_id.innerText = "ID는 반드시 입력하세요."
 				msg_user_id.style.display = "inline"
-				u_id.focus()
+				user_id.focus()
 				return false
 			}
 			fetch("${rootPath}/member/id_check?u_id=" + u_id)
@@ -163,14 +163,4 @@
 			})
 		})
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-
 </script>

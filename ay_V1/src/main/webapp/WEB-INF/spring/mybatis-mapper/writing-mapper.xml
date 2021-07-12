@@ -5,70 +5,68 @@
   
  <mapper namespace="com.callor.mind.dao.ext.WritingDao">
  
- 	<select id="selectAll" resultType="WritingVO">>
+ 	<select id="selectAll" resultType="WritingVO">
  		SELECT * FROM tbl_writing
+ 		ORDER BY wr_seq DESC
+ 	</select>
+ 	<select id="findById" resultType="WritingVO">
+ 		SELECT wr_like_count FROM tbl_writing
+ 		WHERE wr_seq = #{wr_seq}
  	</select>
  	
- 	<select id="selectById" resultType="WritingVO">
- 		SELECT * FROM tbl_writing
-		WHERE wr_seq = #{seq}	
- 	</select>
-	
-	<select id="selectOrderByLike" resultType="WritingVO">
-		SELECT * FROM tbl_writing 
-		WHERE wr_like_count > 0
-		ORDER BY wr_like_count DESC
-	
-	</select>
-	
-	<select id="selectByUserLike" resultType="WritingVO">
-		SELECT *
-		FROM tbl_writing W 
-			LEFT JOIN tbl_like L
-				ON L.li_wr_seq = W.wr_seq
-		WHERE L.li_fan = #{user}
-		ORDER BY L.li_date DESC
-	</select>
-	
-	<select id="selectMyWriting" resultType="WritingVO">
-		SELECT *
-		FROM tbl_writing W
-			LEFT JOIN tbl_user U
-				ON W.wr_user = U.u_seq
-		WHERE u_seq = #{user}
-		ORDER BY wr_last_date 
-	</select>
-	
-	<select id="selectByRandom" resultType="WritingVO">
-		SELECT * FROM tbl_writing
+ 	<select id="selectByRandom" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing 
 		ORDER BY RAND() LIMIT 1
+ 	</select>
+
+	<select id="selectOrderByLike" resultType="WritingVO">
+		SELECT * FROM tbl_writing
+		ORDER BY wr_like_count DESC; 
+	
 	</select>
 	
+	<select id="selectByUserLike" resultType="WritingVO" parameterType="LONG">
+		SELECT * 
+		FROM tbl_writing
+			LEFT JOIN tbl_like
+				ON wr_seq = li_wr_seq
+			LEFT JOIN tbl_user
+				ON u_seq = li_fan
+		WHERE u_seq = #{u_seq}
+		ORDER BY wr_last_date DESC
+	</select>
 	
+	<select id="selectMyWriting" resultType="WritingVO" parameterType="LONG">
+		SELECT * FROM tbl_writing
+		WHERE wr_user = #{u_seq}
+		ORDER BY wr_last_date DESC
+	</select>
+
 
  	<insert id="insert" parameterType="WritingVO">
  		INSERT INTO tbl_writing
- 			(wr_user,wr_content,wr_origin)
+ 			(wr_user,wr_nick,wr_content,wr_origin)
  		VALUES
- 			(#{wr_user},#{wr_content},#{wr_origin})
+ 			(#{wr_user},#{wr_nick},#{wr_content},#{wr_origin})
  	</insert>
+ 	
+ 	<update id="likeCountUp" parameterType="Long">
+ 		UPDATE tbl_writing 
+		SET wr_like_count = wr_like_count + 1
+		WHERE wr_seq = #{wr_seq};
+ 	</update>
+ 	
+ 	<update id="likeCountDown" parameterType="Long">
+ 		UPDATE tbl_writing
+		SET wr_like_count = wr_like_count - 1
+		WHERE wr_seq = #{wr_seq};
+ 	</update>
+ 	
+ 	
  	
  	
  	<update id="update"></update>
- 	
- 	<update id="likeCountUp">
- 		UPDATE tbl_writing
- 		SET wr_like_count = wr_like_count +1
- 		WHERE wr_seq = #{seq} 
- 	</update>
- 	
- 	<update id="likeCountDown">
- 		UPDATE tbl_writing
- 		SET wr_like_count = wr_like_count -1
- 		WHERE wr_seq = #{seq} 
- 	</update>
- 	
- 	
  	<delete id="delete"></delete>
+ 
  
  </mapper> 

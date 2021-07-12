@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-<c:forEach items="${LIKELIST}" var="LIKE">
+
+<c:forEach items="${LIKELIST}" var="LIKE" varStatus="i">
 	<div class="board item1">
 		<a class="card"> <img class="abc"
 			src="${rootPath}/resources/board_white.svg" />
@@ -13,9 +14,21 @@
 					<p>${LIKE.wr_nick}</p>
 				</div>
 				<h1>${LIKE.wr_content}</h1>
-				<span> <img class="heart"
-					src="${rootPath}/resources/heart_red.png" /> ${LIKE.wr_like_count}
-					명이 공감하였어요!
+				<span>
+				<c:choose>
+					<c:when test="${LIKECHECK[i.index] == 0}">
+					<img class="heart"
+							src="${rootPath}/resources/heart_black.png" />
+					</c:when>
+					<c:when test="${LIKECHECK[i.index] == 1}">
+					<img class="heart"
+							src="${rootPath}/resources/heart_red.png" />
+					</c:when>
+					<c:otherwise>
+					<img class="heart"
+							src="${rootPath}/resources/heart_black.png" />
+					</c:otherwise>
+				</c:choose> ${LIKE.wr_like_count} 명이 공감하였어요!
 				</span>
 			</article>
 		</a>

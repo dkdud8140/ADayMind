@@ -8,8 +8,9 @@ import com.callor.mind.model.LikeVO;
 import com.callor.mind.service.LikeService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @RequiredArgsConstructor
 @Service("likeServiceV1")
 public class LikeServiceImplV1 implements LikeService {
@@ -23,12 +24,12 @@ public class LikeServiceImplV1 implements LikeService {
 		
 		int check = this.check_like(likeVO);
 		
-		if(check < 1) {
-			lDao.insert(likeVO);
-			wtDao.likeCountUp(likeVO.getLi_wr_seq());
-		} else {
+		if(check > 0) {
 			lDao.delete(likeVO);
 			wtDao.likeCountDown(likeVO.getLi_wr_seq());
+		} else {
+			lDao.insert(likeVO);
+			wtDao.likeCountUp(likeVO.getLi_wr_seq());
 		}
 		return check;
 	}
@@ -36,7 +37,9 @@ public class LikeServiceImplV1 implements LikeService {
 
 	@Override
 	public int check_like(LikeVO likeVO) {
-		return lDao.check_like(likeVO.getLi_wr_seq(), likeVO.getLi_fan());
+		log.debug("체크 파라메터 {}",likeVO.toString());
+		return lDao.check_like(likeVO);
 	}
+
 
 }

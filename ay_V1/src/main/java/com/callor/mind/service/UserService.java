@@ -5,7 +5,7 @@ import java.util.List;
 import com.callor.mind.model.UserVO;
 
 public interface UserService {
-	
+
 	// 관리자용 리스트출력 
 	public List<UserVO> selectAll();
 	
@@ -14,11 +14,14 @@ public interface UserService {
 	
 	public UserVO join(UserVO userVO);	// 회원가입 
 	public int update(UserVO userVO); // 회원정보 수정 
-	public int expire(Long seq); // 회원탈퇴 
+	public int expire(String seq); // 회원탈퇴 
 	
 	// 유저경고 업데이트 횟수 
 	public int updateWarning(UserVO userVO);
-	
+
+	public UserVO findByPw(String u_pw);
+
+	public int updatePw(UserVO userVO);
 	
 	//일단 보류
 	// 정보는 그대로 두고 접근제한만. 

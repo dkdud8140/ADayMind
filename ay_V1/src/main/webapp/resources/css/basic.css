@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 @font-face {
 	src: url("../font/Cafe24SsurroundAir.ttf");
 	font-family: "cafe24sa";
@@ -19,4 +19,5 @@ html, body {
 	width: 100vw;
 	height: 100vh;
 	user-select: none;
+	font-family: 'Noto Sans KR', sans-serif;
 }

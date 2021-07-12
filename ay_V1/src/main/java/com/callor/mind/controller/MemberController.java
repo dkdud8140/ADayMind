@@ -22,62 +22,76 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/member")
 public class MemberController {
 
+
 	protected final UserService uService;
-
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public String mypage() {
-
+		
 		return "member/mypage";
 	}
-
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	@RequestMapping(value="/mypage", method=RequestMethod.POST)
+	public String update(UserVO userVO) {
+		uService.update(userVO);
+		return "redirect:/member/mypage";
+	}
+	@RequestMapping(value="/pw_change", method=RequestMethod.POST)
+	public String updatePw(UserVO userVO) {
+		uService.updatePw(userVO);
+		return "redirect:/member/mypage";
+	}
+	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join(Model model) {
 		return "header";
 	}
-
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVO userVO, Model model) {
-		
-		log.debug("가입정보 : {}", userVO.toString());
+		log.debug("가입정보 : {}" , userVO.toString());
 		userVO = uService.join(userVO);
 		return "redirect:/main";
 	}
-
 	@ResponseBody
-	@RequestMapping(value = "/id_check", method = RequestMethod.GET)
+	@RequestMapping(value="/id_check",method=RequestMethod.GET)
 	public String idChk(String u_id) {
-		
-		log.debug("아이디 중복검사 : {}", u_id);
+		log.debug("아이디 중복검사 : {}" , u_id);
 		UserVO userVO = uService.findById(u_id);
-		if (userVO == null) {
+		if(userVO == null) {
 			return "NOT_USE_ID";
-		} else {
+		}else {
 			return "USE_ID";
 		}
 	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(UserVO userVO, HttpSession hSession, HttpServletRequest req, RedirectAttributes rttr) {
-		
+	@ResponseBody
+	@RequestMapping(value="/pw_check", method=RequestMethod.GET)
+	public String pwChk(String u_pw) {
+		UserVO userVO = uService.findByPw(u_pw);
+		if(userVO == null) {
+			return "NOT_USE_PW";
+		}else {
+			return "USE_PW";
+		}
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(UserVO userVO,HttpSession hSession,
+			HttpServletRequest req, RedirectAttributes rttr) {
 		hSession = req.getSession();
 		UserVO login = uService.login(userVO);
-
-		if (login == null) {
+		
+		if(login == null) {
 			hSession.setAttribute("USER", null);
 			rttr.addFlashAttribute("msg", false);
-		} else {
+		}else {
 			hSession.setAttribute("USER", login);
 		}
-
+		
 		return "redirect:/main";
 	}
-
-	
-	@RequestMapping(value = "logout", method = RequestMethod.POST)
+	@RequestMapping(value="logout", method=RequestMethod.POST)
 	public String logout(HttpSession hSession) {
-		
 		hSession.removeAttribute("USER");
 		return "redirect:/";
 	}
+	
 
 }

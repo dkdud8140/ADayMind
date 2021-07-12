@@ -6,12 +6,12 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100% 100%;
-	-ms-overflow-style : none ;
-	
+	-ms-overflow-style: none;
 }
+
 body::-webkit-scrollbar {
-		display: none;
-}
+        display: none;
+      }
 
 section {
   opacity: 1;
@@ -140,10 +140,19 @@ section article span {
   bottom: -12%;
 }
 
-section article img {
+section article img, section article div img {
   width: 10%;
   margin-left: 1%;
   vertical-align: middle;
+}
+
+section article div {
+	display: flex;
+}
+
+section article div p {
+	margin-left: 4%;
+	padding-top: 1.3%;
 }
 
 #modal {

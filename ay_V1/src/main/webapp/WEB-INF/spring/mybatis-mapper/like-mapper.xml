@@ -5,15 +5,16 @@
   
  <mapper namespace="com.callor.mind.dao.ext.LikeDao">
  
+	
  	<select id="selectAll" resultType="LikeVO">
  		SELECT * FROM tbl_like
  	</select>
  	
  	<select id="findById" >	</select>
  	
- 	<select id="check_like" resultType= "int">
+ 	<select id="check_like" resultType= "int" parameterType="LikeVO">
  		SELECT count(*) FROM tbl_like
- 		WHERE li_wr_seq = #{li_wr_seq} and li_fan = #{li_fan}
+ 		WHERE li_wr_seq = #{li_wr_seq} AND li_fan = #{li_fan}
  	</select>
  	
 	

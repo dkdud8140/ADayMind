@@ -8,13 +8,16 @@ import com.callor.mind.model.WritingVO;
 
 public interface WritingService {
 
-	public WritingVO selectByRandom();		
+	public List<WritingVO> selectAll();
+	
+	public WritingVO selectByRandom();
+	public WritingVO findById(Long wr_seq);
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	
 	public List<WritingVO> selectOrderByLike();
 	
-	public List<WritingVO> selectMyWriting(Long user);
-	public List<WritingVO> selectByUserLike(Long user);
+	public List<WritingVO> selectMyWriting(Long u_seq);
+	public List<WritingVO> selectByUserLike(Long u_seq);
 	
 	public int insert(WritingVO wtVO);
 	public int delete(WritingVO wtVO);
@@ -25,6 +28,7 @@ public interface WritingService {
 	
 	// 신고메소드
 	public int warning(WarningVO wrVO);
+	
 	
 	
 	

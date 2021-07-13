@@ -3,30 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-<style>
-	
-	div.list_box.user table.list_table tr td:nth-child(1){
-		text-align : center;
-		width: 5%
-	}
-	div.list_box.user table.list_table tr td:nth-child(2){
-		text-align : center;
-		width: 20%
-	}
-	div.list_box.user table.list_table tr td:nth-child(3){
-		width: 35%
-	}
-	div.list_box.user table.list_table tr td:nth-child(4){
-		width: 20%
-	}
-	div.list_box.user table.list_table tr td:nth-child(5){
-		width: 10%
-	}
-	div.list_box.user table.list_table tr td:nth-child(6){
-		width: 10%
-	}
-</style>
-
 <div class="list_box user">
 <h2>전체회원 보기</h2>
 

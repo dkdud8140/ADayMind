@@ -8,7 +8,7 @@ SELECT * FROM tbl_writing;
 
 INSERT INTO tbl_user
 	(u_id, u_pw, u_nick, u_mail, u_level)
-values('admin', '12345','admin','admin@admin.com',0);
+values('admin', 'admin','admin','admin@admin.com',0);
 
 UPDATE tbl_user
 SET

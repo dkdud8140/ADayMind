@@ -6,24 +6,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자페이지</title>
-<link href="${rootPath}/resources/css/basic.css?ver-001"
+<link href="${rootPath}/resources/css/basic.css?ver-002"
 	rel="stylesheet" />
 
 <style>
 body {
-	display: flex;
+display: flex;
 }
 
 nav#admin_nav {
 	width: 200px;
 	height: 100vh;
 	background-color: #eee;
+	background-attachment: fixed;
 }
 
 nav#admin_nav h1 {
 	text-align: center;
-	margin-top: 200px;
+	margin-top: 100px;
 	color:  #092540;
 	font-family: "cafe24s";
 	padding: 0;
@@ -65,11 +67,83 @@ nav#admin_nav li:nth-of-type(5) {
 	padding: 10px;
 }
 
+
+
 div#admin_body {
-	top: 300px;
 	width: 100%;
 	height: 100vh;
+	overflow: auto;
 }
+
+	div.list_box	h2 {
+		padding: 1rem 3rem ;
+		color:  #092540;
+		margin-top: 15px;
+		border-bottom: 3px solid rgba(200, 200, 200, 0.5);
+	}
+	div.list_box table.list_table {
+		margin : 50px auto ;
+		border-collapse: collapse;
+		width: 70%;
+	}
+	
+	div.list_box table.list_table tr {
+		border-top : 1px solid #cccccc;
+	}
+	
+	div.list_box table.list_table tr:first-child {
+		background-color: #ddd;
+		text-align: center;
+		font-weight: 400;
+	}
+	div.list_box table.list_table tr:last-child {
+		border-bottom : 1px solid #cccccc;
+	}
+	
+	div.list_box table.list_table td {
+		padding: 0.5rem ;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	div.list_box table.list_table tr td:nth-child(1){
+		text-align : center;
+		width: 5%
+	}
+	div.list_box table.list_table tr td:nth-child(2){
+		text-align : center;
+		width: 10%
+	}
+	div.list_box table.list_table tr td:nth-child(3){
+		width: 65%
+	}
+	div.list_box table.list_table tr td:nth-child(4){
+		width: 20%
+	}
+	
+
+	div.list_box.user table.list_table tr td:nth-child(1){
+		text-align : center;
+		width: 5%
+	}
+	div.list_box.user table.list_table tr td:nth-child(2){
+		text-align : center;
+		width: 20%
+	}
+	div.list_box.user table.list_table tr td:nth-child(3){
+		width: 35%
+	}
+	div.list_box.user table.list_table tr td:nth-child(4){
+		width: 20%
+	}
+	div.list_box.user table.list_table tr td:nth-child(5){
+		width: 10%
+	}
+	div.list_box.user table.list_table tr td:nth-child(6){
+		width: 10%
+	}
+
+
 </style>
 </head>
 <body>

@@ -20,8 +20,7 @@ public class UserServiceImplV1 implements UserService{
 
 	@Override
 	public List<UserVO> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.selectAll();
 	}
 
 	// 아이디 중복검사

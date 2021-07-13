@@ -6,30 +6,36 @@
  <mapper namespace="com.callor.mind.dao.ext.WarningDao">
  
 	
- 	<select id="selectAll" resultType="LikeVO">
- 		SELECT * FROM tbl_like
+ 	<select id="selectAll" resultType="WarningVO">
+ 		SELECT * FROM tbl_warning
  	</select>
  	
- 	<select id="findById" >	</select>
- 	
- 	<select id="check_like" resultType= "int" parameterType="LikeVO">
- 		SELECT count(*) FROM tbl_like
- 		WHERE li_wr_seq = #{li_wr_seq} AND li_fan = #{li_fan}
+ 	<select id="findById" resultType="WarningVO">
+ 		SELECT * FROM tbl_warning
+ 		WHERE wa_seq = #{wa_seq}
  	</select>
  	
 	
- 	<insert id="insert" parameterType="LikeVO">
- 		INSERT INTO tbl_like
- 			( li_wr_seq, li_fan )
+ 	<insert id="insert" parameterType="WarningVO">
+ 		INSERT INTO tbl_warning
+ 			( wa_writing, wa_user, wa_content, wa_reporter )
  		VALUES
- 			(#{li_wr_seq}, #{li_fan})
+ 			(#{wa_writing}, #{wa_user}, #{wa_content}, #{wa_reporter})
+ 	
  	</insert>
+ 	
+ 	<update id="updateCheck" parameterType="WarningVO">
+ 		UPDATE tlb_warning
+ 		SET wa_check = #{wa_check}
+ 		WHERE wa_seq = #{wa_seq}
+ 	</update>
+ 	
+ 	
+ 	
  	
  	<update id="update"></update>
  	
  	<delete id="delete">
- 		DELETE FROM tbl_like
- 		WHERE li_wr_seq = #{li_wr_seq} and li_fan = #{li_fan}
  	</delete>
  
  </mapper> 

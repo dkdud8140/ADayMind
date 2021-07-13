@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
 <div class="list_box user">
@@ -30,13 +31,13 @@
 	</tr>
 	
 	<c:forEach items="${WARNINGS}" var="WARNING">
-		<tr>
+		<tr data-seq="${WARNING.wa_seq}">
 			<td>${WARNING.wa_seq}</td>
 			<td>${WARNING.wa_writing}</td>
 			<td>${WARNING.wa_content}</td>
 			<td>${WARNING.wa_user}</td>
 			<td>${WARNING.wa_check}</td>
-			<td>${WARNING.wa_date}</td>
+			<td><fmt:formatDate value="${WARNING.wa_date }" type="both"/></td>
 		</tr>
 	
 	</c:forEach>

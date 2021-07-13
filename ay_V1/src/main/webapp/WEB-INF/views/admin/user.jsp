@@ -29,7 +29,7 @@
 	</tr>
 	
 	<c:forEach items="${USERS}" var="USER">
-		<tr>
+		<tr data-id="${USER.u_seq}">
 			<td>${USER.u_seq}</td>
 			<td>${USER.u_id}</td>
 			<td>${USER.u_nick}</td>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
 <div class="list_box">
@@ -26,12 +27,12 @@
 		<td>작성시간</td>
 	</tr>
 	
-	<c:forEach items="${WTLIST}" var="WRITIE">
-		<tr>
-			<td>${WRITIE.wr_seq}</td>
-			<td>${WRITIE.wr_nick}</td>
-			<td>${WRITIE.wr_content}</td>
-			<td>${WRITIE.wr_write_date}</td>
+	<c:forEach items="${WTLIST}" var="WRITE">
+		<tr data-seq="${WRITE.wr_seq}">
+			<td>${WRITE.wr_seq}</td>
+			<td>${WRITE.wr_nick}</td>
+			<td>${WRITE.wr_content}</td>
+			<td><fmt:formatDate value="${WRITE.wr_write_date }" type="both"/></td>
 		</tr>
 	
 	</c:forEach>

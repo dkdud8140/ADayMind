@@ -86,4 +86,10 @@ public class UserServiceImplV1 implements UserService{
 		return userDao.updatePw(userVO);
 	}
 
+	// 2021.07.13 추가 - 조아영
+	@Override
+	public UserVO findBySeq(Long u_seq) {
+		return userDao.findBySeq(u_seq);
+	}
+
 }

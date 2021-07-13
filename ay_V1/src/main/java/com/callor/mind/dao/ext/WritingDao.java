@@ -7,6 +7,8 @@ import com.callor.mind.model.WritingVO;
 
 public interface WritingDao extends GenericDao<WritingVO, Long> {
 	
+	public List<WritingVO> findByUser(Long wr_user);
+	
 	public List<WritingVO> selectOrderByLike();
 	
 	public List<WritingVO> selectByUserLike(Long user);

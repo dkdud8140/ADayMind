@@ -11,6 +11,7 @@ public interface UserService {
 	
 	public UserVO findById(String u_id);
 	public UserVO login(UserVO userVO);
+	public UserVO findBySeq(Long u_seq); // user-seq 값으로 검색하는 메소드 필요해서 추가
 	
 	public UserVO join(UserVO userVO);	// 회원가입 
 	public int update(UserVO userVO); // 회원정보 수정 

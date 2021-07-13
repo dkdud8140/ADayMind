@@ -23,4 +23,9 @@ public class WarningServiceImplV1 implements WarningService {
 		return wDao.selectAll();
 	}
 
+	@Override
+	public WarningVO findById(Long wa_seq) {
+		return wDao.findById(wa_seq);
+	}
+
 }

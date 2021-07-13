@@ -55,12 +55,19 @@ public class WritingServiceImplV1 implements WritingService {
 		return wtDao.findById(wr_seq);
 	}
 	
+	// 07.13 유저 id로 글 찾기
+	@Override
+	public List<WritingVO> findByUser(Long wr_user) {
+		return wtDao.findByUser(wr_user);
+	}
+
+	
 	
 	@Override
 	public int insert(WritingVO wtVO) {
 		// TODO 글 입력하기
 		int ret = wtDao.delete(wtVO);  
-		return 0;
+		return ret;
 	}
 
 	
@@ -87,7 +94,6 @@ public class WritingServiceImplV1 implements WritingService {
 
 	@Override
 	public List<WarningVO> selectByWarning() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

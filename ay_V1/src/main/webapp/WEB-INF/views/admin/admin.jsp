@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +20,15 @@ display: flex;
 nav#admin_nav {
 	width: 200px;
 	height: 100vh;
-	background-color: #eee;
+	background-color:#092540;
 	background-attachment: fixed;
+	color : #ddd;
 }
 
 nav#admin_nav h1 {
 	text-align: center;
 	margin-top: 100px;
-	color:  #092540;
+	color:  #FFF;
 	font-family: "cafe24s";
 	padding: 0;
 	font-size: 34px;
@@ -49,6 +51,8 @@ nav#admin_nav li {
 
 nav#admin_nav li:hover {
 	cursor: pointer;
+	background-color: #ddd;
+	color: #092540;
 }
 
 nav#admin_nav li:nth-of-type(1) {
@@ -63,10 +67,8 @@ nav#admin_nav li:nth-of-type(5) {
 	margin-top: 400px;
 	text-align: center; 
 	font-weight: 600;
-	color:  #092540;
 	padding: 10px;
 }
-
 
 
 div#admin_body {
@@ -84,17 +86,20 @@ div#admin_body {
 	div.list_box table.list_table {
 		margin : 50px auto ;
 		border-collapse: collapse;
-		width: 70%;
+		width: 85%;
 	}
 	
 	div.list_box table.list_table tr {
 		border-top : 1px solid #cccccc;
+		cursor: pointer;
+		background-color: #FFF;
 	}
 	
 	div.list_box table.list_table tr:first-child {
 		background-color: #ddd;
 		text-align: center;
 		font-weight: 400;
+		pointer-events: none;
 	}
 	div.list_box table.list_table tr:last-child {
 		border-bottom : 1px solid #cccccc;
@@ -144,6 +149,85 @@ div#admin_body {
 	}
 
 
+
+	div.detail_box {
+		width: 100%;
+		height: 100%;
+		background-color: #eee;
+	}
+	
+	
+	div.detail_content {
+		width: 70%;
+		height: 70%;
+		background-color: #FFF;
+		border-radius: 10px;
+		margin: auto;
+		margin-top: 50px;
+		box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+		padding: 20px;
+	}
+
+	div.detail_box	h2 {
+		padding: 1rem 3rem ;
+		color:  #092540;
+		margin-top: 15px;
+		border-bottom: 3px solid rgba(200, 200, 200, 0.5);
+		background-color: #FFF;
+	}
+	
+	div.detail_content table {
+		border: 1px solid #ddd;
+		border-collapse: collapse;
+		text-align: center;
+		width: 80%;
+		height: 70%;
+		margin: 30px auto;
+	}
+	
+	div.detail_content table tr{
+		border-bottom: 1px solid #eee;
+		height: 20px;
+	}
+	
+	div.detail_content table td{
+		padding: 10px ;
+	}
+	
+	div.detail_content table tr td:nth-child(odd){
+		background-color: #eee;
+		width: 120px;
+	}
+	
+	div.detail_content table tr td:nth-child(even){
+		background-color: #fff;
+		width: 350px;
+	}
+	
+	div.btn_box {
+		display: flex;
+		width: 80%;
+		margin: 30px auto;
+	}
+	
+	div.detail_content button{
+		background-color: #ccc ;
+		padding : 5px 12px;
+		outline: none;
+		border: none;
+		border-radius: 5px;
+	}
+	
+	div.detail_content button:first-child{
+		margin-left: auto;
+		margin-right: 5px;
+	}
+	
+	div.detail_content button:hover{
+		cursor: pointer;
+		
+	}
+
 </style>
 </head>
 <body>
@@ -166,13 +250,22 @@ div#admin_body {
 			<c:when test="${ADMIN eq 'admin_write' }">
 				<%@ include file="/WEB-INF/views/admin/write.jsp"%>
 			</c:when>
+			<c:when test="${ADMIN eq 'admin_write_detail' }">
+				<%@ include file="/WEB-INF/views/admin/write-detail.jsp"%>
+			</c:when>
 
 			<c:when test="${ADMIN eq 'admin_user' }">
 				<%@ include file="/WEB-INF/views/admin/user.jsp"%>
 			</c:when>
+			<c:when test="${ADMIN eq 'admin_user_detail' }">
+				<%@ include file="/WEB-INF/views/admin/user-detail.jsp"%>
+			</c:when>
 
 			<c:when test="${ADMIN eq 'admin_warning' }">
 				<%@ include file="/WEB-INF/views/admin/warning.jsp"%>
+			</c:when>
+			<c:when test="${ADMIN eq 'admin_warning_detail' }">
+				<%@ include file="/WEB-INF/views/admin/warning-detail.jsp"%>
 			</c:when>
 
 			<c:otherwise>
@@ -203,6 +296,25 @@ div#admin_body {
  			}
  			
  		})
+ 		
+ 		document.querySelector("table.list_table").addEventListener("click",(e)=>{
+ 			if(e.target.tagName === "TD") {
+ 				if(${ADMIN eq 'admin_user' }) {
+	 				let u_id = e.target.closest("TR").dataset.id
+	 				location.href = "${rootPath}/admin/admin_user/" + u_id
+ 				} else if(${ADMIN eq 'admin_write' }) {
+	 				let wr_seq = e.target.closest("TR").dataset.seq
+	 				location.href = "${rootPath}/admin/admin_write/" + wr_seq
+ 				} else if(${ADMIN eq 'admin_warning' }) {
+	 				let wa_seq = e.target.closest("TR").dataset.seq
+	 				location.href = "${rootPath}/admin/admin_warning/" + wa_seq
+ 				}
+ 				
+ 				
+ 				
+ 			} 
+ 		})
+ 		
   
   </script>
 </html>

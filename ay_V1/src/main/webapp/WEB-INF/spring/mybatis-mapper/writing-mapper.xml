@@ -10,9 +10,15 @@
  		ORDER BY wr_seq DESC
  	</select>
  	<select id="findById" resultType="WritingVO">
- 		SELECT wr_like_count FROM tbl_writing
+ 		SELECT * FROM tbl_writing
  		WHERE wr_seq = #{wr_seq}
  	</select>
+ 	
+ 	 <select id="findByUser" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing
+ 		WHERE wr_user = #{wr_user}
+ 	</select>
+ 	
  	
  	<select id="selectByRandom" resultType="WritingVO">
  		SELECT * FROM tbl_writing 
@@ -61,8 +67,6 @@
 		SET wr_like_count = wr_like_count - 1
 		WHERE wr_seq = #{wr_seq};
  	</update>
- 	
- 	
  	
  	
  	<update id="update"></update>

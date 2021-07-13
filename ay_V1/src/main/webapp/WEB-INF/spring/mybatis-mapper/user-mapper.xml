@@ -13,6 +13,13 @@
 		SELECT * FROM tbl_user
 		WHERE u_id = #{u_id}
 	</select>
+	
+	<select id="findBySeq" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_seq = #{u_seq}
+	</select>
+	
+	
 	<select id="findByPw" resultType="UserVO">
 		SELECT * FROM tbl_user
 		WHERE u_pw = #{u_pw}

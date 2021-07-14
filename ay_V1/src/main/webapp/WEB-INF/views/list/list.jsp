@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,11 +10,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>하루생각</title>
-<link rel="stylesheet" href="${rootPath}/resources/css/list.css?ver=005" />
-<script>let pathName = "${title}";</script> <!-- 6월 13일 -->
-<script defer src="${rootPath}/resources/js/list.js?ver-004"></script>
+<link rel="stylesheet" href="${rootPath}/static/css/list.css?ver=14" />
+
+
+<script defer>
+let pathName = "${title}";
+let user = "${USER.u_seq}";
+let rootPath = "${rootPath}";
+</script> <!-- 6월 13일 -->
+<script defer src="${rootPath}/static/js/list.js?ver=48"></script>
+
 
 </head>
+
 
 <body>
 
@@ -49,5 +58,6 @@ let bcon1 = document.getElementById("b_container");
 setTimeout(function () {
 		bcon1.classList.remove("active3");
 	}, 1000);
+	
 </script>
 </html>	

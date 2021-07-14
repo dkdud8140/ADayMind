@@ -38,13 +38,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
 		return "home";
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model, HttpSession session) {
-		
 		
 		WritingVO wrtVO = wtSer.selectByRandom();
 		UserVO userVO = (UserVO) session.getAttribute("USER");
@@ -54,7 +52,6 @@ public class HomeController {
 			model.addAttribute("CHECK",0);
 			return "main";
 		}
-		log.debug("유저정보 {}",userVO.toString());
 		
 		Long seq = wrtVO.getWr_seq();		
 		Long user = userVO.getU_seq();
@@ -106,11 +103,8 @@ public class HomeController {
 		return writingVO.getWr_like_count();
 	}
 	
-	
-	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert(Locale locale, Model model) {
-		
 		return "insert";
 	}
 	

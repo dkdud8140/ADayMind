@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>하루생각</title>
-<link href="${rootPath}/resources/css/home.css?ver-003" rel="stylesheet"/>
-
+<link href="${rootPath}/static/css/home.css?ver-0056" rel="stylesheet"/>
 
 <script>
 	document.addEventListener("DOMContentLoaded",()=>{
@@ -24,17 +23,20 @@
 </script>
 
 </head>
+
+
 <body>
-	
+		
 		<span></span>
 		<span></span>
 		<span></span>
 		<span></span>
-	
 	
 	<div id="intro">
-		<object class="intro_logo" data="resources/logo-white-v2.svg"
+		<object class="intro_logo" data="static/logo-white-v2.svg"
 			type="image/svg+xml"> </object>
 	</div>
+	
+	
 </body>
 </html>

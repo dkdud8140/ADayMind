@@ -28,6 +28,9 @@ public class WritingVO {
 	private Date wr_last_date;	// 수정일자 TIMESTAMP
 	private String wr_origin;		// 글 출처 한글가변문자열(50)
 
+	
+	
+	
 	public Date getWr_write_date() {
 		return wr_write_date;
 	}

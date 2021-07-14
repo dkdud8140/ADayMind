@@ -9,6 +9,7 @@
  		SELECT * FROM tbl_writing
  		ORDER BY wr_seq DESC
  	</select>
+ 	
  	<select id="findById" resultType="WritingVO">
  		SELECT * FROM tbl_writing
  		WHERE wr_seq = #{wr_seq}
@@ -28,7 +29,6 @@
 	<select id="selectOrderByLike" resultType="WritingVO">
 		SELECT * FROM tbl_writing
 		ORDER BY wr_like_count DESC; 
-	
 	</select>
 	
 	<select id="selectByUserLike" resultType="WritingVO" parameterType="LONG">
@@ -41,6 +41,7 @@
 		WHERE u_seq = #{u_seq}
 		ORDER BY wr_last_date DESC
 	</select>
+	
 	
 	<select id="selectMyWriting" resultType="WritingVO" parameterType="LONG">
 		SELECT * FROM tbl_writing

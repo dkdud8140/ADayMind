@@ -3,10 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-<link href="${rootPath}/resources/css/header.css?ver-0034"	rel="stylesheet" />
 
-<script defer src="${rootPath}/resources/js/header.js?ver=054"></script>
+<link href="${rootPath}/static/css/header.css?ver-0046"	rel="stylesheet" />
+
+<script defer src="${rootPath}/static/js/header.js?ver=056"></script>
 <style>
+
+	/* 07.14 body position 추가 */
+	body {
+		position : relative;
+	}
 	div.msg {
 		font-size : 10px;
 		color: red;
@@ -16,23 +22,45 @@
 		font-size: 10px;
 		color:red;
 	}
+	span.ban {
+		text-decoration: line-through;
+	}
 </style>
 <!--  헤더 부분 -->
     <header>
-    <form method="POST" action="${rootPath}/member/logout">
       <div class="h_container">
-        <img class="logo" src="${rootPath}/resources/logo_white.png" />
+        <img class="logo" src="${rootPath}/static/logo_white.png" />
         <nav>
           <ul id="menu">
-            <li class="items item1" id="mypage">
-              <img class="menuimg" src="${rootPath}/resources/profile.png" />
-              <c:if test="${USER != null}">
+            <li class="items item1">
+              <img class="menuimg" src="${rootPath}/static/profile.png" />
+              <c:if test="${USER.u_level < 9}">
               	${USER.u_nick}님
+              </c:if>
+              <c:if test="${USER.u_level == 9}">
+              	<label>아이디 ban</label>
               </c:if>
                <c:if test="${USER == null}">
                	<label>로그인 필요</label>
                </c:if>
             </li>
+            <c:choose>
+            <c:when test="${USER.u_level == 9 }">
+            <li class="items item2" id="ban_insert">
+              <span class="ban">하루 생각 입력하기</span>
+            </li>
+            <li class="items item3" id="ban_ilike">
+              <span class="ban">나의 공감리스트 보기</span>
+            </li>
+            <li class="items item4" id="ban_bestlist">
+              <span class="ban">인기 하루 생각</span>
+            </li>
+            <li class="items item5" id="ban_iwrite">
+              <span class="ban">내가 쓴 하루생각 모음</span>
+            </li>
+            <li></li>
+            </c:when>
+     		<c:when test="${USER.u_level == 0 }">
             <li class="items item2" id="insert">
               <span>하루 생각 입력하기</span>
             </li>
@@ -45,6 +73,27 @@
             <li class="items item5" id="iwrite">
               <span>내가 쓴 하루생각 모음</span>
             </li>
+			<li class="items item5" id="admin">
+			   <span>관리자 페이지</span>
+			</li>
+            </c:when>
+            <c:otherwise>
+    		 <li class="items item2" id="insert">
+              <span>하루 생각 입력하기</span>
+            </li>
+            <li class="items item3" id="ilike">
+              <span>나의 공감리스트 보기</span>
+            </li>
+            <li class="items item4" id="bestlist">
+              <span>인기 하루 생각</span>
+            </li>
+            <li class="items item5" id="iwrite">
+              <span>내가 쓴 하루생각 모음</span>
+            </li>
+             <li></li>
+     		</c:otherwise>
+     		</c:choose>
+     		
             <c:if test="${USER == null}">
             <li class="items item6" id="join">
               <span>회원가입</span>
@@ -54,8 +103,12 @@
             </li>
             </c:if>
             <c:if test="${USER != null}">
-            	<button type="submit" class="items item7" >로그아웃</button>
-            	<ul><li id="mypage">내정보보기</li></ul>
+            <li class="items item6" id="mypage">
+              <span>정보수정</span>
+            </li>
+            <li class="items item7" id="logout">
+              <span>로그아웃</span> 
+            </li>
             </c:if>
           </ul>
           <div id="button">
@@ -65,30 +118,26 @@
           </div>
         </nav>
       </div>
-</form>
       <!-- 회원가입 로그인 컨테이너 시작-->
-      
+  <form method="POST" action="${rootPath}/member/login" id="login_join">    
       <div id="sign_container">
         <div class="sign2">
           <div class="sub create front main">
             <h4 class="items2">회원가입</h4>
-            <button id="ok" class="items2" >가입하기</button>
+            <button id="ok" class="items2" type="button" >가입하기</button>
           </div>
-<form method="POST" action="${rootPath}/member/login">
           <div class="sub join front">
             <h4 class="items2">하루생각 로그인</h4>
             <div class="items2" id="error_msg" >아이디와 비밀번호를 입력하세요</div>
-            <input class="items2" type="text" name="u_id" placeholder="ID" />
-            <input class="items2" type="password" name="u_pw" placeholder="Password" />
+            <input class="items2" type="text" name="us_id" placeholder="ID" />
+            <input class="items2" type="password" name="us_pw" placeholder="Password" />
             <div class="items2">비밀번호를 잊어버리셨나요?</div>
-            <button class="items2 btn" type="submit">로그인</button>
+            <button class="items2 btn" type="button" id="nav_login">로그인</button>
             <div class="exit exit1" >
               <span class="right"></span>
               <span class="left"></span>
             </div>
           </div>
-</form>
-  <form method="POST" action="${rootPath}/member/join">
           <div class="sub create back">
             <h4 class="items3">하루생각 회원가입</h4>
             <div class="items3">하루생각에 가입하세요</div>
@@ -104,12 +153,12 @@
               id="re_pw"
               placeholder="Confirm Password"
             />
-            <button class="items3 btn">가입하기</button>
+            <button class="items3 btn" type="button" id="nav_join">가입하기</button>
           </div>
-   </form>
+
           <div class="sub join back main">
             <h4 class="items3">Welcome Back</h4>
-            <button id="ok2" class="items3" >로그인</button>
+            <button id="ok2" class="items3" type="button">로그인</button>
             <div class="exit exit2" >
               <span class="right"></span>
               <span class="left"></span>
@@ -117,20 +166,39 @@
           </div>
         </div>
       </div>
+     </form>
       <!-- 회원가입 로그인 컨테이너 끝-->
     </header>
     <!-- 헤더 끝-->
     
-    
-    	<span class="shooting_star"></span>
-		<span class="shooting_star"></span>
-		<span class="shooting_star"></span>
-		<span class="shooting_star"></span>
-		<span class="shooting_star"></span>
+    	<!-- 0717 배경 별똥별 수정 --> 
+    	<div class = "star_box">
+	    	<span class="shooting_star"></span>
+			<span class="shooting_star"></span>
+			<span class="shooting_star"></span>
+			<span class="shooting_star"></span>
+		</div>
+		<!-- 0717 배경 별똥별 수정 끝 --> 
+		
 		
 <script>
 	let user_id = document.getElementById("user_id")
 	let msg_user_id = document.querySelector("div.join.id")
+	let nav_login = document.querySelector("#nav_login")
+	let nav_join = document.querySelector("#nav_join")
+	let login_join = document.querySelector("form#login_join")
+	
+	nav_login.addEventListener("click",()=>{
+		login_join.action = "${rootPath}/member/login";
+		login_join.submit();
+	})
+	
+	nav_join.addEventListener("click",()=>{
+		login_join.action = "${rootPath}/member/join";
+		alert(user_id.value);
+		login_join.submit();
+	})
+	
 	
 	if(user_id) {
 		msg_user_id.innerText = ""
@@ -163,4 +231,25 @@
 			})
 		})
 	}
+	// 밴당한 사람 리스트이용못하게하기
+	let b_li_insert = document.getElementById("ban_insert")
+	let b_li_ilike = document.getElementById("ban_ilike")
+	let b_li_best = document.getElementById("ban_bestlist")
+	let b_li_iwrite = document.getElementById("ban_iwrite")
+	b_li_insert.addEventListener("click", ()=>{
+		alert("이용할 수 없습니다.")
+		return false
+	})
+	b_li_ilike.addEventListener("click", ()=>{
+		alert("이용할 수 없습니다.")
+		return false
+	})
+	b_li_best.addEventListener("click", ()=>{
+		alert("이용할 수 없습니다.")
+		return false
+	})
+	b_li_iwrite.addEventListener("click", ()=>{
+		alert("이용할 수 없습니다.")
+		return false
+	})
 </script>

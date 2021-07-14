@@ -39,6 +39,7 @@ public class UserServiceImplV1 implements UserService{
 	public UserVO login(UserVO userVO) {
 		return userDao.login(userVO);
 	}
+	
 
 	// 회원가입
 	@Override
@@ -48,15 +49,15 @@ public class UserServiceImplV1 implements UserService{
 		if (uList == null || uList.size() < 1) {
 			userVO.setU_level(0);
 		} else {
-			userVO.setU_level(9);
+			userVO.setU_level(6);
 		}
 		userDao.insertOrUpdate(userVO);
 		return userVO;
 	}
 
 	@Override
-	public int expire(String seq) {
-		return userDao.delete(seq);
+	public int expire(UserVO userVO) {
+		return userDao.delete(userVO);
 	}
 
 	@Override
@@ -82,14 +83,29 @@ public class UserServiceImplV1 implements UserService{
 	}
 
 	@Override
-	public int updatePw(UserVO userVO) {
-		return userDao.updatePw(userVO);
+	public int updatePw(String u_pw, String us_pw) {
+		return userDao.updatePw(u_pw, us_pw);
 	}
 
-	// 2021.07.13 추가 - 조아영
+	@Override
+	public UserVO findByNick(String u_nick) {
+		return userDao.findByNick(u_nick);
+	}
+
+	@Override
+	public UserVO findByMail(String u_mail) {
+		return userDao.findByMail(u_mail);
+	}
+
 	@Override
 	public UserVO findBySeq(Long u_seq) {
 		return userDao.findBySeq(u_seq);
+	}
+
+	@Override
+	public int ban(Long seq) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 @import url("basic.css");
 
+
+
 body {
 	background-image: url("../BG-V2_2.png");
 	background-repeat: no-repeat;
@@ -26,12 +28,14 @@ section {
   margin: auto;
   padding-top: 3%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(4, minmax(270px, 1fr));
   grid-gap: 40px;
   font-size: 1.6vh;
   transition: transform 1s; /* 6월 13일 */
   position: relative; /* 6월 13일 */
 }
+
+
 /*6월 13일 */
 #b_container.active3 {
   transform: translateZ(-500px);
@@ -155,6 +159,44 @@ section article div p {
 	padding-top: 1.3%;
 }
 
+section article span p {
+	display: inline-block;
+}
+
+section article .list_button {
+	display: none;
+}
+
+#modal .list_button {
+	position: absolute;
+	bottom: -5.5%;
+	right: 0;
+	width: 25%;
+	text-align: center;
+}
+
+#modal .list_button div {
+	width: 50%;
+	background-color: transparent;
+}
+
+section article .modal_siren {
+	display: none;
+}
+
+#modal .modal_siren {
+	position: absolute;
+	top: 1%;
+	right: 4%;
+}
+
+
+
+#modal .modal_siren {
+	width: 6%;
+}
+
+
 #modal {
   display: none;
   position: fixed;
@@ -178,20 +220,41 @@ section article div p {
   flex-direction: column;
 }
 
+#modal article div.profile_div, #modal article div.list_button {
+	display: flex;
+}
+
+#modal article div p {
+	margin-left: 4%;
+	padding-top: 2%;
+	font-size: 1.3rem;
+}
+#modal article span p {
+	display: inline-block;
+}
+
 #modal article h1 {
   height: 70%;
   padding: 0 10%;
   overflow: hidden;
   text-align: center;
+  padding-top: 15px;
 }
 
 #modal article span {
   position: absolute;
   bottom: -7%;
+  z-index: 10;
 }
 
 #modal article img {
   width: 10%;
+  vertical-align: middle;
+}
+
+#modal article img.heart {
+  width: 30px;
+  height: 30px;
   vertical-align: middle;
 }
 

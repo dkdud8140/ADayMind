@@ -27,9 +27,11 @@
  	
  	<update id="update"></update>
  	
+ 	<!-- 0714  : 조건문 수정-->
  	<delete id="delete">
  		DELETE FROM tbl_like
  		WHERE li_wr_seq = #{li_wr_seq} and li_fan = #{li_fan}
  	</delete>
+ 
  
  </mapper> 

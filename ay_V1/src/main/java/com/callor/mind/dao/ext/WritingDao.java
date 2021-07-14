@@ -15,10 +15,9 @@ public interface WritingDao extends GenericDao<WritingVO, Long> {
 	public List<WritingVO> selectMyWriting(Long user);
 	
 	public WritingVO selectByRandom();
-	
-	public void likeCountUp(Long seq);
-	public void likeCountDown(Long seq);
-	
+
+	public int likeCountUp(Long wr_seq);
+	public int likeCountDown(Long wr_seq);
 	
 	// 신고 들어온 글 셀렉트할 떄 빼도록.......................
 

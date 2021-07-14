@@ -1,5 +1,7 @@
 package com.callor.mind.dao.ext;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.callor.mind.dao.GenericDao;
 import com.callor.mind.model.UserVO;
 
@@ -11,10 +13,10 @@ public interface UserDao extends GenericDao<UserVO, String>{
 	
 	public int insertOrUpdate(UserVO userVO);
 	public UserVO login(UserVO userVO);
+	public int updatePw(@Param("u_pw") String u_pw,@Param("us_pw") String us_pw);
 	
-	public int delete(String seq);
 	public UserVO findByPw(String u_pw);
-	public int updatePw(UserVO userVO);
-	
+	public UserVO findByNick(String u_nick);
+	public UserVO findByMail(String u_mail);
 	
 }

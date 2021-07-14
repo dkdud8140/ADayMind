@@ -12,7 +12,9 @@ public interface WritingService {
 	
 	public WritingVO selectByRandom();
 	public WritingVO findById(Long wr_seq);
+	
 	public List<WritingVO> findByUser(Long wr_user);
+	
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	
 	public List<WritingVO> selectOrderByLike();

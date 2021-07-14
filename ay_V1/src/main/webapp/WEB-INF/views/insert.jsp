@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>하루생각 입력하기</title>
-<link href="${rootPath}/resources/css/insert.css?ver-022"
-	rel="stylesheet" />
+<link href="${rootPath}/static/css/insert.css?ver-015" rel="stylesheet" />
 </head>
 <body>
 	<%@ include file="header.jsp"%>

@@ -12,8 +12,8 @@
 <!-- <link href="${rootPath}/resources/css/main.css?ver-016" rel="stylesheet" /> -->
 
 <style>
-	
 @import url("basic.css");
+
 body {
 	background-image: url("${rootPath}/resources/BG-V2_1.png");
 	background-repeat: no-repeat;
@@ -68,40 +68,12 @@ body {
 	height: 12%;
 }
 
-.siren {
-	width: 13%;
-	position: absolute;
-	left: 10%;
-	top: 13%;
-	user-select: none;
-	cursor: pointer;
-}
-
-.siren img {
-	width: 30%;
-}
-
-#siren {
-	display: none;
-}
-
-
-h4#siren_title {
-	border-bottom : 1px solid #ccc;
-	padding: 10px;
-	margin-bottom: 10px;
-	color: #3f6d84;
-}
-
-
 #body_size_box {
 	width: 100vw;
 	height: 85vh;
 	perspective: 1500px;
 	background: rgba(0, 0, 0, 0);
 }
-
-
 
 .main_bubble.active {
 	transform: translateZ(-500px);
@@ -117,29 +89,6 @@ h4#siren_title {
 	animation: move 1s forwards;
 }
 
-
-
-@keyframes unfoldIn { 
-	0% {
-		transform: scaleX(0) scaleY(0.005);
-	}
-	50% {
-		transform : scaleX(1) scaleY(0.005);
-	}
-	100% {
-		transform : scaleY(1) scaleX(1);
-	}
-}
-
-@keyframes move { 
-	100% {
-		transform: translateZ(0px);
-	}
-}
-body {
-position: relative;
-
-}
 div.main_modal {
 	width: 100%;
 	height: 100vh;
@@ -152,36 +101,55 @@ div.main_modal {
 	z-index: 0;
 }
 
+.siren {
+	width: 13%;
+	position: absolute;
+	left: 10%;
+	top: 13%;
+	user-select: none;
+	cursor: pointer;
+}
+
+.siren img {
+	width: 30%;
+}
+
+h4#siren_title {
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: #3f6d84;
+}
+
+/* 	0714 신고창 관련된 모든 css 수정 */
 div.siren_box {
-	width: 500px;
+	width: 300px;
 	height: auto;
-	border-radius: 10px;
-	font-family: 'Noto Sans KR';
-	font-size: 20px;
+	font-size: 15px;
 	background-color: #fff;
 	border-radius: 5px;
 	position: absolute;
-	left: 5%;
-	top: 5%;
+	left: 30%;
+	top: 10%;
+	transform: translateX(-50%);
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-	/* display: none; */
-	visibility:hidden;
-	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	visibility: hidden;
 	line-height: 2.5rem;
-	font-size: 1.2rem;
 	margin: 10px;
 	padding: 10px;
 	z-index: 1000;
 }
 
-#siren_box div {
-	margin: 3px;
+.siren_box div {
 	padding: 3px;
+	width: 100%;
 }
 
-#siren_box textarea {
-	display: block;
+.siren_box form {
+	width: 100%;
 }
+
+
 
 #siren_box button {
 	display: inline-block;
@@ -200,13 +168,8 @@ div.siren_box {
 	color: white;
 }
 
-#siren:checked+#siren_box {
-	display: block;
-	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-
 .siren_box.visible {
-	visibility:visible;
+	visibility: visible;
 	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
@@ -229,7 +192,6 @@ div.siren_box {
 	display: inline-block;
 }
 
-
 div#background1 {
 	top: 0;
 	left: 0;
@@ -239,12 +201,24 @@ div#background1 {
 	display: none;
 }
 
+@keyframes unfoldIn { 
+0% { transform: scaleX(0) scaleY(0.005);}
+
+50% { transform : scaleX(1) scaleY(0.005);}
+
+100% { transform : scaleY(1) scaleX(1);}
+}
+
+
+@keyframes move { 
+100% {transform: translateZ(0px);}
+}
 
 </style>
 
 </head>
 <body>
-<div id="background1"></div>
+	<div id="background1"></div>
 
 	<%@ include file="header.jsp"%>
 
@@ -252,65 +226,88 @@ div#background1 {
 		<div class="main_bubble active3">
 
 			<div class="bubble_box">
-				<label class="siren" for="siren"> <img src="resources/siren.png"> </label>
-				<input type="checkbox" id="siren" />
+
+				<label class="siren" for="siren"> <img
+					src="resources/siren.png">
+				</label>
 
 				<p class="p1">
 					<b>“${WRITING.wr_nick}”</b>님이 보내온 하루 생각입니다.
 				</p>
+
 				<p class="p2">${WRITING.wr_content}</p>
 				<p class="p3">${WRITING.wr_origin}</p>
+
+
 				<div class="heart-box">
+
 					<div class="content">
-					<!--  <span id="like_it">♥</span> -->
-					<span id="like_it">
-					<c:if test="${CHECK == 0}">
-					<img class="heart"
-							src="${rootPath}/resources/heart_black.png" width="30px" height="25px"/>
-					</c:if>
-					<c:if test="${CHECK == 1}">
-					<img class="heart"
-							src="${rootPath}/resources/heart_red.png" width="30px" height="25px"/>
-					</c:if>
-					</span>
-						<p id="like_it_text">${WRITING.wr_like_count}명이 공감중</p>
+						<!--  <span id="like_it">♥</span> -->
+						<span id="like_it"> <c:if test="${CHECK == 0}">
+								<img class="heart" src="${rootPath}/resources/heart_black.png"
+									width="30px" height="25px" />
+							</c:if> <c:if test="${CHECK == 1}">
+								<img class="heart" src="${rootPath}/resources/heart_red.png"
+									width="30px" height="25px" />
+							</c:if>
+						</span>
+						<p id="like_it_text">${WRITING.wr_like_count}명이공감중</p>
 					</div>
+
 				</div>
+
+
 			</div>
 
 		</div>
 	</div>
 
 	<div class="main_modal"></div>
+
+	<!--  0714 신고창 수정-->
 	<div id="siren_box" class="siren_box">
 		<h4 id="siren_title">신고하기</h4>
-		<form>
+		<form action="${rootPah}/warning/insert">
 			<p>신고 사유를 선택하세요.</p>
+
 			<div>
-				<input type="radio" name="r1" id="r1" value="1"><label
-					for="r1"> 성적인 콘텐츠</label>
+				<input type="radio" name="r1"value="1">
+				<label for="r1"> 성적인 콘텐츠</label>
 			</div>
+
 			<div>
-				<input type="radio" name="r1" id="r1" value="2"><label
-					for="r1"> 폭력적 또는 혐오스러운 콘텐츠</label>
+				<input type="radio" name="r1"value="2"> 
+				<label for="r1"> 폭력적 또는 혐오스러운 콘텐츠</label>
 			</div>
+
 			<div>
-				<input type="radio" name="r1" id="r1" value="3"><label
-					for="r1"> 증오 또는 악의적인 콘텐츠</label>
+				<input type="radio" name="r1"  value="3"> 
+				<label for="r1"> 증오 또는 악의적인 콘텐츠</label>
 			</div>
+
 			<div>
-				<input type="radio" name="r1" id="r1" value="4"><label
-					for="r1"> 희롱 또는 괴롭힘</label>
+				<input type="radio" name="r1"  value="4"> 
+				<label for="r1"> 희롱 또는 괴롭힘</label>
 			</div>
+
 			<div>
-				<input type="radio" name="r1" id="r1" value="5"><label
-					for="r1"> 유해하거나 위험한 행위</label>
+				  <input type="radio" name="r1" value="5">
+				  <label for="r1"> 유해하거나 위험한 행위</label>
 			</div>
-			<textarea rows="" cols=""></textarea>
+
+			<div id="div_text">
+				<input type="radio" name="r1" value="6"> 
+				<label for="r1" >기타</label>
+				<input type="text" name="r1" value="6"> 
+			</div>
+
 			<button id="close">취 소</button>
 			<button>신고하기</button>
 		</form>
 	</div>
+
+
+
 </body>
 
 

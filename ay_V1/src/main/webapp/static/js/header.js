@@ -46,11 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
       url += "/list/iwrite";
     } else if (getId === "mypage") {
       url += "/member/mypage";
-    }  else if (getId === "insert") {
+    } else if (getId === "insert") {
         url += "/insert";
-    }else if (getId === "bestlist") {
+    } else if (getId === "bestlist") {
       url += "/list/bestlist";
-    }else if (getId === "join") {
+    } else if (getId === "admin") {
+      url += "/admin";
+    } else if (getId === "logout") {
+    	if(confirm("로그아웃 할까요?")) {
+			url += "/member/logout";
+		} else {
+			return false;
+		}
+    } else if (getId === "") {
+    	return false;
+    } else if (getId === "join") {
       if(b_con) {
        	b_con.classList.add("active2");
        }
@@ -94,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     button_click();
 	  return;
     } 
-
+	
     document.location.href = url;
   });
 

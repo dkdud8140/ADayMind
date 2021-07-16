@@ -51,7 +51,7 @@ CREATE TABLE tbl_like (
 	li_date		TIMESTAMP DEFAULT NOW()		
 );
 
-
+DESC tbl_writing;
 SELECT * FROM tbl_writing;
 SELECT * FROM tbl_like;
 SELECT * FROM tbl_warning;
@@ -97,3 +97,10 @@ ON DELETE CASCADE;
 
 SELECT * FROM tbl_writing
 WHERE wr_user LIKE '%2%' OR wr_nick LIKE '%김%' ;
+
+SELECT * FROM tbl_writing
+		WHERE wr_content LIKE '%이%' ;
+        
+SELECT * FROM tbl_writing
+		WHERE wr_user LIKE '%2%' OR 
+				wr_nick LIKE '%2%' ;        

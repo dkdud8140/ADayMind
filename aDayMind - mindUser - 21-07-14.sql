@@ -40,6 +40,10 @@ CREATE TABLE tbl_warning (
 	wa_date		TIMESTAMP DEFAULT NOW()
 );
 
+ALTER TABLE tbl_warning
+ADD COLUMN wa_reporter BIGINT NOT NULL ;
+
+
 CREATE TABLE tbl_like (
 	li_seq		BIGINT		AUTO_INCREMENT	PRIMARY KEY,
 	li_wr_seq	BIGINT		NOT NULL,	
@@ -54,12 +58,7 @@ SELECT * FROM tbl_warning;
 SELECT * FROM tbl_user;
 SELECT * FROM tbl_userProf;
 
-DROP TABLE tbl_writing;
-DROP TABLE tbl_like;
-DROP TABLE tbl_warning;
-DROP TABLE tbl_user;
-DROP TABLE tbl_userProf;
-
+ROLLBACK;
 
 ALTER TABLE tbl_userProf
 ADD CONSTRAINT fk_prof
@@ -94,3 +93,7 @@ ADD CONSTRAINT fk_li_user
 FOREIGN KEY(li_fan)
 REFERENCES tbl_user(u_seq)
 ON DELETE CASCADE;
+
+
+SELECT * FROM tbl_writing
+WHERE wr_user LIKE '%2%' OR wr_nick LIKE '%김%' ;

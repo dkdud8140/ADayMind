@@ -14,27 +14,38 @@
 					<p>${WRITING.wr_nick}</p>
 				</div>
 				<h1>${WRITING.wr_content}</h1>
+
+				<%-- 조아영 - 0715 : 하트모양변경 --%>
 				<span class="modal_span" data-seq="${WRITING.wr_seq}"> 	
-				<c:choose>
-					<c:when test="${LIKECHECK[i.index] == 0}">
-					<img class="heart"
-							src="${rootPath}/static/heart_black.png" />
-					</c:when>
-					<c:when test="${LIKECHECK[i.index] == 1}">
-					<img class="heart"
-							src="${rootPath}/static/heart_red.png" />
-					</c:when>
-					<c:otherwise>
-					<img class="heart"
-							src="${rootPath}/static/heart_black.png" />
-					</c:otherwise>
-				</c:choose> 
-				<p class="modal_count"> ${WRITING.wr_like_count} 명이 공감하였어요! </p>
+
+					<c:choose>
+					
+						<c:when test="${LIKECHECK[i.index] == 0}">
+							<div class="heart _black" id="heart_event">♡</div>
+						</c:when>
+						<c:when test="${LIKECHECK[i.index] == 1}">
+							 <div class="heart _red"  id="heart_event">♥</div>
+						</c:when>
+						<c:otherwise>
+							<div class="heart _black" id="heart_event">♡</div>
+						</c:otherwise>
+						
+					</c:choose> 
+					
+					<p class="modal_count"> ${WRITING.wr_like_count} 명이 공감하였어요! </p>
 				</span>
+				<%-- 조아영 - 0715 : 하트모양변경 끝--%>
+				
+				
+				<!-- 7월 14일 c:if문 감싸기 -->
+				<c:if test="${USER != null}">
 				<img class="modal_siren" src="${rootPath}/static/siren.png" />
+				</c:if>
+				<!-- c:if문 감싸기 끝 -->
 				<c:if test="${USER.u_seq == WRITING.wr_user}">
 				<div class="list_button">
-					<div class="update_btn">수정</div>
+					<input type="hidden" name="wr_seq" value="${WRITING.wr_seq}"/>
+					<div class="update_btn" >수정</div>
 					<div class="delete_btn">삭제</div>
 				</div>
 				</c:if>
@@ -42,4 +53,3 @@
 		</a>
 	</div>
 </c:forEach>
-<script></script>

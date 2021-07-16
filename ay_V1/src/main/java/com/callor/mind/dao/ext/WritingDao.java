@@ -7,6 +7,7 @@ import com.callor.mind.model.WritingVO;
 
 public interface WritingDao extends GenericDao<WritingVO, Long> {
 	
+	
 	public List<WritingVO> findByUser(Long wr_user);
 	
 	public List<WritingVO> selectOrderByLike();
@@ -14,10 +15,20 @@ public interface WritingDao extends GenericDao<WritingVO, Long> {
 	public List<WritingVO> selectByUserLike(Long user);
 	public List<WritingVO> selectMyWriting(Long user);
 	
+	// 0716 유저 SEQ 혹은 닉네임으로 검색하기
+	public List<WritingVO> findByUserSeqOrNick(String search);
+	public List<WritingVO> findByContent(String search);
+	
 	public WritingVO selectByRandom();
 
 	public int likeCountUp(Long wr_seq);
 	public int likeCountDown(Long wr_seq);
+	
+	// 0716 경고 카운트 업데이트 메소드 추가
+	public int warningCountUp(Long wr_seq);
+	public int warningCountDown(Long wr_seq);
+	
+	
 	
 	// 신고 들어온 글 셀렉트할 떄 빼도록.......................
 

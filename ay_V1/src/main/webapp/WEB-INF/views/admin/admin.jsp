@@ -278,6 +278,13 @@ div#admin_body {
 
 <script type="text/javascript">
   	
+  		document.querySelector("body").addEventListener("onload",(e)=>{
+  			if("${ERROR eq 'NOT_RIGNT' }") {
+  				alert("접근 권한이 없습니다")
+  				location.href="${rootPath}/main";
+  			}
+  		})
+  	
  		document.querySelector("nav#admin_nav").addEventListener("click",(e)=>{
  			
  			let name = e.target.tagName
@@ -287,14 +294,13 @@ div#admin_body {
  				if(menu === "to_main") {
  					location.href="${rootPath}/main";
  				} else if(menu === "to_admin_write") {
- 					location.href="${rootPath}/admin";
+ 					location.href="${rootPath}/admin/admin_write";
  				} else if(menu === "to_admin_user") {
  					location.href="${rootPath}/admin/admin_user";
  				} else if(menu === "to_admin_warning") {
  					location.href="${rootPath}/admin/admin_warning";
  				}
  			}
- 			
  		})
  		
  		document.querySelector("table.list_table").addEventListener("click",(e)=>{
@@ -309,9 +315,6 @@ div#admin_body {
 	 				let wa_seq = e.target.closest("TR").dataset.seq
 	 				location.href = "${rootPath}/admin/admin_warning/" + wa_seq
  				}
- 				
- 				
- 				
  			} 
  		})
  		

@@ -1,7 +1,5 @@
 package com.callor.mind.dao.ext;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.callor.mind.dao.GenericDao;
 import com.callor.mind.model.LikeVO;
 

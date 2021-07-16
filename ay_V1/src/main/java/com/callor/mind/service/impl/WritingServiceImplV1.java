@@ -1,8 +1,10 @@
 package com.callor.mind.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.WritingDao;
 import com.callor.mind.model.LikeVO;
@@ -86,33 +88,55 @@ public class WritingServiceImplV1 implements WritingService {
 
 	@Override
 	public int delete(WritingVO wtVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		return wtDao.delete(wtVO);
 	}
-
 
 	@Override
 	public int update(WritingVO wtVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		return wtDao.update(wtVO);
 	}
-
 
 	@Override
 	public int like(LikeVO likeVO) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 
 	@Override
 	public int warning(WarningVO wrVO) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 
+	@Override
+	public List<WritingVO> search(String category, String search, Model model) throws Exception {
 
+		List<WritingVO> writing = new ArrayList<WritingVO>();
+		
+		if(category.equalsIgnoreCase("seq")) {
+			Long wr_seq = null;
+			try {
+				wr_seq = Long.valueOf(search);
+			} catch (Exception e) {
+				return null;
+			}
+			WritingVO write = wtDao.findById(wr_seq);
+			writing.add(write);
+		} else if(category.equalsIgnoreCase("user")) {
+			writing = wtDao.findByUserSeqOrNick(search);
+		} else if(category.equalsIgnoreCase("content")) {
+			writing = wtDao.findByContent(search);
+		} else if(category.equalsIgnoreCase("content")) {
+			writing = wtDao.findByContent(search);
+		}
+		
+		log.debug("검색결과 : {}", writing.toString());
+		
+		return writing;
+	}
+
+
+	
 
 
 }

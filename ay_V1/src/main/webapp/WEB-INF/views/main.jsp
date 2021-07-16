@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,24 +12,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>하루생각</title>
 <!-- <link href="${rootPath}/resources/css/main.css?ver-016" rel="stylesheet" /> -->
-
+<link href="${rootPath}/static/css/basic.css?ver-016" rel="stylesheet" />
 <style>
-@import url("basic.css");
 
+/*0715 배경수정*/
 body {
-	background-image: url("${rootPath}/resources/BG-V2_1.png");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: 100% 100%;
+	-webkit-background-size: cover; 
+	-moz-background-size: cover; 
+	-o-background-size: cover; 
+	background-size: cover;
+
 	overflow: hidden;
 }
 
+
+div#background1 img{
+	min-height : 100%;
+	min-width : 1024px;
+	width : 100%;
+	height : auto;
+	position : fixed;
+	top: 0;
+	left: 0;
+}
+/*0715 배경수정 끝*/
+
+
 .main_bubble {
-	width: 40%;
-	height: 75%;
+	width: 750px;
+	height: 600px;
 	margin: 2.5% auto;
 	transition: all 1s;
-	background: url("${rootPath}/resources/bubbleAndperson.png") no-repeat;
+	background: url("${rootPath}/static/bubbleAndperson.png") no-repeat;
 	background-size: 100%;
 }
 
@@ -101,6 +117,7 @@ div.main_modal {
 	z-index: 0;
 }
 
+
 .siren {
 	width: 13%;
 	position: absolute;
@@ -114,7 +131,7 @@ div.main_modal {
 	width: 30%;
 }
 
-h4#siren_title {
+h3#siren_title {
 	border-bottom: 1px solid #ccc;
 	padding: 10px;
 	margin-bottom: 10px;
@@ -125,7 +142,6 @@ h4#siren_title {
 div.siren_box {
 	width: 300px;
 	height: auto;
-	font-size: 15px;
 	background-color: #fff;
 	border-radius: 5px;
 	position: absolute;
@@ -147,6 +163,7 @@ div.siren_box {
 
 .siren_box form {
 	width: 100%;
+	font-size: 15px;
 }
 
 
@@ -170,7 +187,7 @@ div.siren_box {
 
 .siren_box.visible {
 	visibility: visible;
-	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	animation: unfoldIn 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 .heart-box {
@@ -184,7 +201,15 @@ div.siren_box {
 	font-size: 18px;
 }
 
+/*0715 하트모양 변경*/
 .heart-box span#like_it {
+	cursor: pointer;
+	font-size: 20px;
+}
+.heart-box span#like_it span#h_black{
+	color: black;
+}
+.heart-box span#like_it span#h_red{
 	color: red;
 }
 
@@ -192,14 +217,15 @@ div.siren_box {
 	display: inline-block;
 }
 
-div#background1 {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.4);
-	display: none;
+/*0715 배경수정*/
+@media screen and (max-width: 1024px) { 
+ div#background1 img { 
+ 	left: 50%; 
+ 	margin-left: -512px;
+ 	} 
 }
+
+
 
 @keyframes unfoldIn { 
 0% { transform: scaleX(0) scaleY(0.005);}
@@ -218,7 +244,11 @@ div#background1 {
 
 </head>
 <body>
-	<div id="background1"></div>
+	
+	<!-- 배경수정 -->
+	<div id="background1">
+		<img class="heart" src="${rootPath}/static/BG-V2_1.png">
+	</div>
 
 	<%@ include file="header.jsp"%>
 
@@ -228,7 +258,7 @@ div#background1 {
 			<div class="bubble_box">
 
 				<label class="siren" for="siren"> <img
-					src="resources/siren.png">
+					src="static/siren.png">
 				</label>
 
 				<p class="p1">
@@ -242,13 +272,12 @@ div#background1 {
 				<div class="heart-box">
 
 					<div class="content">
-						<!--  <span id="like_it">♥</span> -->
-						<span id="like_it"> <c:if test="${CHECK == 0}">
-								<img class="heart" src="${rootPath}/resources/heart_black.png"
-									width="30px" height="25px" />
-							</c:if> <c:if test="${CHECK == 1}">
-								<img class="heart" src="${rootPath}/resources/heart_red.png"
-									width="30px" height="25px" />
+						<span id="like_it"> 
+							<c:if test="${CHECK == 0}">
+									<span id="h_black">♡</span>
+							</c:if> 
+							<c:if test="${CHECK == 1}">
+									 <span id="h_red">♥</span>
 							</c:if>
 						</span>
 						<p id="like_it_text">${WRITING.wr_like_count}명이공감중</p>
@@ -265,44 +294,50 @@ div#background1 {
 	<div class="main_modal"></div>
 
 	<!--  0714 신고창 수정-->
+	<!--  0715 신고창 수정-->
 	<div id="siren_box" class="siren_box">
-		<h4 id="siren_title">신고하기</h4>
-		<form action="${rootPah}/warning/insert">
+		<h3 id="siren_title">신고하기</h3>
+		<form  id="WARNING" method="POST" action="${rootPath}/warning/insert" onsubmit="jSubmit">
 			<p>신고 사유를 선택하세요.</p>
+				<input type="hidden" name="wa_writing" value="${WRITING.wr_seq}">
+				<input type="hidden" name="wa_user" value="${WRITING.wr_user}">
+
 
 			<div>
-				<input type="radio" name="r1"value="1">
-				<label for="r1"> 성적인 콘텐츠</label>
+				<input type="radio" name="wa_content"  value="성적인 콘텐츠" onClick="this.form.wa_content_other.disabled=true">
+				<label for="wa_content"> 성적인 콘텐츠</label>
 			</div>
 
 			<div>
-				<input type="radio" name="r1"value="2"> 
-				<label for="r1"> 폭력적 또는 혐오스러운 콘텐츠</label>
+				<input type="radio" name="wa_content"  value="폭력적 또는 혐오스러운 콘텐츠" onClick="this.form.wa_content_other.disabled=true"> 
+				<label for="wa_content"> 폭력적 또는 혐오스러운 콘텐츠</label>
 			</div>
 
 			<div>
-				<input type="radio" name="r1"  value="3"> 
-				<label for="r1"> 증오 또는 악의적인 콘텐츠</label>
+				<input type="radio" name="wa_content"  value="증오 또는 악의적인 콘텐츠" onClick="this.form.wa_content_other.disabled=true"> 
+				<label for="wa_content"> 증오 또는 악의적인 콘텐츠</label>
 			</div>
 
 			<div>
-				<input type="radio" name="r1"  value="4"> 
-				<label for="r1"> 희롱 또는 괴롭힘</label>
+				<input type="radio" name="wa_content"  value="희롱 또는 괴롭힘" onClick="this.form.wa_content_other.disabled=true"> 
+				<label for="wa_content"> 희롱 또는 괴롭힘</label>
 			</div>
 
 			<div>
-				  <input type="radio" name="r1" value="5">
-				  <label for="r1"> 유해하거나 위험한 행위</label>
+				  <input type="radio" name="wa_content" value="유해하거나 위험한 행위" onClick="this.form.wa_content_other.disabled=true">
+				  <label for="wa_content"> 유해하거나 위험한 행위</label>
 			</div>
 
 			<div id="div_text">
-				<input type="radio" name="r1" value="6"> 
-				<label for="r1" >기타</label>
-				<input type="text" name="r1" value="6"> 
+				<input type="radio" name="wa_content" value="6" onClick="this.form.wa_content_other.disabled=false"> 
+				<label for="wa_content" >기타</label>
+				
+				<input type="text" name="wa_content_other" id="other" value="입력하세요" disabled="disabled" >
+				
 			</div>
 
-			<button id="close">취 소</button>
-			<button>신고하기</button>
+			<button type="button" id="close">취소</button>
+			<button type="button" id="btn_wa" >신고하기</button>
 		</form>
 	</div>
 
@@ -329,12 +364,10 @@ div#background1 {
 			.then(response=>response.text())
 			.then(result=>{
 				if(result === "COUNT_DOWN"){
-					like_it.innerHTML = `<img class='heart'
-					src='${rootPath}/resources/heart_black.png' width="30px" height="25px" />`;
+					like_it.innerHTML = `<span id="h_black">♡</span>`;
 					wrLikeCount();
 				}else if (result === "COUNT_UP"){
-					like_it.innerHTML = `<img class='heart'
-					src='${rootPath}/resources/heart_red.png' width="30px" height="25px" />`;
+					like_it.innerHTML = `<span id="h_red">♥</span>`;
 					wrLikeCount();
 				}
 			})
@@ -349,11 +382,42 @@ div#background1 {
 		})
 	}
 	
+	/* 0715 로그인제한 추가*/
 	document.querySelector("label.siren").addEventListener("click",(e)=>{
-		modal.style.display = "block";
-		document.querySelector("#siren_box").classList.add("visible")
+		
+		if(${not empty USER}) {
+			modal.style.display = "block";
+			document.querySelector("#siren_box").classList.add("visible")
+		} else {
+			alert("로그인하세요.")
+		}
 	})
 	
+	document.querySelector("button#close").addEventListener("click",(e)=>{
+		modal.style.display = "none";
+		document.querySelector("#siren_box").classList.remove("visible")
+	})	
+	
+	document.querySelector("button#btn_wa").addEventListener("click",(e)=>{
+		
+		let size = document.getElementsByName("wa_content").length
+		let check = 0;
+		
+		for(let i = 0 ; i < size ; i ++) {
+			if(document.getElementsByName("wa_content")[i].checked == true) {
+				check ++	
+			}	
+		}
+		
+		if(check <=0) {
+			alert("항목은 반드시 선택해야 합니다")
+			return false;
+		} 
+		
+		document.querySelector("form#WARNING").submit()
+		
+	})
+
 </script>
 
 </html>

@@ -2,6 +2,8 @@ package com.callor.mind.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.callor.mind.model.LikeVO;
 import com.callor.mind.model.WarningVO;
 import com.callor.mind.model.WritingVO;
@@ -14,6 +16,9 @@ public interface WritingService {
 	public WritingVO findById(Long wr_seq);
 	
 	public List<WritingVO> findByUser(Long wr_user);
+	
+	//0716 admim 페이지에서 목록검색하기
+	public List<WritingVO> search(String category, String search, Model model) throws Exception;
 	
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	

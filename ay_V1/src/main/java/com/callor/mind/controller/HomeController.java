@@ -103,11 +103,30 @@ public class HomeController {
 		return writingVO.getWr_like_count();
 	}
 	
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert(Locale locale, Model model) {
 		return "insert";
 	}
 	
+	
+
+	// 7월 14일 추가
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String insert(Long u_seq,String u_nick, WritingVO writingVO) {
+	
+		log.debug("글정보 {}",writingVO);
+		writingVO.setWr_user(u_seq);
+		writingVO.setWr_nick(u_nick);
+		
+		log.debug("2개 합치기 {}",writingVO);
+		
+		int result = wtSer.insert(writingVO);
+		if(result > 0) {
+			return "redirect:/list/iwrite";
+		}
+		return "redirect:/insert";
+	}
 	
 	
 }

@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>하루생각</title>
-<link rel="stylesheet" href="${rootPath}/static/css/list.css?ver=14" />
+<link rel="stylesheet" href="${rootPath}/static/css/list.css?ver=23" />
 
 
 <script defer>
@@ -18,7 +18,7 @@ let pathName = "${title}";
 let user = "${USER.u_seq}";
 let rootPath = "${rootPath}";
 </script> <!-- 6월 13일 -->
-<script defer src="${rootPath}/static/js/list.js?ver=48"></script>
+<script defer src="${rootPath}/static/js/list.js?ver=65"></script>
 
 
 </head>
@@ -29,7 +29,10 @@ let rootPath = "${rootPath}";
 	<%@ include file="../header.jsp"%>
 
 	<!-- section 시작-->
+	<!-- 7월14일 modal form으로 감싸기 -->
+	<form id="writing_delete" method="POST" action="${rootPath}/list/delete">
 	<div id="modal"></div>
+	</form>
 	<section>
 	
 		<div id="b_container" class="active3">

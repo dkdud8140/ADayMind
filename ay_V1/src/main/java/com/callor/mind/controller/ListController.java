@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping(value="/list")
 public class ListController {
-	
 	protected final WritingService wService;
 	protected final LikeService lService;
 
@@ -97,5 +96,21 @@ public class ListController {
 		model.addAttribute("LIKELIST",wrList);
 		model.addAttribute("title", "인기 하루 생각");
 		return "list/list";
+	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	public String delete(WritingVO writingVO) {
+		
+		int result = wService.delete(writingVO);
+		
+		return "redirect:/main";
+	}
+	
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String update(WritingVO writingVO) {
+		
+		int result = wService.update(writingVO);
+		
+		return "redirect:/main";
 	}
 }

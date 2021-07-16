@@ -2,6 +2,8 @@ package com.callor.mind.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.callor.mind.model.UserVO;
 
 public interface UserService {
@@ -26,6 +28,9 @@ public interface UserService {
 		// 유저경고 업데이트 횟수 
 		public int updateWarning(UserVO userVO);
 		public int ban(Long seq);
+		
+		//0716 admim 페이지에서 목록검색하기
+		public List<UserVO> search(String category, String search, Model model) throws Exception;
 
 	
 	//일단 보류

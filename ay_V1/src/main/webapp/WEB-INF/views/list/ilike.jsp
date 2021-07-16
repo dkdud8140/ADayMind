@@ -15,6 +15,7 @@
 					<p>${WRITING.wr_nick}</p>
 				</div>
 				<h1>${WRITING.wr_content}</h1>
+				<h5>${WRITING.wr_origin}</h5>
 
 				<%-- 조아영 - 0715 : 하트모양변경 --%>
 				<span class="modal_span" data-seq="${WRITING.wr_seq}"> 	

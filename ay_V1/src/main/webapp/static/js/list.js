@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   let boardList = document.getElementsByClassName("card");
   let boardNum;
-
+  
+  let b_con1 = document.getElementById("b_container");
+  let s_con1 = document.querySelector("#sign_container");
+  let front1 = document.querySelectorAll("div.front");
+  let back1 = document.querySelectorAll("div.back");
+  let modal_Temp = document.createElement("div")
   
   for (let i = 0; i < boardList.length; i++) {
     boardList[i].addEventListener("click", function () {
@@ -11,10 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
       boardList[i].style.opacity = "0";
       openModal.style.display = "flex";
       openModal.innerHTML = boardList[i].innerHTML;
+	  modal_Temp.innerHTML = boardList[i].innerHTML;
       document.querySelector("section").style.opacity = "0.3";
       document.querySelector("header").style.opacity = "0.3";
     });
   }
+
+  
+  function display_back1() {
+    if (b_con1) {
+      b_con1.classList.add("active2");
+      s_con1.style.display = "block";
+    }
+  }
+
+    function login_open1() {
+    for (let i = 0; i < back1.length; i++) {
+      back1[i].style.display = "none";
+      front1[i].style.display = "grid";
+    }
+  }
+
   let modal_p = document.createElement("p");
   modal_p.setAttribute("class","modal_count");
 
@@ -26,6 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
   	let tagName = e.target.tagName;
 	let idName = e.target.id;
   	if(tagName == "SPAN" || idName =="heart_event" || tagName == "P") {
+
+		if(user == "") {
+			modalClose();
+			display_back1();
+			login_open1();
+		}
+
   			let writing = e.target.closest("SPAN").dataset.seq;
   			let listWriting = document.querySelector(`A ARTICLE SPAN[data-seq="${writing}"]`);
   			let modal_span = document.querySelector("#modal article .modal_span");
@@ -52,34 +81,50 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
   		return false;
   	} else if(className == "delete_btn") {
-  		if(confirm("삭제하시겠습니까?")) {
+		if(confirm("삭제하시겠습니까?")) {
 			document.querySelector("form#writing_delete").submit();
   		} else {
   			return false;
   		}
   	} else if(className == "update_btn") {
-  		if(confirm("수정할까요")) {
 			let text1 = document.querySelector("#modal article h1");
 			let text_content = text1.innerText;
+			let text2 = document.querySelector("#modal article h5");
+			let text2_content = text2.innerText;
 			let textarea = document.createElement("textarea");
+			let textarea2 = document.createElement("textarea");
+			textarea.setAttribute("name","wr_origin");
+			textarea2.setAttribute("name","wr_content");
 			text1.remove();
+			text2.remove();
 			textarea.appendChild(document.createTextNode(text_content));
+			textarea2.appendChild(document.createTextNode(text2_content));
 			document.querySelector("#modal article div.profile_div").after(textarea);
+			document.querySelector("#modal article textarea").after(textarea2);
 			document.querySelector(".update_btn").innerHTML = "완료";
 			document.querySelector(".update_btn").className = "update_complete";
 			document.querySelector(".delete_btn").innerHTML = "취소";
 			document.querySelector(".delete_btn").className = "update_cancle";
 			return false;
-  		} else {
-  			return false;
-  		}
-  	} else if(tagName == "TEXTAREA") {
-  			return false;	
+  		
+  	} else if (className == "update_complete") {
+  		document.querySelector("form#writing_delete").action = rootPath + "/list/update";
+  		document.querySelector("form#writing_delete").submit();
+  		return false;
+  	} else if (className == "update_cancle") {
+  		let openModal = document.getElementById("modal");
+  		openModal.innerHTML = modal_Temp.innerHTML;
+  		return false;
+  	} else {
+  		closeModal.addEventListener("dblclick",(e)=>{
+  			let className = e.target.className;
+  			let tagName = e.target.tagName;
+  			if(tagName == "IMG" || tagName == "P" || tagName == "TEXTAREA"){
+  				return false;
+  			}
+  			modalClose();
+  		})
   	}
-    closeModal.style.display = "none";
-    document.querySelector("section").style.opacity = "1";
-    document.querySelector("header").style.opacity = "1";
-    boardNum.style.opacity = "1";
   });
   
   	function wrLikeCount(writing,listWriting,modal_span,list_p){
@@ -91,6 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	}
 	
+	function modalClose() {
+		closeModal.style.display = "none";
+	    document.querySelector("section").style.opacity = "1";
+	    document.querySelector("header").style.opacity = "1";
+	    boardNum.style.opacity = "1";
+	}
   
    // 6월 13일 시작
   let t_like = "나의 공감리스트";

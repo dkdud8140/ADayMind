@@ -19,6 +19,8 @@ public interface WritingService {
 	
 	//0716 admim 페이지에서 목록검색하기
 	public List<WritingVO> search(String category, String search, Model model) throws Exception;
+	//0716 admim 페이지에서 날짜별검색하기
+	public List<WritingVO> searchDate(String stDate, String edDate) ;
 	
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	

@@ -1,5 +1,7 @@
 package com.callor.mind.dao.ext;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.callor.mind.dao.GenericDao;
@@ -18,5 +20,10 @@ public interface UserDao extends GenericDao<UserVO, String>{
 	public UserVO findByPw(String u_pw);
 	public UserVO findByNick(String u_nick);
 	public UserVO findByMail(String u_mail);
+	
+	// 0716 조아영 - search메소드 추가
+	public List<UserVO> searchById(String search);
+	public List<UserVO> serchByNick(String search);	
+	public List<UserVO> serchByMail(String search);	
 	
 }

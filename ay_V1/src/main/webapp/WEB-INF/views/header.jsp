@@ -3,10 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-
-<link href="${rootPath}/static/css/header.css?ver-0046"	rel="stylesheet" />
-
-<script defer src="${rootPath}/static/js/header.js?ver=056"></script>
+<link href="${rootPath}/static/css/header.css?ver-0040"	rel="stylesheet" />
+<script defer>let userInfo = "${USER.u_seq}"; </script>
+<script defer src="${rootPath}/static/js/header.js?ver=060"></script>
 <style>
 
 	/* 07.14 body position 추가 */
@@ -25,6 +24,7 @@
 	span.ban {
 		text-decoration: line-through;
 	}
+
 </style>
 <!--  헤더 부분 -->
     <header>
@@ -131,6 +131,8 @@
             <div class="items2" id="error_msg" >아이디와 비밀번호를 입력하세요</div>
             <input class="items2" type="text" name="us_id" placeholder="ID" />
             <input class="items2" type="password" name="us_pw" placeholder="Password" />
+            <input id="url_now" type="hidden" name="url_now" />
+            <input id="wr_seq" type="hidden" name="wr_seq" value="" />
             <div class="items2">비밀번호를 잊어버리셨나요?</div>
             <button class="items2 btn" type="button" id="nav_login">로그인</button>
             <div class="exit exit1" >
@@ -171,31 +173,36 @@
     </header>
     <!-- 헤더 끝-->
     
-    	<!-- 0717 배경 별똥별 수정 --> 
-    	<div class = "star_box">
-	    	<span class="shooting_star"></span>
-			<span class="shooting_star"></span>
-			<span class="shooting_star"></span>
-			<span class="shooting_star"></span>
-		</div>
-		<!-- 0717 배경 별똥별 수정 끝 --> 
-		
-		
+    <div class ="star_box">
+    	<span class="shooting_star"></span>
+		<span class="shooting_star"></span>
+		<span class="shooting_star"></span>
+		<span class="shooting_star"></span>
+		<span class="shooting_star"></span>
+	</div>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
 	let user_id = document.getElementById("user_id")
 	let msg_user_id = document.querySelector("div.join.id")
 	let nav_login = document.querySelector("#nav_login")
 	let nav_join = document.querySelector("#nav_join")
 	let login_join = document.querySelector("form#login_join")
+	let url_now = document.querySelector("input#url_now")
+	let wr_seq = document.querySelector("input#wr_seq");
+
+
 	
 	nav_login.addEventListener("click",()=>{
 		login_join.action = "${rootPath}/member/login";
+		url_now.value = location.pathname;
+		wr_seq.value = `${WRITING.wr_seq}`;
 		login_join.submit();
 	})
 	
 	nav_join.addEventListener("click",()=>{
 		login_join.action = "${rootPath}/member/join";
-		alert(user_id.value);
+		url_now.value = location.pathname;
+		wr_seq.value = `${WRITING.wr_seq}`
 		login_join.submit();
 	})
 	
@@ -232,10 +239,12 @@
 		})
 	}
 	// 밴당한 사람 리스트이용못하게하기
+
 	let b_li_insert = document.getElementById("ban_insert")
 	let b_li_ilike = document.getElementById("ban_ilike")
 	let b_li_best = document.getElementById("ban_bestlist")
 	let b_li_iwrite = document.getElementById("ban_iwrite")
+
 	b_li_insert.addEventListener("click", ()=>{
 		alert("이용할 수 없습니다.")
 		return false
@@ -252,4 +261,5 @@
 		alert("이용할 수 없습니다.")
 		return false
 	})
+})
 </script>

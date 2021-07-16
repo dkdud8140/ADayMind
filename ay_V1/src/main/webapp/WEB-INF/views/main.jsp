@@ -121,6 +121,11 @@
 	let content = document.querySelector("div.content");
 	let like_it = document.querySelector("#like_it");
 	let like_it_text = document.querySelector("#like_it_text");
+	let main_s_con = document.querySelector("#sign_container");
+	let main_front = document.querySelectorAll("div.front");
+	let main_back = document.querySelectorAll("div.back");
+	
+	
 	
 	setTimeout(function() {
 		box.classList.remove("active3");
@@ -140,6 +145,13 @@
 					wrLikeCount();
 				}
 			})
+		} else {
+	        box.classList.add("active2");
+	        main_s_con.style.display = "block";
+	        for (let i = 0; i < main_back.length; i++) {
+	            main_back[i].style.display = "none";
+	            main_front[i].style.display = "grid";
+	          }
 		}
 	})
 	

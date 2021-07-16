@@ -40,6 +40,30 @@
 		WHERE u_id = #{u_id} AND u_pw = #{u_pw}
 	</select>
 	
+	
+<!--  0716 유저 아이디,닉네임,메일으로 검색하기 -->
+	<select id="searchById" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_id LIKE CONCAT('%', #{search}, '%')
+	</select>
+
+	<select id="serchByNick" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_nick LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="serchByMail" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_mail LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	
+
+<!-- 0716 추가 끝 -->
+	
+	
+	
+	
 	<insert id="insert" ></insert>
 	
 	<!-- join -->

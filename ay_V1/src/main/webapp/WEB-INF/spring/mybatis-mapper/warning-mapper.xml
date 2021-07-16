@@ -15,6 +15,36 @@
  		WHERE wa_seq = #{wa_seq}
  	</select>
  	
+ <!-- 0716 글번호, 사용자 닉네임, 글내용,날짜로 검색하기 -->
+ 	<select id="findByWrite" resultType="WarningVO" parameterType="String">
+		SELECT * FROM tbl_warning
+ 		WHERE wa_writing = #{search}
+	</select>
+	
+	<select id="findByUserSeq" resultType="WarningVO" parameterType="String">
+		SELECT * FROM tbl_warning
+		WHERE wa_user = #{search}
+	</select>
+
+	<select id="findByContent" resultType="WarningVO" parameterType="String">
+		SELECT * FROM tbl_warning
+		WHERE wa_content LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="findByDate" resultType="WarningVO" parameterType="String">
+		SELECT * FROM tbl_warning
+		WHERE wa_date BETWEEN #{stDate} AND #{edDate}
+	</select>
+	<!-- 0716 추가 끝 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
  	<insert id="insert" parameterType="WarningVO">
  		INSERT INTO tbl_warning

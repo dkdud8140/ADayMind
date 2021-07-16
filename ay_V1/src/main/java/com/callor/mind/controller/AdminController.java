@@ -50,7 +50,7 @@ public class AdminController {
 	
 	@RequestMapping(value = {"/",""}, method=RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-		return this.admin_write(model, session);
+		return "redirect:/admin/admin_write";
 		
 	}
 	
@@ -86,12 +86,31 @@ public class AdminController {
 		log.debug("####파라메터값 확인 : {}, {}",cat,search);
 		
 		if(search.equals("") || search == null) {
-			return "admin/admin";
+			return this.admin_write(model, session);
 		}
 		
 		model.addAttribute("CAT",cat);
 		
 		List<WritingVO> writing = wtSer.search(cat, search, model);
+		model.addAttribute("WTLIST", writing);
+		model.addAttribute("ADMIN", "admin_write");
+		return this.admin_check(model, session);
+	}
+	
+	// 0716 추가 날짜별 검색
+	@RequestMapping(value = "/write_search/date", method=RequestMethod.GET)
+	public String admin_write_search_date(Model model, HttpSession session,
+									@RequestParam(name="stDate",required = false, defaultValue="") String stDate,
+									@RequestParam(name="edDate",required = false, defaultValue="") String edDate
+									) throws Exception {
+		
+		model.addAttribute("CAT","date");
+		
+		if(stDate.equals("") || stDate == null || edDate.equals("") || edDate == null) {
+			return this.admin_write(model, session);
+		}
+		
+		List<WritingVO> writing = wtSer.searchDate(stDate, edDate);
 		model.addAttribute("WTLIST", writing);
 		model.addAttribute("ADMIN", "admin_write");
 		return this.admin_check(model, session);
@@ -125,6 +144,27 @@ public class AdminController {
 	}
 	
 	
+	// 0716 유저 전체 목록에서 검색하기
+	@RequestMapping(value = "/user_search/{CAT}", method=RequestMethod.GET)
+	public String admin_user_search(Model model, HttpSession session,
+									@PathVariable("CAT") String cat, 
+									@RequestParam(name="search",required = false, defaultValue="") String search ) 
+									throws Exception {
+			
+		log.debug("####파라메터값 확인 : {}, {}",cat,search);
+			
+		if(search.equals("") || search == null) {
+			return this.admin_user(model, session);
+		}
+			
+		model.addAttribute("CAT",cat);
+			
+		List<UserVO> users = uSer.search(cat, search, model);
+		model.addAttribute("USERS", users);
+		model.addAttribute("ADMIN", "admin_user");
+		return this.admin_check(model, session);
+	
+	}
 	
 	
 	
@@ -149,6 +189,54 @@ public class AdminController {
 		
 		return this.admin_check(model, session);
 	}
+	
+	
+
+	// 0716 신고 전체 목록에서 검색하기
+	@RequestMapping(value = "/warning_search/{CAT}", method=RequestMethod.GET)
+	public String admin_warning_search(Model model, HttpSession session,
+									@PathVariable("CAT") String cat, 
+									@RequestParam(name="search",required = false, defaultValue="") String search ) 
+											throws Exception {
+		
+		log.debug("####파라메터값 확인 : {}, {}",cat,search);
+		
+		if(search.equals("") || search == null) {
+			return this.admin_warning(model, session);
+		}
+		
+		model.addAttribute("CAT",cat);
+		
+		List<WarningVO> writing = wSer.search(cat, search, model);
+		model.addAttribute("WARNINGS", writing);
+		model.addAttribute("ADMIN", "admin_warning");
+		return this.admin_check(model, session);
+	}
+	
+	// 0716 신고 날짜별 검색
+	@RequestMapping(value = "/warning_search/date", method=RequestMethod.GET)
+	public String admin_warning_search_date(Model model, HttpSession session,
+									@RequestParam(name="stDate",required = false, defaultValue="") String stDate,
+									@RequestParam(name="edDate",required = false, defaultValue="") String edDate
+									) throws Exception {
+		
+		model.addAttribute("CAT","date");
+		
+		if(stDate.equals("") || stDate == null || edDate.equals("") || edDate == null) {
+			return this.admin_warning(model, session);
+		}
+		
+		List<WarningVO> writing = wSer.searchDate(stDate, edDate);
+		model.addAttribute("WARNINGS", writing);
+		model.addAttribute("ADMIN", "admin_warning");
+		return this.admin_check(model, session);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

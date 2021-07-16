@@ -103,4 +103,8 @@ SELECT * FROM tbl_writing
         
 SELECT * FROM tbl_writing
 		WHERE wr_user LIKE '%2%' OR 
-				wr_nick LIKE '%2%' ;        
+				wr_nick LIKE '%2%' ;  
+                
+SELECT * FROM tbl_writing;            
+SELECT * FROM tbl_writing
+WHERE wr_last_date BETWEEN '2021-07-15 00:00:00' AND '2021-07-15 23:59:59';

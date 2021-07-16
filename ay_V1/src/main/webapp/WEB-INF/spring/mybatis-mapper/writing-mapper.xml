@@ -20,7 +20,7 @@
 		WHERE wr_user = #{wr_user}
 	</select>
 
-	<!-- 0715 사용자 닉네임, 글내용으로 검색하기 -->
+<!-- 0715, 0716 사용자 닉네임, 글내용으로 검색하기 -->
 	<select id="findByUserSeqOrNick" resultType="WritingVO" parameterType="String">
 		SELECT * FROM tbl_writing
 		WHERE wr_user LIKE CONCAT('%', #{search}, '%') OR wr_nick LIKE CONCAT('%', #{search}, '%')
@@ -30,6 +30,12 @@
 		SELECT * FROM tbl_writing
 		WHERE wr_content LIKE CONCAT('%', #{search}, '%')
 	</select>
+	
+	<select id="findByDate" resultType="WritingVO" parameterType="String">
+		SELECT * FROM tbl_writing
+		WHERE wr_last_date BETWEEN #{stDate} AND #{edDate}
+	</select>
+<!-- 0716 추가 끝 -->
 
 
 	<select id="selectByRandom" resultType="WritingVO">

@@ -2,6 +2,8 @@ package com.callor.mind.dao.ext;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.callor.mind.dao.GenericDao;
 import com.callor.mind.model.WritingVO;
 
@@ -15,9 +17,10 @@ public interface WritingDao extends GenericDao<WritingVO, Long> {
 	public List<WritingVO> selectByUserLike(Long user);
 	public List<WritingVO> selectMyWriting(Long user);
 	
-	// 0716 유저 SEQ 혹은 닉네임으로 검색하기
+	// 0716 추가메소드
 	public List<WritingVO> findByUserSeqOrNick(String search);
 	public List<WritingVO> findByContent(String search);
+	public List<WritingVO> findByDate(@Param("stDate") String stDate, @Param("edDate") String edDate);
 	
 	public WritingVO selectByRandom();
 

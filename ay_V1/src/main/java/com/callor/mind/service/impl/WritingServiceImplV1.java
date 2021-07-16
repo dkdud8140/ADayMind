@@ -107,7 +107,7 @@ public class WritingServiceImplV1 implements WritingService {
 		return 0;
 	}
 
-
+	// 0716 검색메소드 : 글번호, 유저번호, 글내용으로 검색
 	@Override
 	public List<WritingVO> search(String category, String search, Model model) throws Exception {
 
@@ -126,13 +126,22 @@ public class WritingServiceImplV1 implements WritingService {
 			writing = wtDao.findByUserSeqOrNick(search);
 		} else if(category.equalsIgnoreCase("content")) {
 			writing = wtDao.findByContent(search);
-		} else if(category.equalsIgnoreCase("content")) {
-			writing = wtDao.findByContent(search);
-		}
-		
+		} 
 		log.debug("검색결과 : {}", writing.toString());
 		
 		return writing;
+	}
+
+	// 0716 검색메소드 : 날짜별 검색
+	@Override
+	public List<WritingVO> searchDate(String stDate, String edDate) {
+		
+		stDate +=" 00:00:00";
+		edDate +=" 23:59:59";
+		
+		log.debug("%%검색날짜 , {} , {} ", stDate, edDate);
+		
+		return wtDao.findByDate(stDate, edDate);
 	}
 
 

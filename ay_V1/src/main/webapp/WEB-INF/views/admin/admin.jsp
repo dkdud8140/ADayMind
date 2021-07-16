@@ -227,6 +227,46 @@ div#admin_body {
 		cursor: pointer;
 		
 	}
+	
+	
+	/* 0716 검색창 style 추가*/
+	div.div_search_box {
+	margin-top : 10px;
+	margin-left : 50px;
+	padding : 3px;
+}
+
+select#category { 
+	display: inline-block;
+	padding : 3px;
+	margin : 3px;
+}
+
+form.frm_search{
+	display: inline-block;
+	margin : 3px;
+	
+}
+
+form.frm_search input{
+	padding : 5px;
+	background-color: #ddd;
+	border : none;
+}
+
+form.frm_search input.btn_search{
+	padding : 5px 10px;;
+	border: none;
+	outline: none;
+	border-radius: 2px;
+	background-color: #092540;
+	color: #fff;
+	font-weight: 400;
+	margin : 3px;
+	cursor: pointer;
+}
+	
+	
 
 </style>
 </head>

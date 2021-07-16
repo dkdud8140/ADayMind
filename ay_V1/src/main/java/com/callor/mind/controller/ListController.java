@@ -19,21 +19,24 @@ import com.callor.mind.service.WritingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping(value="/list")
 public class ListController {
+	
 	protected final WritingService wService;
 	protected final LikeService lService;
 
 	@RequestMapping(value="/ilike", method=RequestMethod.GET)
 	public String list(Model model, HttpSession session) {
 		
+		// 비로그인 주소입력시 차단 후 홈으로
 		UserVO userVO = (UserVO) session.getAttribute("USER");
 		if(userVO == null) {
-			return "redirect:/main";
+			return "redirect:/";
 		}
+
 		List<WritingVO> likeList = wService.selectByUserLike(userVO.getU_seq());
 		List<Integer> ilike = new ArrayList<>();
 		LikeVO likeVO = new LikeVO();
@@ -52,11 +55,11 @@ public class ListController {
 	@RequestMapping(value="/iwrite", method=RequestMethod.GET)
 	public String mylist(Model model, HttpSession session) {
 		
+		// 비로그인 주소입력시 차단 후 홈으로
 		UserVO userVO = (UserVO) session.getAttribute("USER");
 		if(userVO == null) {
-			return "redirect:/main";
+			return "redirect:/";
 		}
-		
 		List<WritingVO> wrList = wService.selectMyWriting(userVO.getU_seq());
 		List<Integer> ilike = new ArrayList<>();
 		LikeVO likeVO = new LikeVO();
@@ -103,7 +106,7 @@ public class ListController {
 		
 		int result = wService.delete(writingVO);
 		
-		return "redirect:/main";
+		return "redirect:/list/iwrite";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
@@ -111,6 +114,6 @@ public class ListController {
 		
 		int result = wService.update(writingVO);
 		
-		return "redirect:/main";
+		return "redirect:/list/iwrite";
 	}
 }

@@ -41,10 +41,13 @@ public class HomeController {
 		return "home";
 	}
 	
+
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model, HttpSession session) {
-		
+		log.debug("모델{}",model.getAttribute("wr_seq"));
+		String wrseq = (String) model.getAttribute("wr_seq");
 		WritingVO wrtVO = wtSer.selectByRandom();
+		
 		UserVO userVO = (UserVO) session.getAttribute("USER");
 		
 		if(userVO == null) {
@@ -52,22 +55,33 @@ public class HomeController {
 			model.addAttribute("CHECK",0);
 			return "main";
 		}
+		log.debug("유저정보 {}",userVO.toString());
 		
 		Long seq = wrtVO.getWr_seq();		
 		Long user = userVO.getU_seq();
+
+		
+		if( wrseq != null ) {
+			Long wr_seq = Long.valueOf(wrseq);
+			WritingVO wrtVO2 = wtSer.findById(wr_seq);
+			seq = wrtVO2.getWr_seq();
+			model.addAttribute("WRITING",wrtVO2);
+		} else {
+			model.addAttribute("WRITING", wrtVO);
+		}
 		
 		LikeVO likeVO = new LikeVO();
 		likeVO.setLi_wr_seq(seq);
 		likeVO.setLi_fan(user);
-		
 		int check = lSer.check_like(likeVO);
 		log.debug("체크여부 {}",check);
+		
 		
 		// 좋아요 테이블 find한 결과 값
 		// check = 1 ; 현재 로그인한 유저가 좋아요 누른 글
 		// check = 0 ; 현재 로그인한 유저가 좋아요를 누르지 않은 글
 		model.addAttribute("CHECK",check);
-		model.addAttribute("WRITING", wrtVO);
+		
 		
 		return "main";
 	}
@@ -105,10 +119,15 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert(Locale locale, Model model) {
+	public String insert(Locale locale, Model model, HttpSession session) {
+		// 비로그인 주소입력시 차단 후 홈으로
+		UserVO userVO = (UserVO) session.getAttribute("USER");
+		if(userVO == null) {
+			return "redirect:/";
+		}
+		
 		return "insert";
 	}
-	
 	
 
 	// 7월 14일 추가

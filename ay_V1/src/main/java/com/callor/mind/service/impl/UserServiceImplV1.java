@@ -1,11 +1,14 @@
 package com.callor.mind.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.UserDao;
 import com.callor.mind.model.UserVO;
+import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -106,6 +109,31 @@ public class UserServiceImplV1 implements UserService{
 	public int ban(Long seq) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	//0716 조아영 - 검색메소드
+	@Override
+	public List<UserVO> search(String category, String search, Model model) throws Exception {
+		List<UserVO> users = new ArrayList<UserVO>();
+		
+		if(category.equalsIgnoreCase("seq")) {
+			Long u_seq = null;
+			try {
+				u_seq = Long.valueOf(search);
+			} catch (Exception e) {
+				return null;
+			}
+			UserVO user = userDao.findBySeq(u_seq);
+			users.add(user);
+		} else if(category.equalsIgnoreCase("id")) {
+			users = userDao.searchById(search);
+		} else if(category.equalsIgnoreCase("nick")) {
+			users = userDao.serchByNick(search);
+		}  else if(category.equalsIgnoreCase("mail")) {
+			users = userDao.serchByMail(search);
+		} 
+		
+		return users;
 	}
 
 }

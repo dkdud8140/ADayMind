@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>하루생각 입력하기</title>
-<link href="${rootPath}/static/css/insert.css?ver-015" rel="stylesheet" />
+<link href="${rootPath}/static/css/insert.css?ver-014"
+	rel="stylesheet" />
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -24,10 +25,12 @@
 					<div>
 						<input type="hidden" name="u_seq" value="${USER.u_seq}"/>
 						<input type="hidden" name="u_nick" value="${USER.u_nick}"/>
-						<input type="text" name="wr_content" id="text1" class="img0" placeholder="하루생각을 입력하세요." />
+						<input type="text" name="wr_content" id="text1" class="img0" 
+						maxlength="3000" placeholder="하루생각을 입력하세요." />
 					</div>
 					<div>
-						<input type="text" name="wr_origin" id="text2" class="img0" placeholder="출처를 입력하세요." />
+						<input type="text" name="wr_origin" id="text2" class="img0" 
+						maxlength="50" placeholder="출처를 입력하세요." />
 					</div>
 				</div>
 			</div>

@@ -78,10 +78,20 @@ FOREIGN KEY(wa_writing)
 REFERENCES tbl_writing(wr_seq)
 ON DELETE CASCADE;
 
+
+
+
 ALTER TABLE tbl_warning
 ADD CONSTRAINT fk_wa_user
 FOREIGN KEY(wa_user)
-REFERENCES tbl_user(u_seq);
+REFERENCES tbl_user(u_seq)
+ON DELETE CASCADE;
+
+ALTER TABLE tbl_warning
+drop FOREIGN KEY fk_wa_user;
+
+
+
 
 ALTER TABLE tbl_like
 ADD CONSTRAINT fk_li_writing

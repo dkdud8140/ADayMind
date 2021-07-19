@@ -180,6 +180,8 @@
 		<span class="shooting_star"></span>
 		<span class="shooting_star"></span>
 	</div>
+	
+	
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 	let user_id = document.getElementById("user_id")

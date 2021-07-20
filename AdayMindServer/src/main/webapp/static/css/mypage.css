@@ -1,0 +1,332 @@
+@charset "UTF-8";
+
+@import url("basic.css");
+
+body {
+	background-image: url("../BG-V2_2.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	font-size: 2vh;
+	overflow: hidden;
+}
+
+div.b_container {
+	width: 100%;
+	height: 85%;
+	perspective: 1500px;
+}
+
+section.a {
+	width: 100%;
+	height: 85vh;
+	position: relative;
+	transition: transform 1s;
+}
+
+section.a.active {
+transform: translateZ(-500px);
+}
+section.a.active2 {
+transform: translateZ(-1500px) scale(0);
+transform-origin: 50% 0%;
+}
+section.a.active3 {
+	transform: translateZ(-500px);
+	animation: move 1s forwards;
+}
+@keyframes move {
+	100% {
+		transform: translateZ(-0px);
+	}
+} 
+
+div.a1 {
+	background-color: white;
+	width: 30vw;
+	height: 58vh;
+	border-radius: 10%;
+	position: absolute;
+	top: 10%;
+	left: 35%;
+	transform: translate(-50% -50%);
+}
+
+div.profile img {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 3%;
+	left: 30%;
+}
+
+div.proname {
+	position: absolute;
+	top: 8%;
+	left: 48%;
+}
+
+div input {
+	text-align: center;
+}
+
+div.id p {
+	position: absolute;
+	top: 28%;
+	left: 10%;
+}
+
+#id_input {
+	position: absolute;
+	top: 28%;
+	left: 29%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	outline: none;
+	border-radius: 8px;
+}
+
+div#id_input:hover {
+	background-color: steelblue;
+}
+
+div.pw {
+	position: absolute;
+	top: 41%;
+	left: 10%;
+}
+
+#pw_input {
+	position: absolute;
+	top: 4%;
+	left: 117%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	border-radius: 8px;
+	outline: none;
+}
+
+div.nick {
+	position: absolute;
+	top: 54%;
+	left: 10%;
+}
+
+#nick_input {
+	position: absolute;
+	top: 4%;
+	left: 160%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	border-radius: 8px;
+	outline: none;
+}
+
+div.email {
+	position: absolute;
+	top: 67%;
+	left: 10%;
+}
+
+#email_input {
+	position: absolute;
+	top: 4%;
+	left: 160%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	border-radius: 8px;
+	outline: none;
+}
+
+div.infos button {
+	border: skyblue;
+	border-radius: 25px;
+	width: 7vw;
+	height: 4vh;
+	position: absolute;
+	top: 80%;
+	left: 42%;
+	background-color: skyblue;
+	color: white;
+	cursor: pointer;
+}
+
+div.infos button:hover {
+	box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+div.pws button {
+	border: skyblue;
+	border-radius: 25px;
+	width: 7vw;
+	height: 4vh;
+	position: absolute;
+	top: 80%;
+	left: 70%;
+	background-color: skyblue;
+	color: white;
+	cursor: pointer;
+}
+
+div.pws button:hover {
+	box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+div.expire button {
+	border: skyblue;
+	border-radius: 25px;
+	width: 7vw;
+	height: 4vh;
+	position: absolute;
+	top: 80%;
+	left: 15%;
+	background-color: skyblue;
+	color: white;
+	cursor: pointer;
+}
+
+div.expire button:hover {
+	box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+section.b {
+	border-radius: 15px;
+	width: 35vw;
+	height: 40vh;
+	background-color: white;
+	position: absolute;
+	top: 20%;
+	left: 32.5%;
+	display: none;
+	font-size: 2vh;
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@
+keyframes unfoldIn { 0% {
+	transform: scaleX(0) scaleY(0.005);
+}
+
+50
+%
+{
+transform
+:
+scaleX(
+1
+)
+scaleY(
+0.005
+);
+}
+100
+%
+{
+transform
+:
+scaleY(
+1
+)
+scaleX(
+1
+);
+}
+}
+main.new_page div {
+	font-size: 1.8vh;
+}
+
+div.pw_title {
+	position: absolute;
+	top: 8%;
+	left: 35%;
+}
+
+div.now_pw {
+	position: absolute;
+	top: 25%;
+	left: 5%;
+}
+
+#now_input {
+	position: absolute;
+	top: 8%;
+	left: 130%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	outline: none;
+}
+
+div.new_pw {
+	position: absolute;
+	top: 45%;
+	left: 5%;
+}
+
+#new_input {
+	position: absolute;
+	top: 3%;
+	left: 130%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	outline: none;
+}
+
+div.ag_pw {
+	position: absolute;
+	top: 65%;
+	left: 5%;
+}
+
+#ag_input {
+	position: absolute;
+	top: 3%;
+	left: 130%;
+	border: 0;
+	border-bottom: 1px solid black;
+	width: 300px;
+	outline: none;
+}
+
+div.pw_ok button {
+	position: absolute;
+	top: 80%;
+	left: 47%;
+	border-radius: 25px;
+	background-color: skyblue;
+	border: 0;
+	width: 7vw;
+	height: 4vh;
+	color: white;
+	text-decoration: none;
+	outline: none;
+}
+
+div.pw_ok button:hover {
+	box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+div.quit button {
+	position: absolute;
+	top: 80%;
+	left: 75%;
+	border-radius: 25px;
+	background-color: skyblue;
+	border: 0;
+	width: 7vw;
+	height: 4vh;
+	color: white;
+}
+
+div.quit button:hover {
+	box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#change_ok {
+	text-decoration: none;
+}

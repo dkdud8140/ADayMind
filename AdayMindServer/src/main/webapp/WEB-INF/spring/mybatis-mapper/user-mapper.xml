@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.callor.mind.dao.ext.UserDao">
+	
+	<select id="selectAll" resultType="UserVO">
+		SELECT * FROM tbl_user
+	</select>
+	
+	<select id="findById" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_id = #{u_id}
+	</select>
+	
+	<select id="findBySeq" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_seq = #{u_seq}
+	</select>
+	
+	<select id="findByPw" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_pw = #{u_pw} AND u_id = #{u_id}
+	</select>
+	
+	<select id="findByNick" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_nick = #{u_nick}
+	</select>
+	
+	<select id="findByMail" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_mail = #{u_mail}
+	</select>
+	
+	<select id="login" resultType="UserVO">
+		SELECT * FROM tbl_user
+		WHERE u_id = #{u_id} AND u_pw = #{u_pw}
+	</select>
+	
+	<!--  0716 유저 아이디,닉네임,메일으로 검색하기 -->
+	<select id="searchById" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_id LIKE CONCAT('%', #{search}, '%')
+	</select>
+
+	<select id="serchByNick" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_nick LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="serchByMail" resultType="UserVO" parameterType="String">
+		SELECT * FROM tbl_user
+		WHERE u_mail LIKE CONCAT('%', #{search}, '%')
+	</select>
+	<!-- 0716 추가 끝 -->
+	
+	<insert id="insert" ></insert>
+	
+	<!-- join -->
+	<insert id="insertOrUpdate" parameterType="UserVO">
+		INSERT INTO tbl_user (
+			u_id, u_pw, u_mail, u_nick, u_level
+		)
+		VALUES(
+			#{u_id}, #{u_pw}, #{u_mail}, #{u_nick}, #{u_level}
+		)
+	</insert>
+	
+	<update id="update" parameterType="UserVO">
+		UPDATE tbl_user SET
+		u_nick = #{u_nick},
+		u_mail = #{u_mail}
+		WHERE  u_seq = #{u_seq}
+		AND u_pw = #{u_pw}
+	</update>
+	
+	<update id="updatePw" parameterType="UserVO">
+		UPDATE tbl_user SET
+		u_pw = #{us_pw}
+		WHERE u_pw = #{u_pw}
+		AND u_id = #{u_id}
+	</update>
+	
+	<!-- 유저 ban -->
+	<update id="ban" parameterType="UserVO">
+		UPDATE tbl_user 
+		SET u_level = 9
+		WHERE u_seq = #{u_seq}
+	</update>
+	
+	<!-- 유저 레벨조정 -->
+	<update id="levelUp" parameterType="int">
+		UPDATE tbl_user 
+		SET u_level = #{u_level}
+		WHERE u_seq = #{u_seq}
+	</update>
+	
+	
+	<delete id="delete" parameterType="UserVO">
+		DELETE from tbl_user
+		WHERE u_seq = #{u_seq} AND u_pw = #{u_pw}
+	</delete>
+	
+	<delete id="deleteByAdmin" parameterType="UserVO">
+		DELETE from tbl_user
+		WHERE u_seq = #{u_seq}
+	</delete>
+	
+
+	
+</mapper>

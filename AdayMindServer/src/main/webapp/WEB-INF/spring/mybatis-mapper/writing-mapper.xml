@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.callor.mind.dao.ext.WritingDao">
+ 
+ 	<select id="selectAll" resultType="WritingVO">
+ 	 	SELECT * FROM tbl_writing
+ 		ORDER BY wr_seq DESC
+ 	</select>
+ 	<select id="findById" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing
+ 		WHERE wr_seq = #{wr_seq}
+ 	</select>
+ 	
+ 	 <select id="findByUser" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing
+ 		WHERE wr_user = #{wr_user}
+ 	</select>
+ 	
+ 	<!-- 0715, 0716 사용자 닉네임, 글내용으로 검색하기 -->
+	<select id="findByUserSeqOrNick" resultType="WritingVO" parameterType="String">
+		SELECT * FROM tbl_writing
+		WHERE wr_user LIKE CONCAT('%', #{search}, '%') OR wr_nick LIKE CONCAT('%', #{search}, '%')
+	</select>
+
+	<select id="findByContent" resultType="WritingVO" parameterType="String">
+		SELECT * FROM tbl_writing
+		WHERE wr_content LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="findByDate" resultType="WritingVO" parameterType="String">
+		SELECT * FROM tbl_writing
+		WHERE wr_last_date BETWEEN #{stDate} AND #{edDate}
+	</select>
+<!-- 0716 추가 끝 -->
+ 	
+ 	<select id="selectByRandom" resultType="WritingVO">
+ 		SELECT * FROM tbl_writing 
+ 		WHERE wr_warning_count < 21
+		ORDER BY RAND() LIMIT 1
+ 	</select>
+
+	<select id="selectOrderByLike" resultType="WritingVO">
+		SELECT * FROM tbl_writing
+		ORDER BY wr_like_count DESC
+	</select>
+	
+	<select id="selectByUserLike" resultType="WritingVO" parameterType="LONG">
+		SELECT * 
+		FROM tbl_writing
+			LEFT JOIN tbl_like
+				ON wr_seq = li_wr_seq
+			LEFT JOIN tbl_user
+				ON u_seq = li_fan
+		WHERE u_seq = #{u_seq}
+		ORDER BY wr_last_date DESC
+	</select>
+	
+	<select id="selectMyWriting" resultType="WritingVO" parameterType="LONG">
+		SELECT * FROM tbl_writing
+		WHERE wr_user = #{u_seq}
+		ORDER BY wr_last_date DESC
+	</select>
+	
+
+
+ 	<insert id="insert" parameterType="WritingVO">
+ 		INSERT INTO tbl_writing
+ 			(wr_user,wr_nick,wr_content,wr_origin)
+ 		VALUES
+ 			(#{wr_user},#{wr_nick},#{wr_content},#{wr_origin})
+ 	</insert>
+ 	
+ 	<update id="likeCountUp" parameterType="Long">
+ 		UPDATE tbl_writing 
+		SET wr_like_count = wr_like_count + 1
+		WHERE wr_seq = #{wr_seq};
+ 	</update>
+ 	
+ 	<update id="likeCountDown" parameterType="Long">
+ 		UPDATE tbl_writing
+		SET wr_like_count = wr_like_count - 1
+		WHERE wr_seq = #{wr_seq};
+ 	</update>
+ 	
+ 	<!-- 0716 경고 카운트 업데이트 -->
+	<update id="warningCountUp" parameterType="Long">
+		UPDATE tbl_writing
+		SET wr_warning_count = wr_warning_count + 1
+		WHERE wr_seq = #{wr_seq};
+	</update>
+
+	<update id="warningCountDown" parameterType="Long">
+		UPDATE tbl_writing
+		SET wr_warning_count = wr_warning_count - 1
+		WHERE wr_seq = 	#{wr_seq};
+	</update>
+ 	
+ 	<update id="update" parameterType="WritingVO">
+ 		UPDATE tbl_writing SET
+ 		wr_content = #{wr_content},
+ 		wr_origin = #{wr_origin}
+ 		WHERE wr_seq = #{wr_seq}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_writing
+ 		WHERE wr_seq = #{wr_seq}
+ 	</delete>
+ 
+ </mapper> 

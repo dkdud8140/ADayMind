@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.callor.mind.model.UserVO;
+import com.callor.mind.model.WritingVO;
 
 public interface UserService {
 	
 	// 관리자용 리스트출력 
 	public List<UserVO> selectAll();
+	
+	//페이징 추가한 selectAll
+	public List<UserVO> selectAllPage(int pageNum, Model model);
 	
 	public UserVO findById(String u_id);
 	public UserVO findByPw(String u_pw, String u_id); // 비밀번호 확인

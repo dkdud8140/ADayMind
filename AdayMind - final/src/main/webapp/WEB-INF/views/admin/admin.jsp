@@ -53,9 +53,14 @@
 				<%@ include file="/WEB-INF/views/admin/write.jsp"%>
 			</c:otherwise>
 		</c:choose>
-
+	
+	<%@ include file="/WEB-INF/views/paging_nav.jsp" %>
 	</div>
+	
+	
+	
 </body>
+
 
 <script type="text/javascript">
  		document.querySelector("nav#admin_nav").addEventListener("click",(e)=>{

@@ -44,14 +44,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value =  "/admin_write", method=RequestMethod.GET)
-	public String admin_write(Model model, HttpSession session) {
-		List<WritingVO> writeList = wtSer.selectAll();
-
-		model.addAttribute("WTLIST", writeList);
+	public String admin_write(Model model, HttpSession session,
+								@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) {
+		
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		if(intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum );
+		}
+		
+		wtSer.selectAllPage(intPageNum, model);
 		model.addAttribute("ADMIN", "admin_write");
 		
 		return "admin/admin";
 	}
+	
+	
 		
 	@RequestMapping(value = "/admin_write/{wr_seq}", method=RequestMethod.GET)
 	public String admin_write(Model model, @PathVariable("wr_seq") Long wr_seq, HttpSession session) {
@@ -68,13 +76,15 @@ public class AdminController {
 	@RequestMapping(value = "/write_search/{CAT}", method=RequestMethod.GET)
 	public String admin_write_search(Model model, HttpSession session,
 									@PathVariable("CAT") String cat, 
-									@RequestParam(name="search",required = false, defaultValue="") String search ) 
+									@RequestParam(name="search",required = false, defaultValue="") String search,
+									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum ) 
 											throws Exception {
 		
 		log.debug("####파라메터값 확인 : {}, {}",cat,search);
 		
+		
 		if(search.equals("") || search == null) {
-			return this.admin_write(model, session);
+			return this.admin_write(model, session, pageNum);
 		}
 		
 		model.addAttribute("CAT",cat);
@@ -85,6 +95,8 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
+	
+	
 	// 0716 추가 날짜별 검색
 	@RequestMapping(value = "/write_search/date", method=RequestMethod.GET)
 	public String admin_write_search_date(Model model, HttpSession session,
@@ -93,9 +105,9 @@ public class AdminController {
 									) throws Exception {
 		
 		model.addAttribute("CAT","date");
-		
+		String pageNum = null ;
 		if(stDate.equals("") || stDate == null || edDate.equals("") || edDate == null) {
-			return this.admin_write(model, session);
+			return this.admin_write(model, session, pageNum);
 		}
 		
 		List<WritingVO> writing = wtSer.searchDate(stDate, edDate);
@@ -118,11 +130,20 @@ public class AdminController {
 	
 	
 	
+	
 	@RequestMapping(value = "/admin_user", method=RequestMethod.GET)
-	public String admin_user(Model model, HttpSession session) {
-		List<UserVO> userList = uSer.selectAll();
+	public String admin_user(Model model, HttpSession session,
+			@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) {
 		
-		model.addAttribute("USERS", userList);
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		if(intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum );
+		}
+		
+		
+		uSer.selectAllPage(intPageNum,model);
+		
 		model.addAttribute("ADMIN", "admin_user");
 		
 		return "admin/admin";
@@ -146,13 +167,14 @@ public class AdminController {
 	@RequestMapping(value = "/user_search/{CAT}", method=RequestMethod.GET)
 	public String admin_user_search(Model model, HttpSession session,
 									@PathVariable("CAT") String cat, 
-									@RequestParam(name="search",required = false, defaultValue="") String search ) 
+									@RequestParam(name="search",required = false, defaultValue="") String search,
+									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) 
 									throws Exception {
 			
 		log.debug("####파라메터값 확인 : {}, {}",cat,search);
 			
 		if(search.equals("") || search == null) {
-			return this.admin_user(model, session);
+			return this.admin_user(model, session,pageNum);
 		}
 			
 		model.addAttribute("CAT",cat);
@@ -185,15 +207,26 @@ public class AdminController {
 	
 	
 	
+	
+	
+	
 	@RequestMapping(value = "/admin_warning", method=RequestMethod.GET)
-	public String admin_warning(Model model, HttpSession session) {
-		List<WarningVO> wList = wSer.selectAll();
+	public String admin_warning(Model model, HttpSession session,
+			@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) {
 		
-		model.addAttribute("WARNINGS", wList);
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		if(intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum );
+		}
+		
+		wSer.selectAllPage(intPageNum, model);
 		model.addAttribute("ADMIN", "admin_warning");
 		
 		return "admin/admin";
 	}
+	
+	
 	
 	@RequestMapping(value = "/admin_warning/{wa_seq}", method=RequestMethod.GET)
 	public String admin_warning(Model model, @PathVariable("wa_seq") Long wa_seq, HttpSession session) {
@@ -213,13 +246,14 @@ public class AdminController {
 	@RequestMapping(value = "/warning_search/{CAT}", method=RequestMethod.GET)
 	public String admin_warning_search(Model model, HttpSession session,
 									@PathVariable("CAT") String cat, 
-									@RequestParam(name="search",required = false, defaultValue="") String search ) 
+									@RequestParam(name="search",required = false, defaultValue="") String search,
+									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) 
 											throws Exception {
 		
 		log.debug("####파라메터값 확인 : {}, {}",cat,search);
 		
 		if(search.equals("") || search == null) {
-			return this.admin_warning(model, session);
+			return this.admin_warning(model, session,pageNum);
 		}
 		
 		model.addAttribute("CAT",cat);
@@ -230,17 +264,21 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
+	
+	
+	
 	// 0716 신고 날짜별 검색
 	@RequestMapping(value = "/warning_search/date", method=RequestMethod.GET)
 	public String admin_warning_search_date(Model model, HttpSession session,
 									@RequestParam(name="stDate",required = false, defaultValue="") String stDate,
-									@RequestParam(name="edDate",required = false, defaultValue="") String edDate
+									@RequestParam(name="edDate",required = false, defaultValue="") String edDate,
+									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum
 									) throws Exception {
 		
 		model.addAttribute("CAT","date");
 		
 		if(stDate.equals("") || stDate == null || edDate.equals("") || edDate == null) {
-			return this.admin_warning(model, session);
+			return this.admin_warning(model, session,pageNum);
 		}
 		
 		List<WarningVO> writing = wSer.searchDate(stDate, edDate);

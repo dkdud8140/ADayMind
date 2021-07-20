@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.WritingDao;
 import com.callor.mind.model.LikeVO;
+import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.WarningVO;
 import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.LikeService;
+import com.callor.mind.service.PageService;
 import com.callor.mind.service.WritingService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class WritingServiceImplV1 implements WritingService {
 
 	protected final WritingDao wtDao;
 	protected final LikeService lService;
+	protected final PageService pService;
 	
 	@Override
 	public List<WritingVO> selectAll() {
@@ -182,4 +185,31 @@ public class WritingServiceImplV1 implements WritingService {
 		return wtDao.findByDate(stDate, edDate);
 	}
 
+	@Override
+	public List<WritingVO> selectAllPage(int pageNum, Model model) {
+		
+		List<WritingVO> wtList = wtDao.selectAll();
+		int totalList = wtList.size();
+		
+		PageDTO pageDTO = pService.makePage(totalList, pageNum);
+		
+		List<WritingVO> pageList = new ArrayList<WritingVO>();
+		
+		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {
+			pageList.add(wtList.get(i));
+		}
+		
+		model.addAttribute("PAGE_NAV", pageDTO);
+		model.addAttribute("WTLIST", pageList);
+		
+		return null;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }

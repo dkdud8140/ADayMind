@@ -4,11 +4,16 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.callor.mind.model.UserVO;
 import com.callor.mind.model.WarningVO;
 
 public interface WarningService {
 	
 	public List<WarningVO> selectAll();
+	
+	//페이징 추가한 selectAll
+	public List<WarningVO> selectAllPage(int pageNum, Model model);
+	
 	public WarningVO findById(Long wa_seq);
 	
 	//0715 추가 

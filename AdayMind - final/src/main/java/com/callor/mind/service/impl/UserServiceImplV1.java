@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.UserDao;
+import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.UserVO;
+import com.callor.mind.model.WritingVO;
+import com.callor.mind.service.PageService;
 import com.callor.mind.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImplV1 implements UserService {
 
 	protected final UserDao userDao;
+	protected final PageService pSer;
 
 	@Override
 	public List<UserVO> selectAll() {
@@ -146,5 +150,24 @@ public class UserServiceImplV1 implements UserService {
 		int retBan = userDao.ban(userVO);
 		
 		return 0;
+	}
+
+	@Override
+	public List<UserVO> selectAllPage(int pageNum, Model model) {
+		List<UserVO> userList = userDao.selectAll();
+		int totalList = userList.size();
+		
+		PageDTO pageDTO = pSer.makePage(totalList, pageNum);
+		
+		List<UserVO> pageList = new ArrayList<UserVO>();
+		
+		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {
+			pageList.add(userList.get(i));
+		}
+		
+		model.addAttribute("PAGE_NAV", pageDTO);
+		model.addAttribute("USERS", pageList);
+		
+		return null;
 	}
 }

@@ -12,6 +12,10 @@ import com.callor.mind.model.WritingVO;
 public interface WritingService {
 
 	public List<WritingVO> selectAll();
+	
+	//페이징 추가한 selectAll
+	public List<WritingVO> selectAllPage(int pageNum, Model model);
+	
 	public WritingVO selectByRandom();
 	public WritingVO findById(Long wr_seq);
 	

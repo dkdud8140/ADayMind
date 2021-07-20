@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Service("pageServiceV1")
 public class PageServiceImplV1 implements PageService {
+	
 	protected int listPerPage = 10;
 	protected int navsPerPage = 10 ;
 	

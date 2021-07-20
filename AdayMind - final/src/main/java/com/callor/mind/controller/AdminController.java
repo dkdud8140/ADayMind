@@ -252,6 +252,14 @@ public class AdminController {
 		
 		log.debug("####파라메터값 확인 : {}, {}",cat,search);
 		
+
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		if( intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum );
+		}
+		
+		
 		if(search.equals("") || search == null) {
 			return this.admin_warning(model, session,pageNum);
 		}
@@ -274,6 +282,12 @@ public class AdminController {
 									@RequestParam(name="edDate",required = false, defaultValue="") String edDate,
 									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum
 									) throws Exception {
+		
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		if( intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum );
+		}
 		
 		model.addAttribute("CAT","date");
 		

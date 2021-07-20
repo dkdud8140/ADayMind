@@ -55,6 +55,8 @@
 
 <script>
 	const page_nav = document.querySelector("ul.page_nav")
+	let search = document.querySelector("input#search").value
+	
 	if(page_nav) {
 		page_nav.addEventListener("click",(e)=>{
 			const li = e.target
@@ -62,7 +64,28 @@
 			if(li.tagName === "LI") {
 				const pageNum = e.target.dataset.num
 				if( ${ADMIN eq 'admin_write' } ) {
-					location.href = "${rootPath}/admin/admin_write?pageNum=" + pageNum
+					
+					let urlPath = "${rootPath}/admin"
+					
+					if( ${PAGING eq 'MAIN' } ) {
+						// location.href = "${rootPath}/admin/admin_write?pageNum=" + pageNum;
+						urlPath += "/admin_write"
+								
+					} else if( ${PAGING eq 'SEARCH' } ) {
+						// let value = category.value
+						// location.href="${rootPath}/admin/write_search/" + value +"?search="+search+"?pageNum="+ pageNum;
+						urlPath += "/write_search"
+								
+					} else if( ${PAGING eq 'SEARCH-DATE' } ) {
+						// let value = category.value
+						// location.href="${rootPath}/admin/write_search/date?pageNum="+ pageNum
+						urlPath += "/write_search/date"
+					}
+					
+					
+					
+					
+					
 				} else if( ${ADMIN eq 'admin_user' } ) {
 					location.href = "${rootPath}/admin/admin_user?pageNum=" + pageNum
 				} else if( ${ADMIN eq 'admin_warning' } ) {

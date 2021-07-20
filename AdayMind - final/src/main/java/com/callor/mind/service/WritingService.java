@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.LikeVO;
 import com.callor.mind.model.WarningVO;
 import com.callor.mind.model.WritingVO;
@@ -22,9 +23,9 @@ public interface WritingService {
 	public List<WritingVO> findByUser(Long wr_user);
 	
 	//0716 admim 페이지에서 목록검색하기
-	public List<WritingVO> search(String category, String search, Model model) throws Exception;
+	public List<WritingVO> search(int pageNum, String category, String search, Model model) throws Exception;
 	//0716 admim 페이지에서 날짜별검색하기
-	public List<WritingVO> searchDate(String stDate, String edDate) ;
+	public List<WritingVO> searchDate(int pageNum, String stDate, String edDate, Model model) ;
 	
 	public List<WarningVO> selectByWarning(); 	//모든 신고글 조회
 	
@@ -44,4 +45,6 @@ public interface WritingService {
 	
 	// 신고메소드
 	public int warning(WarningVO wrVO);
+
+	public void search(AdminSearchDTO searchDTO, Model model);
 }

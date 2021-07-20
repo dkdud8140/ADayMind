@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.WritingDao;
+import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.LikeVO;
 import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.WarningVO;
@@ -150,7 +151,7 @@ public class WritingServiceImplV1 implements WritingService {
 	
 	// 0716 검색메소드 : 글번호, 유저번호, 글내용으로 검색
 	@Override
-	public List<WritingVO> search(String category, String search, Model model) throws Exception {
+	public List<WritingVO> search(int pageNum, String category, String search, Model model) throws Exception {
 
 		List<WritingVO> writing = new ArrayList<WritingVO>();
 		
@@ -170,25 +171,39 @@ public class WritingServiceImplV1 implements WritingService {
 		} 
 		log.debug("검색결과 : {}", writing.toString());
 		
+		this.paging(pageNum, model, writing);
+		
+		
 		return writing;
 	}
 
 	// 0716 검색메소드 : 날짜별 검색
 	@Override
-	public List<WritingVO> searchDate(String stDate, String edDate) {
+	public List<WritingVO> searchDate(int pageNum, String stDate, String edDate, Model model) {
 		
 		stDate +=" 00:00:00";
 		edDate +=" 23:59:59";
 		
 		log.debug("%%검색날짜 , {} , {} ", stDate, edDate);
 		
-		return wtDao.findByDate(stDate, edDate);
+		List<WritingVO> wtList = wtDao.findByDate(stDate, edDate);
+		
+		this.paging(pageNum, model, wtList);
+		
+		return  wtList;
 	}
 
 	@Override
 	public List<WritingVO> selectAllPage(int pageNum, Model model) {
 		
 		List<WritingVO> wtList = wtDao.selectAll();
+		this.paging(pageNum, model, wtList);
+		
+		return null;
+	}
+	
+	
+	public void paging(int pageNum, Model model, List<WritingVO> wtList) {
 		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pService.makePage(totalList, pageNum);
@@ -201,9 +216,20 @@ public class WritingServiceImplV1 implements WritingService {
 		
 		model.addAttribute("PAGE_NAV", pageDTO);
 		model.addAttribute("WTLIST", pageList);
-		
-		return null;
 	}
+
+	@Override
+	public void search(AdminSearchDTO searchDTO, Model model) {
+		// TODO Auto-generated method stub
+		String cat = searchDTO.getCategory();
+		
+		if(cat.equals("DATE")) {
+			
+		}
+		
+	}
+	
+	
 
 	
 	

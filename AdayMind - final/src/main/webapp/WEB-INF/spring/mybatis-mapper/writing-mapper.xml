@@ -37,11 +37,9 @@
 <!-- 0716 추가 끝 -->
  	
  	<select id="selectByRandom" resultType="WritingVO">
- 		<![CDATA[ 
 	 		SELECT * FROM tbl_writing 
-	 		WHERE wr_warning_count < 21
+	 		WHERE wr_warning_count &lt; 21
 			ORDER BY RAND() LIMIT 1
-		]]>
  	</select>
 
 	<select id="selectOrderByLike" resultType="WritingVO">
@@ -53,7 +51,7 @@
 		SELECT * 
 		FROM tbl_writing
 			LEFT JOIN tbl_like
-				ON wr_seq = li_wr_seq
+				ON wr_seq = li00_wr_seq
 			LEFT JOIN tbl_user
 				ON u_seq = li_fan
 		WHERE u_seq = #{u_seq}
@@ -66,6 +64,27 @@
 		ORDER BY wr_last_date DESC
 	</select>
 	
+	<select id="findByCatSearch2" parameterType="AdminSearchDTO">
+	
+		SELECT * FROM tbl_writing
+		
+		<if test="categoty == 'DATE' ">
+			WHERE wr_last_date = #{search}
+		</if>
+		<if test="categoty == 'USER' ">
+			WHERE wr_user LIKE CONCAT('%',#{search},'%')
+		</if>
+	</select>
+
+	<select id="findByCatSearch" parameterType="AdminSearchDTO">
+	
+		SELECT * FROM tbl_writing
+		<where>
+			AND ${category} LIKE CONCAT('%',#{search},'%')		
+		</where>
+	</select>
+
+
 
 
  	<insert id="insert" parameterType="WritingVO">

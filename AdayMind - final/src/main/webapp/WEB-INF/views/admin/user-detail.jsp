@@ -31,7 +31,6 @@
 <div class="detail_box">
 	<h2>유저 상세보기</h2>
 	
-	<form id="form_delete" method="POST" action="${rootPath}/admin/admin_user/delete">
 	<div class="detail_content">
 		<table>
 			<tr>
@@ -59,12 +58,11 @@
 		
 		<div class = "btn_box">
 			<input type="hidden" name="u_seq" value="${USER.u_seq}"/>
-			<button class = "ban">회원 차단하기</button>
-			<button class="delete">회원 정보삭제</button>
+			<button class = "ban" type="button">회원 차단하기</button>
+			<button class=" delete" type="button">회원 정보삭제</button>
 		</div>
 	</div>
 	
-	</form>
 	
 	<c:if test="${not empty WTLIST }">
 	
@@ -96,35 +94,57 @@
 </div>
 
 <script>
-document.querySelector("table.list_table").addEventListener("click",(e)=>{
+
+let list = document.querySelector("table.list_table")
+
+let u_seq = document.querySelector("input[name='u_seq']").value
+let json = { u_seq : u_seq }
+let jsonString = JSON.stringify(json)
+			
+	
+	if(list) {
+
+		addEventListener("click",(e)=>{
+		
 		if(e.target.tagName === "TD") {
 				let wr_seq = e.target.closest("TR").dataset.seq
 				location.href = "${rootPath}/admin/admin_write/" + wr_seq
 			}
-})
+		})
+	}
 
-// 0720 삭제추가
-	document.querySelector("div.btn_box").addEventListener("click",(e)=>{
-		
-		let className = e.target.className
-		
-		if(className === "delete") {
-			if(confirm("삭제하시겠습니까?")) {
-				document.querySelector("form#form_delete").submit();
-	  		} else {
-	  			return false;
-	  		}
-		} else if (className === "ban") {
-			if(confirm("회원을 차단하시겠습니까??")) {
-				document.querySelector("form#form_delete").submit();
-	  		} else {
-	  			return false;
-	  		}
-		}
+
+	// 0720 삭제추가
+	document.querySelector("button.delete").addEventListener("click",(e)=>{
+		let className = e.target.className 
+		if(confirm("삭제하시겠습니까?")) {
+			
+			fetch(`${rootPath}/admin/admin_user/delete/${u_seq}`, {
+				method:"POST", 
+				body : jsonString,
+				headers : {"content-Type" : "application/json"}
+			})
+			
+		} else {
+  			return false;
+  		}
 		
 	})
+	
+	document.querySelector("button.ban").addEventListener("click",(e)=>{
+		let className = e.target.className 
+		if(confirm("회원을 차단하시겠습니까?")) {
+			
+			fetch(`${rootPath}/admin/admin_user/banorlevelup/${u_seq}`, {
+				method:"POST", 
+				body : jsonString,
+				headers : {"content-Type" : "application/json"}
+			})
+		} else {
+  			return false;
+  		}
 
-
+	})
 
 
 </script>

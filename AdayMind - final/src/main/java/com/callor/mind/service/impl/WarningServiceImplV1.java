@@ -42,6 +42,9 @@ public class WarningServiceImplV1 implements WarningService {
 			wtDao.warningCountUp(warning.getWa_writing());
 		}
 		
+		//경고 카운트 20이상인 게시물이 20이상일 때 자동으로 유저 ban
+		
+		
 		return ret;
 	}
 
@@ -88,7 +91,13 @@ public class WarningServiceImplV1 implements WarningService {
 
 	@Override
 	public int delete(WarningVO warningVO) {
-		return wDao.delete(warningVO);
+		
+		int ret = wDao.delete(warningVO);
+		
+		//삭제된 신고 글 카운트 다운
+		wtDao.warningCountDown(warningVO.getWa_writing());
+		
+		return ret;
 	}
 	
 	// 0716 검색 메소드 추가 끝

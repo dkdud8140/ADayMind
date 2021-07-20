@@ -165,16 +165,18 @@ public class AdminController {
 	}
 	
 	//0720 삭제하기 : mapper,Dao,service 모두 메소드 추가됨
-	@RequestMapping(value = "/admin_user/delete", method=RequestMethod.POST)
-	public String admin_user_delete(UserVO userVO) {
+	@RequestMapping(value = "/admin_user/delete/{u_seq}", method=RequestMethod.POST)
+	public String admin_user_delete(@PathVariable("u_seq") Long u_seq ) {
+		
+		UserVO userVO = uSer.findBySeq(u_seq);
 		
 		int ret = uSer.delete(userVO);
 		return "admin/admin";
 	}
 	
-	@RequestMapping(value = "/admin_user/banorlevelup", method=RequestMethod.POST)
-	public String admin_user_ban(UserVO userVO) {
-		
+	@RequestMapping(value = "/admin_user/banorlevelup/{u_seq}", method=RequestMethod.POST)
+	public String admin_user_ban(@PathVariable("u_seq") Long u_seq) {
+		UserVO userVO = uSer.findBySeq(u_seq);
 		int ret = uSer.banOrLevelUp(userVO);
 		return "admin/admin";
 	}

@@ -36,6 +36,8 @@
 				<td>신고자</td>
 				<td>${WARNING.wa_reporter}</td>
 			</tr>
+			
+			<!--  
 			<tr>
 				<td>신고처리여부</td>
 				<c:choose>
@@ -50,6 +52,7 @@
 					</c:otherwise>
 				</c:choose>
 			</tr>
+			-->
 			
 		</table>
 		

@@ -37,9 +37,11 @@
 <!-- 0716 추가 끝 -->
  	
  	<select id="selectByRandom" resultType="WritingVO">
- 		SELECT * FROM tbl_writing 
- 		WHERE wr_warning_count < 21
-		ORDER BY RAND() LIMIT 1
+ 		<![CDATA[ 
+	 		SELECT * FROM tbl_writing 
+	 		WHERE wr_warning_count < 21
+			ORDER BY RAND() LIMIT 1
+		]]>
  	</select>
 
 	<select id="selectOrderByLike" resultType="WritingVO">

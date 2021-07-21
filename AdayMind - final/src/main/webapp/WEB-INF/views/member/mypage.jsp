@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<link rel="stylesheet" href="${rootPath}/static/css/mypage.css?ver-009" />
-<script defer src="${rootPath}/static/js/mypage.js?ver-005"></script>
+<link rel="stylesheet" href="${rootPath}/static/css/mypage.css?ver-100" />
+<script defer src="${rootPath}/static/js/mypage.js?ver-100"></script>
 <style>
 div.msg.change.pw {
 	display: none;
@@ -162,6 +162,8 @@ let url_now2 = document.querySelector("input#url_now2")
 let u_pw1 = document.getElementById("pw_input")
 let box = document.querySelector(".a");
 let ok = `${OK}`
+let flag_n = false
+let flag_m = false
 if(ok) {
 	
 	if(ok > 0) {
@@ -209,7 +211,11 @@ let updateBtn = document.getElementById("update_btn")
 		if(u_pw1.value == null || u_pw1.value == "" || u_pw1.value != ${USER.u_pw}){
 			alert("비밀번호를 확인해주세요.")
 			return false
-		}else {
+		}else if(flag_n == false || flag_m == false){
+			alert("중복확인을 해주세요.")
+		}
+		else{
+			alert("수정이 완료되었습니다.")
 			acform.action = "${rootPath}/member/mypage"
 			url_now2.value = location.pathname;
 			acform.submit()	
@@ -283,12 +289,16 @@ let msg_update_nick = document.querySelector("div.update.nick")
 				if(result === "USE_NICK"){
 					msg_update_nick.innerText = "사용중인 닉네임"
 					msg_update_nick.style.color = "#ff0000"
+					flag_n = false
 					return false
 				}else if (result === "NOT_USE_NICK"){
 					msg_update_nick.innerText = "사용가능한 닉네임"
 					msg_update_nick.style.color = "#00ff00"
+					flag_n = true
 				}else {
 					msg_update_nick.innerText = "사용중인 닉네임(1)"
+					flag_n = false
+					
 				}
 			})
 		})
@@ -318,11 +328,14 @@ if(user_mail) {
 			if(result === "USE_MAIL"){
 				msg_update_mail.innerText = "사용중인 이메일입니다"
 				msg_update_mail.style.color = "#ff0000"
+				flag_m = false
 				return false;
 			}else if(result === "NOT_USE_MAIL"){
 				msg_update_mail.innerText = "사용가능한 이메일"
 				msg_update_mail.style.color = "#00ff00"
+				flag_m = true
 			}else {
+				flag_m = false
 				msg_update_mail.innerText = "사용중인 이메일입니다(1)"
 				return false
 			}

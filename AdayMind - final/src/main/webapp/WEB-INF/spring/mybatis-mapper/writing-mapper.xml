@@ -64,6 +64,8 @@
 		ORDER BY wr_last_date DESC
 	</select>
 	
+	
+	<!-- 
 	<select id="findByCatSearch2" parameterType="AdminSearchDTO">
 	
 		SELECT * FROM tbl_writing
@@ -83,7 +85,7 @@
 			AND ${category} LIKE CONCAT('%',#{search},'%')		
 		</where>
 	</select>
-
+	 -->
 
 
 

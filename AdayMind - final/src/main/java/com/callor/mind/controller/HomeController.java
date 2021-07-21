@@ -44,9 +44,10 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model, HttpSession session) {
-		log.debug("모델{}",model.getAttribute("wr_seq"));
 		String wrseq = (String) model.getAttribute("wr_seq");
 		WritingVO wrtVO = wtSer.selectByRandom();
 		
@@ -57,11 +58,9 @@ public class HomeController {
 			model.addAttribute("CHECK",0);
 			return "main";
 		}
-		log.debug("유저정보 {}",userVO.toString());
 		
 		Long seq = wrtVO.getWr_seq();		
 		Long user = userVO.getU_seq();
-
 		
 		if( wrseq != null ) {
 			Long wr_seq = Long.valueOf(wrseq);
@@ -77,13 +76,6 @@ public class HomeController {
 		likeVO.setLi_fan(user);
 		int check = lSer.check_like(likeVO);
 		log.debug("체크여부 {}",check);
-		
-		
-		// 좋아요 테이블 find한 결과 값
-		// check = 1 ; 현재 로그인한 유저가 좋아요 누른 글
-		// check = 0 ; 현재 로그인한 유저가 좋아요를 누르지 않은 글
-		model.addAttribute("CHECK",check);
-		
 		
 		return "main";
 	}

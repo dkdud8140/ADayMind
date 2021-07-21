@@ -7,19 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-
 public class AdminSearchDTO {
 	
-	
-	private String category;
-	private String search;
-	private String pageNo;
+//	
+//	private String category;
+//	private String search;
+//	private String pageNo;
 	
 
 }

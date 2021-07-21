@@ -26,9 +26,7 @@
 
 			<div class="bubble_box">
 
-				<label class="siren" for="siren"> <img
-					src="static/siren.png">
-				</label>
+				<label class="siren" for="siren"> <img src="static/siren.png"></label>
 
 				<p class="p1">
 					<b>“${WRITING.wr_nick}”</b>님이 보내온 하루 생각입니다.
@@ -62,7 +60,6 @@
 
 	<div class="main_modal"></div>
 
-	<!--  0714 신고창 수정-->
 	<!--  0715 신고창 수정-->
 	<div id="siren_box" class="siren_box">
 		<h3 id="siren_title">신고하기</h3>

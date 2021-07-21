@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.callor.mind.dao.ext.WritingDao;
-import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.LikeVO;
 import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.WarningVO;
@@ -169,10 +168,8 @@ public class WritingServiceImplV1 implements WritingService {
 		} else if(category.equalsIgnoreCase("content")) {
 			writing = wtDao.findByContent(search);
 		} 
-		log.debug("검색결과 : {}", writing.toString());
 		
 		this.paging(pageNum, model, writing);
-		
 		
 		return writing;
 	}
@@ -218,17 +215,17 @@ public class WritingServiceImplV1 implements WritingService {
 		model.addAttribute("WTLIST", pageList);
 	}
 
-	@Override
-	public void search(AdminSearchDTO searchDTO, Model model) {
-		// TODO Auto-generated method stub
-		String cat = searchDTO.getCategory();
-		
-		if(cat.equals("DATE")) {
-			
-		}
-		
-	}
-	
+//	@Override
+//	public void search(AdminSearchDTO searchDTO, Model model) {
+//		// TODO Auto-generated method stub
+//		String cat = searchDTO.getCategory();
+//		
+//		if(cat.equals("DATE")) {
+//			
+//		}
+//		
+//	}
+//	
 	
 
 	

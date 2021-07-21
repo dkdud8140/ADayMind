@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.callor.mind.dao.GenericDao;
-import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.WritingVO;
 
 public interface WritingDao extends GenericDao<WritingVO, Long> {
@@ -23,7 +22,7 @@ public interface WritingDao extends GenericDao<WritingVO, Long> {
 	public List<WritingVO> findByDate(@Param("stDate") String stDate, @Param("edDate") String edDate);
 	
 	
-	public List<WritingVO> findByCatSearch(AdminSearchDTO searchDTO);
+	//public List<WritingVO> findByCatSearch(AdminSearchDTO searchDTO);
 	
 	
 	public WritingVO selectByRandom();

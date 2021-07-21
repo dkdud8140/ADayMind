@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.UserVO;
 import com.callor.mind.model.WarningVO;
 import com.callor.mind.model.WritingVO;
@@ -73,16 +72,11 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value="/search",method=RequestMethod.GET)
-	public String admin_search(AdminSearchDTO searchDTO, Model model) {
-		
-		
-		wtSer.search(searchDTO,model);
-		
-		return null;
-		
-		
-	}
+//	@RequestMapping(value="/search",method=RequestMethod.GET)
+//	public String admin_search(AdminSearchDTO searchDTO, Model model) {
+//		wtSer.search(searchDTO,model);
+//		return null;
+//	}
 	
 	
 	// 0715 글 전체 목록에서 검색하기
@@ -92,10 +86,8 @@ public class AdminController {
 									@RequestParam(name="search",required = false, defaultValue="") String search,
 									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum ) 
 											throws Exception {
-		
-		log.debug("####파라메터값 확인 : {}, {}",cat,search);
+
 		int intPageNum = Integer.valueOf(pageNum);
-		
 		if(search.equals("") || search == null) {
 			return this.admin_write(model, session, pageNum);
 		}
@@ -156,8 +148,6 @@ public class AdminController {
 		if(intPageNum > 0 ) {
 			model.addAttribute("PAGE_NUM", intPageNum );
 		}
-		
-		
 		uSer.selectAllPage(intPageNum,model);
 		
 		model.addAttribute("ADMIN", "admin_user");

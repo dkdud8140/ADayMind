@@ -194,56 +194,60 @@ setTimeout(function () {
 	  }
 	 };
 	 refreshList();
-
-moreList_p.addEventListener("click",()=>{
-	let list_length = document.querySelectorAll("div.board.item1").length;
-	let url_now = location.pathname;
-	
-	fetch("${rootPath}/list/moreList?moreCount=" + list_length + "&url_now=" + url_now)
-	.then(response=>response.json())
-	.then(result=>{
-		let list = result.moreList
-		let count = result.likeCount
-		if(list.length < 8) {
-			moreList_p.remove();
-		} 
+	 
+	 
+if(moreList_p) {
+	moreList_p.addEventListener("click",()=>{
+		let list_length = document.querySelectorAll("div.board.item1").length;
+		let url_now = location.pathname;
 		
-		for(let i = 0; i < list.length; i++) {
-			let content = '';
-			console.log(list[i].wr_content);
-			let board_box = document.createElement("div");
-			board_box.setAttribute("class","board item1");
-			content += '<a class="card"> <img class="abc" src="${rootPath}/static/board_white.svg" />';
-			content += '<article><div class="profile_div"><img class="profile" src="${rootPath}/static/profile.png" />';
-			content += '<p>'+ list[i].wr_nick +'</p></div><h1>'+ list[i].wr_content +'</h1><h5>'+ list[i].wr_origin +'</h5>';
-			content += '<span class="modal_span" data-seq="'+ list[i].wr_seq +'">';
-			if(count) {
-				if(count[i] == 0){
-					content += `<div class="heart _black" id="heart_event">♡</div>`;
-				} else if (count[i] == 1){
-					content += `<div class="heart _red"  id="heart_event">♥</div>`;	
+		fetch("${rootPath}/list/moreList?moreCount=" + list_length + "&url_now=" + url_now)
+		.then(response=>response.json())
+		.then(result=>{
+			let list = result.moreList
+			let count = result.likeCount
+			if(list.length < 8) {
+				moreList_p.remove();
+			} 
+			
+			for(let i = 0; i < list.length; i++) {
+				let content = '';
+				console.log(list[i].wr_content);
+				let board_box = document.createElement("div");
+				board_box.setAttribute("class","board item1");
+				content += '<a class="card"> <img class="abc" src="${rootPath}/static/board_white.svg" />';
+				content += '<article><div class="profile_div"><img class="profile" src="${rootPath}/static/profile.png" />';
+				content += '<p>'+ list[i].wr_nick +'</p></div><h1>'+ list[i].wr_content +'</h1><h5>'+ list[i].wr_origin +'</h5>';
+				content += '<span class="modal_span" data-seq="'+ list[i].wr_seq +'">';
+				if(count) {
+					if(count[i] == 0){
+						content += `<div class="heart _black" id="heart_event">♡</div>`;
+					} else if (count[i] == 1){
+						content += `<div class="heart _red"  id="heart_event">♥</div>`;	
+					}
+				} else {
+					content += `<div class="heart _black" id="heart_event">♡</div>`;	
 				}
-			} else {
-				content += `<div class="heart _black" id="heart_event">♡</div>`;	
+				content += ' <p class="modal_count">'+ list[i].wr_like_count +' 명이 공감하였어요! </p></span>';
+				<c:if test="${USER != null}">
+				content += `<img class="modal_siren" src="${rootPath}/static/siren.png" />`;
+				</c:if>
+				<c:if test="${USER.u_seq == list[i].wr_user}">
+				content += `<div class="list_button">`;
+				content += '<input type="hidden" name="wr_seq" value="'+ list[i].wr_seq+'"/>';
+				content += '<div class="update_btn" >수정</div><div class="delete_btn">삭제</div></div>';
+				</c:if>
+				content += `</article></a>`;
+				board_box.innerHTML = content;
+				let board = document.querySelectorAll("div.board.item1")
+				board[board.length - 1].after(board_box);
+				b_length += 1;
+				refreshList();
 			}
-			content += ' <p class="modal_count">'+ list[i].wr_like_count +' 명이 공감하였어요! </p></span>';
-			<c:if test="${USER != null}">
-			content += `<img class="modal_siren" src="${rootPath}/static/siren.png" />`;
-			</c:if>
-			<c:if test="${USER.u_seq == list[i].wr_user}">
-			content += `<div class="list_button">`;
-			content += '<input type="hidden" name="wr_seq" value="'+ list[i].wr_seq+'"/>';
-			content += '<div class="update_btn" >수정</div><div class="delete_btn">삭제</div></div>';
-			</c:if>
-			content += `</article></a>`;
-			board_box.innerHTML = content;
-			let board = document.querySelectorAll("div.board.item1")
-			board[board.length - 1].after(board_box);
-			b_length += 1;
-			refreshList();
-		}
+		})
 	})
-})
+}
+
 
 document.querySelector("button#close").addEventListener("click",(e)=>{
 	document.querySelector("#siren_box").classList.remove("visible")

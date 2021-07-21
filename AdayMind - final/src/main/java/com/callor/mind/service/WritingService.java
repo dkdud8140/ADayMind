@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
-import com.callor.mind.model.AdminSearchDTO;
 import com.callor.mind.model.LikeVO;
 import com.callor.mind.model.WarningVO;
 import com.callor.mind.model.WritingVO;
@@ -46,5 +45,5 @@ public interface WritingService {
 	// 신고메소드
 	public int warning(WarningVO wrVO);
 
-	public void search(AdminSearchDTO searchDTO, Model model);
+	//public void search(AdminSearchDTO searchDTO, Model model);
 }

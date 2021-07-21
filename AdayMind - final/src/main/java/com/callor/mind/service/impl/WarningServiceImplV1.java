@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import com.callor.mind.dao.ext.WarningDao;
 import com.callor.mind.dao.ext.WritingDao;
 import com.callor.mind.model.PageDTO;
-import com.callor.mind.model.UserVO;
 import com.callor.mind.model.WarningVO;
-import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.PageService;
 import com.callor.mind.service.WarningService;
 
@@ -46,10 +44,6 @@ public class WarningServiceImplV1 implements WarningService {
 		if(ret > 0) {
 			wtDao.warningCountUp(warning.getWa_writing());
 		}
-		
-		//경고 카운트 20이상인 게시물이 20이상일 때 자동으로 유저 ban
-		
-		
 		return ret;
 	}
 

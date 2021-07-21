@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import com.callor.mind.dao.ext.UserDao;
 import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.UserVO;
-import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.PageService;
 import com.callor.mind.service.UserService;
 

@@ -35,10 +35,7 @@ public class WarningController {
 	
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String warning(
-			@RequestParam("wa_writing") Long wa_writing,
-			@RequestParam("wa_user") Long wa_user,
-			@RequestParam("wa_content") String wa_content,
+	public String warning(WarningVO warning, 
 			@RequestParam( name= "wa_content_other", required = false, defaultValue = "0") String wa_content_other,
 			Locale locale, Model model, HttpSession session, String url_now2) {
 		
@@ -48,29 +45,24 @@ public class WarningController {
 			return "redirect:/";
 		}
 		
+		String wa_content = warning.getWa_content();
+		
 		if(wa_content.equals("") || wa_content == null) {
 			return "redirect:/";
 		} 
 		
-		// 0720 수정
-		// 기타 사유 넣었을 때 
+		// 0720 수정 기타 사유 넣었을 때 
 		if(wa_content.equals("6")) {
-			log.debug("####other : {}", wa_content_other);
-			
 			if(wa_content_other.equals("") || wa_content_other == null) {
 				return "redirect:/";
 			}
-			
 			wa_content = wa_content_other ;
 		}
 		
-		log.debug("####form 값 유저SEQ : {}, 글SEQ : {}, 신고자SEQ : {}, 신고내용 : {}", wa_user,wa_writing,userVO.getU_seq(),wa_content);
-		
-		WarningVO warning = new WarningVO();
-		warning.setWa_writing(wa_writing);
-		warning.setWa_user(wa_user);
 		warning.setWa_content(wa_content);
 		warning.setWa_reporter(userVO.getU_seq());
+		
+		log.debug("신고내용 : {} ", warning.toString());
 		
 		int ret = wSer.insert(warning);
 		

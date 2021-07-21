@@ -19,7 +19,9 @@
 		<option value="content"<c:if test="${CAT == 'content'}">selected="selected"</c:if>>글내용</option>
 		<option value="date"<c:if test="${CAT == 'date'}">selected="selected"</c:if>>날짜</option>
 	</select>
+	
 	<form class="frm_search" >
+	
 		<c:choose>
 			<c:when test="${CAT == 'date' }">
 				<input type="date" name="stDate" id="stDate">부터 <input type="date" name="edDate" id="edDate">
@@ -27,10 +29,13 @@
 			<c:otherwise>
 				<input name="search" id="search">
 			</c:otherwise>
-			
 		</c:choose>
+		
 			<input type="button" class="btn_search" value="검색하기">
 	</form>
+	
+	
+	
 	
 </div>
 <!--  0716 : 끝-->

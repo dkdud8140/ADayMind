@@ -212,7 +212,7 @@ public class AdminController {
 	public String admin_user_ban(@PathVariable("u_seq") Long u_seq) {
 		UserVO userVO = uSer.findBySeq(u_seq);
 		int ret = uSer.banOrLevelUp(userVO);
-		return "redirect:/";
+		return "admin/admin";
 	}
 	
 	

@@ -54,7 +54,10 @@
       top:55%;
       left:40%;
    }
-
+   div.msg.caps {
+      font-size : 10px;
+      display: none;
+   }
 </style>
 <!--  헤더 부분 -->
     <header>
@@ -183,6 +186,7 @@
             <div class="msg join mail"></div>
             <div class="check mail">중복확인</div>
             <input class="items3" type="password" name="u_pw" id="user_pw"  placeholder="password"  maxlength="125" />
+            <div class="msg caps"></div>
             <input
               class="items3"
               type="password"
@@ -194,7 +198,7 @@
             />
             <button class="items3 btn" type="button" id="nav_join" >가입하기</button>
           </div>
-
+   
           <div class="sub join back main">
             <h4 class="items3">Welcome Back</h4>
             <button id="ok2" class="items3" type="button">로그인</button>
@@ -479,19 +483,22 @@ document.addEventListener("DOMContentLoaded", () => {
    /* 7.18 비밀번호 유효성검사 */
 
 /* 캡스락 */
-let msg_caps = document.querySelector("div.capslock")
+
+let msg_caps = document.querySelector("div.msg.caps")
 join_pw.addEventListener("keyup", (e)=>{
     if (event.getModifierState("CapsLock")) {
-         alert("CapsLock을 켰습니다.")
+         msg_caps.style.display = 'inline'
+         msg_caps.innerText = "CapsLock ON"
         }else {
-           alert("CapsLock을 껏습니다.")
+           msg_caps.style.display = 'none'
       }   
 })
 join_pw2.addEventListener("keyup",(e)=>{
        if (event.getModifierState("CapsLock")) {
-          alert("CapsLock을 켰습니다.")
+          msg_caps.style.display = 'inline'
+         msg_caps.innerText = "CapsLock ON"
         }else {
-           alert("CapsLock을 껏습니다.")
+           msg_caps.style.display = 'none'
       }   
 })
  

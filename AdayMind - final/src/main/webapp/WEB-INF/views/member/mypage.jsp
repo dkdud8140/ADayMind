@@ -250,15 +250,11 @@ let again_pw = document.getElementById("ag_input")
 btn_pw_change.addEventListener("click", ()=>{
 	vone_pw = new_pw.value
 	vtwo_pw = again_pw.value
-	if(user_pw.value < 6) {
+	if(vone_pw.length < 6){
 		alert("패스워드는 6글자 이상 입력해주세요.")
 		return false
 	}
-	if(new_input.value < 6){
-		alert("패스워드는 6글자 이상 입력해주세요.")
-		return false
-	}
-	if(again_pw.value < 6) {
+	if(vtwo_pw.length < 6) {
 		alert("패스워드는 6글자 이상 입력해주세요.")
 		return false
 	}
@@ -275,9 +271,6 @@ btn_pw_change.addEventListener("click", ()=>{
 		pw_form.submit()
 	}
 })
-
-
-
 
 /* 7.19 비밀번호변경버튼 검사 끝 */
 /* 7.15 정보수정 닉네임 유효성검사 */
@@ -357,6 +350,7 @@ if(user_mail) {
 		})
 	})
 }
+
 /* 7.15 정보수정 이메일 유효성검사 */
 // 추가끝 
 </script>

@@ -52,6 +52,10 @@ CREATE TABLE tbl_like (
 );
 
 DESC tbl_writing;
+DESC tbl_user;
+DESC tbl_writing;
+
+
 SELECT * FROM tbl_writing;
 SELECT * FROM tbl_like;
 SELECT * FROM tbl_warning;
@@ -156,3 +160,12 @@ INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
 value ('test25','test25','test25test25','test25' );
 INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
 value ('test26','test26','test26test26','test26' );
+
+select * from tbl_user;
+UPDATE tbl_user
+SET u_level = 0
+WHERE u_id = 'admin';
+
+UPDATE tbl_user
+SET u_seq = 0
+WHERE u_id = 'admin';

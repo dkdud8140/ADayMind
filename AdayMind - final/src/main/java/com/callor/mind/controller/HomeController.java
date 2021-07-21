@@ -49,6 +49,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model, HttpSession session) {
 		String wrseq = (String) model.getAttribute("wr_seq");
+		
 		WritingVO wrtVO = wtSer.selectByRandom();
 		
 		UserVO userVO = (UserVO) session.getAttribute("USER");

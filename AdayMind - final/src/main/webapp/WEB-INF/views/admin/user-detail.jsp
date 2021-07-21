@@ -116,7 +116,6 @@ let jsonString = JSON.stringify(json)
 
 	// 0720 삭제추가
 	document.querySelector("button.delete").addEventListener("click",(e)=>{
-		let className = e.target.className 
 		
 		if(${USER.u_level eq 0} ) {
 			alert("관리자 ID는 삭제할 수 없습니다")
@@ -138,7 +137,6 @@ let jsonString = JSON.stringify(json)
 	})
 	
 	document.querySelector("button.ban").addEventListener("click",(e)=>{
-		let className = e.target.className 
 		
 		if(${USER.u_level eq 0} ) {
 			alert("관리자는 차단할 수 없습니다")

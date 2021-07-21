@@ -58,8 +58,6 @@ SELECT * FROM tbl_warning;
 SELECT * FROM tbl_user;
 SELECT * FROM tbl_userProf;
 
-ROLLBACK;
-
 ALTER TABLE tbl_userProf
 ADD CONSTRAINT fk_prof
 FOREIGN KEY (prof_seq)
@@ -72,13 +70,12 @@ FOREIGN KEY(wr_user)
 REFERENCES tbl_user(u_seq)
 ON DELETE CASCADE;
 
+
 ALTER TABLE tbl_warning
 ADD CONSTRAINT fk_wa_writing
 FOREIGN KEY(wa_writing)
 REFERENCES tbl_writing(wr_seq)
 ON DELETE CASCADE;
-
-
 
 
 ALTER TABLE tbl_warning
@@ -87,16 +84,13 @@ FOREIGN KEY(wa_user)
 REFERENCES tbl_user(u_seq)
 ON DELETE CASCADE;
 
-ALTER TABLE tbl_warning
-drop FOREIGN KEY fk_wa_user;
-
-
-
-
 ALTER TABLE tbl_like
 ADD CONSTRAINT fk_li_writing
 FOREIGN KEY(li_wr_seq)
-REFERENCES tbl_writing(wr_seq);
+REFERENCES tbl_writing(wr_seq)
+ON DELETE CASCADE;
+
+
 
 ALTER TABLE tbl_like
 ADD CONSTRAINT fk_li_user
@@ -118,3 +112,13 @@ SELECT * FROM tbl_writing
 SELECT * FROM tbl_writing;            
 SELECT * FROM tbl_writing
 WHERE wr_last_date BETWEEN '2021-07-15 00:00:00' AND '2021-07-15 23:59:59';
+
+
+DROP TABLE tbl_like;
+DROP TABLE tbl_user;
+DROP TABLE tbl_userprof;
+DROP TABLE tbl_warning;
+DROP TABLE tbl_writing;
+
+
+

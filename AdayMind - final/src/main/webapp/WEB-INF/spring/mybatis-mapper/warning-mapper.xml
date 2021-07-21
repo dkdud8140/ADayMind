@@ -7,7 +7,7 @@
  
  	<select id="selectAll" resultType="WarningVO">
  		SELECT * FROM tbl_warning
- 		ORDER BY wa_date
+ 		ORDER BY wa_date DESC
  	</select>
  	
  	<select id="findById" resultType="WarningVO">

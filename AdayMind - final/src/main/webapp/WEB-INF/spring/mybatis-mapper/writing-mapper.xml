@@ -51,7 +51,7 @@
 		SELECT * 
 		FROM tbl_writing
 			LEFT JOIN tbl_like
-				ON wr_seq = li00_wr_seq
+				ON wr_seq = li_wr_seq
 			LEFT JOIN tbl_user
 				ON u_seq = li_fan
 		WHERE u_seq = #{u_seq}

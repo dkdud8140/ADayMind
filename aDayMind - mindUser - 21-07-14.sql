@@ -53,7 +53,8 @@ CREATE TABLE tbl_like (
 
 DESC tbl_writing;
 DESC tbl_user;
-DESC tbl_writing;
+DESC tbl_like;
+DESC tbl_warning;
 
 
 SELECT * FROM tbl_writing;

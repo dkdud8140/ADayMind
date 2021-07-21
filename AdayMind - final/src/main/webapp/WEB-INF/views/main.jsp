@@ -35,9 +35,7 @@
 				<p class="p2">${WRITING.wr_content}</p>
 				<p class="p3">${WRITING.wr_origin}</p>
 
-
 				<div class="heart-box">
-
 					<div class="content">
 						<span id="like_it">
 							<c:choose> 
@@ -54,12 +52,9 @@
 						</span>
 						<p id="like_it_text">${WRITING.wr_like_count}명이 공감중</p>
 					</div>
-
 				</div>
-
-
+				
 			</div>
-
 		</div>
 	</div>
 

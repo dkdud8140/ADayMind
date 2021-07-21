@@ -63,7 +63,12 @@
 
 
 <script type="text/javascript">
- 		document.querySelector("nav#admin_nav").addEventListener("click",(e)=>{
+		
+const admin_nav = document.querySelector("nav#admin_nav")
+const list_table = document.querySelector("table.list_table")
+
+	if(admin_nav) {
+		admin_nav.addEventListener("click",(e)=>{
  			
  			let name = e.target.tagName
  			if(name === "LI") {
@@ -80,8 +85,10 @@
  				}
  			}
  		})
+	}
  		
- 		document.querySelector("table.list_table").addEventListener("click",(e)=>{
+ 	if(list_table) {
+ 		list_table.addEventListener("click",(e)=>{
  			if(e.target.tagName === "TD") {
  				if(${ADMIN eq 'admin_user' }) {
 	 				let u_id = e.target.closest("TR").dataset.id
@@ -95,7 +102,7 @@
  				}
  			} 
  		})
+ 	}
  		
-  
   </script>
 </html>

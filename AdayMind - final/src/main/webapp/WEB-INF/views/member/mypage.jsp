@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<link rel="stylesheet" href="${rootPath}/static/css/mypage.css?ver-100" />
-<script defer src="${rootPath}/static/js/mypage.js?ver-100"></script>
+<link rel="stylesheet" href="${rootPath}/static/css/mypage.css?ver-009" />
+<script defer src="${rootPath}/static/js/mypage.js?ver-005"></script>
 <style>
 div.msg.change.pw {
 	display: none;
@@ -164,6 +164,10 @@ let box = document.querySelector(".a");
 let ok = `${OK}`
 let flag_n = false
 let flag_m = false
+let cop_nick = ""
+let cop_mail = ""
+let user_nick = document.getElementById("nick_input")
+let user_mail = document.getElementById("email_input")
 if(ok) {
 	
 	if(ok > 0) {
@@ -215,6 +219,15 @@ let updateBtn = document.getElementById("update_btn")
 			alert("중복확인을 해주세요.")
 		}
 		else{
+			if(cop_nick != user_nick.value){
+				alert("닉네임을 다시 입력해주세요")
+				user_nick.focus()
+				return false
+			}else if(cop_mail != user_mail.value) {
+				alert("이메일을 다시 입력해주세요")
+				user_mail.focus()
+				return false
+			}
 			alert("수정이 완료되었습니다.")
 			acform.action = "${rootPath}/member/mypage"
 			url_now2.value = location.pathname;
@@ -268,7 +281,7 @@ btn_pw_change.addEventListener("click", ()=>{
 
 /* 7.19 비밀번호변경버튼 검사 끝 */
 /* 7.15 정보수정 닉네임 유효성검사 */
-let user_nick = document.getElementById("nick_input")
+
 let msg_update_nick = document.querySelector("div.update.nick")
 	if(user_nick) {
 		msg_update_nick.innerText = ""
@@ -295,6 +308,8 @@ let msg_update_nick = document.querySelector("div.update.nick")
 					msg_update_nick.innerText = "사용가능한 닉네임"
 					msg_update_nick.style.color = "#00ff00"
 					flag_n = true
+					cop_nick = u_nick
+					
 				}else {
 					msg_update_nick.innerText = "사용중인 닉네임(1)"
 					flag_n = false
@@ -305,7 +320,6 @@ let msg_update_nick = document.querySelector("div.update.nick")
 	}
 /* 7.15 정보수정 닉네임 유효성검사 끝 */
 
-let user_mail = document.getElementById("email_input")
 let msg_update_mail = document.querySelector("div.update.mail")
 
 /* 7.15 정보수정 이메일 유효성검사 */
@@ -334,6 +348,7 @@ if(user_mail) {
 				msg_update_mail.innerText = "사용가능한 이메일"
 				msg_update_mail.style.color = "#00ff00"
 				flag_m = true
+				cop_mail = u_mail
 			}else {
 				flag_m = false
 				msg_update_mail.innerText = "사용중인 이메일입니다(1)"

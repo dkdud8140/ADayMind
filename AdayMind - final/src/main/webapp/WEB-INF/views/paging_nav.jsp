@@ -56,26 +56,52 @@
 <script>
 	const page_nav = document.querySelector("ul.page_nav")
 	
-	
 	if(page_nav) {
 		page_nav.addEventListener("click",(e)=>{
-			const li = e.target
-			
+		const li = e.target
+		
 			if(li.tagName === "LI") {
 				const pageNum = e.target.dataset.num
 				let value = category.value
-				let search = document.querySelector("input#search").value
 				
 				if( ${ADMIN eq 'admin_write' } ) {
-					location.href = "${rootPath}/admin/admin_write?pageNum=" + pageNum;
+					
+					if(${PAGING eq 'MAIN' } ) {
+						location.href = "${rootPath}/admin/admin_write?pageNum=" + pageNum;
+					} else if(${PAGING eq 'SEARCH' } ) {
+						location.href = "${rootPath}/admin/write_search/"+value + "?search=" +`${SEARCH}` + "&pageNum=" + pageNum;
+					} else if(${PAGING eq 'SEARCH-DATE' } ) {
+						location.href = "${rootPath}/admin/write_search/date?stDate="+`${STDATE}` +"&edDate="+`${EDDATE}` +"&pageNum=" + pageNum;
+					}
+						
+					
 				} else if( ${ADMIN eq 'admin_user' } ) {
-					location.href = "${rootPath}/admin/admin_user?pageNum=" + pageNum
+						
+					if(${PAGING eq 'MAIN' } ) {
+						location.href = "${rootPath}/admin/admin_user?pageNum=" + pageNum
+					} else if(${PAGING eq 'SEARCH' } ) {
+						location.href = "${rootPath}/admin/user_search/"+value + "?search=" +`${SEARCH}` + "&pageNum=" + pageNum;
+					}
+								
+								
 				} else if( ${ADMIN eq 'admin_warning' } ) {
-					location.href = "${rootPath}/admin/admin_warning?pageNum=" + pageNum
+						
+					if(${PAGING eq 'MAIN' } ) {
+						location.href = "${rootPath}/admin/admin_warning?pageNum=" + pageNum
+					} else if(${PAGING eq 'SEARCH' } ) {
+						location.href = "${rootPath}/admin/warning_search/"+value + "?search=" +`${SEARCH}` + "&pageNum=" + pageNum;
+					} else if(${PAGING eq 'SEARCH-DATE' } ) {
+						location.href = "${rootPath}/admin/warning_search/date?stDate="+`${STDATE}` +"&edDate="+`${EDDATE}` +"&pageNum=" + pageNum;
+					}		
+								
 				}
 			}
+		
 		})
 	}
+ 		
+	
+	
 
 </script>
 

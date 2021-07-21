@@ -213,6 +213,9 @@ public class WritingServiceImplV1 implements WritingService {
 		
 		model.addAttribute("PAGE_NAV", pageDTO);
 		model.addAttribute("WTLIST", pageList);
+		
+		log.debug("페이징 DTO 확인 : {}" , pageDTO.toString());
+		
 	}
 
 //	@Override

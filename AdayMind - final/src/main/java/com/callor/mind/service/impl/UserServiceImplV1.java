@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import com.callor.mind.dao.ext.UserDao;
 import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.UserVO;
+import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.PageService;
 import com.callor.mind.service.UserService;
 
@@ -115,7 +116,7 @@ public class UserServiceImplV1 implements UserService {
 	
 	//0716 조아영 - 검색메소드
 	@Override
-	public List<UserVO> search(String category, String search, Model model) throws Exception {
+	public List<UserVO> search(int pageNum, String category, String search, Model model) throws Exception {
 		List<UserVO> users = new ArrayList<UserVO>();
 		
 		if(category.equalsIgnoreCase("seq")) {
@@ -135,6 +136,8 @@ public class UserServiceImplV1 implements UserService {
 			users = userDao.serchByMail(search);
 		} 
 		
+		this.paging(pageNum, model, users);
+		
 		return users;
 	}
 
@@ -153,20 +156,30 @@ public class UserServiceImplV1 implements UserService {
 
 	@Override
 	public List<UserVO> selectAllPage(int pageNum, Model model) {
+		
 		List<UserVO> userList = userDao.selectAll();
-		int totalList = userList.size();
+		this.paging(pageNum, model, userList);
+		
+		return null;
+	}
+	
+	
+	public void paging(int pageNum, Model model, List<UserVO> wtList) {
+		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pSer.makePage(totalList, pageNum);
 		
 		List<UserVO> pageList = new ArrayList<UserVO>();
 		
 		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {
-			pageList.add(userList.get(i));
+			pageList.add(wtList.get(i));
 		}
 		
 		model.addAttribute("PAGE_NAV", pageDTO);
 		model.addAttribute("USERS", pageList);
 		
-		return null;
+		log.debug("페이징 DTO 확인 : {}" , pageDTO.toString());
+		
 	}
+	
 }

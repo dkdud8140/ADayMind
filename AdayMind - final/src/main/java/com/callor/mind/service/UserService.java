@@ -34,7 +34,7 @@ public interface UserService {
 	public int ban(Long seq);
 	
 	//0716 admim 페이지에서 목록검색하기
-	public List<UserVO> search(String category, String search, Model model) throws Exception;
+	public List<UserVO> search(int pageNum, String category, String search, Model model) throws Exception;
 	
 	public int delete(UserVO userVO);
 	

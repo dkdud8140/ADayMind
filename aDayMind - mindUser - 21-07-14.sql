@@ -90,8 +90,6 @@ FOREIGN KEY(li_wr_seq)
 REFERENCES tbl_writing(wr_seq)
 ON DELETE CASCADE;
 
-
-
 ALTER TABLE tbl_like
 ADD CONSTRAINT fk_li_user
 FOREIGN KEY(li_fan)
@@ -121,4 +119,40 @@ DROP TABLE tbl_warning;
 DROP TABLE tbl_writing;
 
 
+SELECT * FROM tbl_user ;
 
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test10','test10','test10test10','test10' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test11','test11','test11test11','test11' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test12','test12','test12test12','test12' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test13','test13','test13test13','test13' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test14','test14','test14test14','test14' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test15','test15','test15test15','test15' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test16','test16','test16test16','test16' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test17','test17','test17test17','test17' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test18','test18','test18test18','test18' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test19','test19','test19test19','test19' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test20','test20','test20test20','test20' );
+
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test21','test21','test21test21','test21' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test22','test22','test22test22','test22' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test23','test23','test23test23','test23' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test24','test24','test24test24','test24' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test25','test25','test25test25','test25' );
+INSERT INTO tbl_user (u_id, u_nick, u_pw, u_mail)
+value ('test26','test26','test26test26','test26' );

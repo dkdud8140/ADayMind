@@ -10,6 +10,7 @@ import com.callor.mind.dao.ext.WarningDao;
 import com.callor.mind.dao.ext.WritingDao;
 import com.callor.mind.model.PageDTO;
 import com.callor.mind.model.WarningVO;
+import com.callor.mind.model.WritingVO;
 import com.callor.mind.service.PageService;
 import com.callor.mind.service.WarningService;
 
@@ -47,13 +48,10 @@ public class WarningServiceImplV1 implements WarningService {
 		return ret;
 	}
 
-	
-	
-	
 	// 0716 검색 메소드 추가
 	
 	@Override
-	public List<WarningVO> search(String category, String search, Model model) throws Exception {
+	public List<WarningVO> search(int pageNum, String category, String search, Model model) throws Exception {
 		
 		List<WarningVO> warning = new ArrayList<WarningVO>();
 		
@@ -74,20 +72,18 @@ public class WarningServiceImplV1 implements WarningService {
 			warning = wDao.findByWrite(search);
 		}
 		
-		
-		log.debug("검색결과 : {}", warning.toString());
-		
+		this.paging(pageNum, model, warning);
 		return warning;
 	}
 
 	@Override
-	public List<WarningVO> searchDate(String stDate, String edDate) {
+	public List<WarningVO> searchDate(int pageNum, String stDate, String edDate, Model model) {
 		stDate +=" 00:00:00";
 		edDate +=" 23:59:59";
 		
-		log.debug("%%검색날짜 , {} , {} ", stDate, edDate);
-		
-		return wDao.findByDate(stDate, edDate);
+		List<WarningVO> warnings =  wDao.findByDate(stDate, edDate);
+		this.paging(pageNum, model, warnings);
+		return warnings; 
 	}
 
 	@Override
@@ -97,31 +93,31 @@ public class WarningServiceImplV1 implements WarningService {
 		
 		//삭제된 신고 글 카운트 다운
 		wtDao.warningCountDown(warningVO.getWa_writing());
-		
 		return ret;
 	}
 
 	@Override
 	public List<WarningVO> selectAllPage(int pageNum, Model model) {
-		
-
 		List<WarningVO> warnings = wDao.selectAll();
-		int totalList = warnings.size();
+		this.paging(pageNum, model, warnings);
+		return null;
+	}
+	
+	// 0716 검색 메소드 추가 끝
+	
+	public void paging(int pageNum, Model model, List<WarningVO> wtList) {
+		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pSer.makePage(totalList, pageNum);
 		
 		List<WarningVO> pageList = new ArrayList<WarningVO>();
 		
 		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {
-			pageList.add(warnings.get(i));
+			pageList.add(wtList.get(i));
 		}
 		
 		model.addAttribute("PAGE_NAV", pageDTO);
 		model.addAttribute("WARNINGS", pageList);
-		
-		return null;
 	}
-	
-	// 0716 검색 메소드 추가 끝
 
 }

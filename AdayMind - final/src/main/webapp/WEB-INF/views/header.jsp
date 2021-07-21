@@ -222,7 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	let wr_seq = document.querySelector("input#wr_seq");
 	let click_login = document.querySelector("button#nav_login")
 	let click_join = document.querySelector("button#nav_join")
-
+	let com_id =""
+	let com_nick = ""
+	let com_mail = ""
 	let login_join = document.querySelector("form#login_join") // 회원가입,로그인 폼
 
 	/* 7.15 추가함수 로그인 유효성검사 */
@@ -256,8 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
 					return false
 				}	
 			})
-			
-			
 		}
 	})
 	/* 7.15 추가함수 로그인 유효성검사 끝 */
@@ -265,6 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let user_id = document.getElementById("user_id")
 	let msg_user_id = document.querySelector("div.join.id")
 	let chk_id = document.querySelector("div.check.id")
+	
 	let flag_id = false
 		if(user_id) {
 			msg_user_id.innerText = ""
@@ -294,6 +295,8 @@ document.addEventListener("DOMContentLoaded", () => {
 						msg_user_id.style.color = "#00ff00"
 						document.querySelector("input[name='u_nick']")
 						flag_id = true
+						com_id = u_id
+						
 					}else {
 						msg_user_id.innerText = "알 수 없는 결과를 수신함"
 						flag_id = false
@@ -333,6 +336,8 @@ document.addEventListener("DOMContentLoaded", () => {
 					msg_join_nick.innerText = "사용가능한 닉네임"
 					msg_join_nick.style.color = "#00ff00"
 					flag_nick = true
+					com_nick = u_nick
+					
 				}else {
 					msg_join_nick.innerText = "사용중인 닉네임(1)"
 					flag_nick = false
@@ -374,6 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					msg_join_mail.innerText = "사용가능한 이메일"
 					msg_join_mail.style.color = "#00ff00"
 					flag_mail = true
+					com_mail = u_mail
 				}
 			})
 		})
@@ -394,6 +400,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		if(chk_id == null || chk_id == ""){
 			alert("아이디는 반드시 입력해야 합니다.")
+			join_id.focus()
+			return false
+		}
+		if(chk_id.length < 4 ) {
+			alert("아이디는 4글자 이상 입력해주세요.")
 			join_id.focus()
 			return false
 		}
@@ -435,10 +446,26 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	
 		if(chk_id != "" || chk_pw != "" || chk_pw2 != "" || chk_nick != "" || chk_mail != ""){
-			alert("회원가입을 축하드립니다.")
 			login_join.action = "${rootPath}/member/join"
 			url_now.value = location.pathname;
 			wr_seq.value = `${WRITING.wr_seq}`
+			if(com_id != user_id.value) {
+				alert("아이디 중복확인을 다시해주세요.")
+				msg_user_id.style.display = "none"
+				user_id.focus()
+				return false
+			}else if(com_nick != join_nick.value) {
+				alert("닉네임 중복확인을 다시해주세요.")
+				msg_join_nick.style.display = "none"
+				join_nick.focus()
+				return false
+			}else if(com_mail != join_mail.value){
+				alert("이메일 중복확인을 다시해주세요.")
+				msg_join_mail.style.display = "none"
+				join_mail.focus()
+				return false
+			}
+			alert("회원가입을 축하드립니다.")
 			login_join.submit()
 		}
 		

@@ -51,7 +51,7 @@
 			<tr>
 				<td>유저경고</td>
 				<td>${USER.u_warning}</td>
-				<td>Level</td>
+				<td>회원등급</td>
 				<td>${USER.u_level}</td>
 			</tr>
 		</table>
@@ -117,6 +117,12 @@ let jsonString = JSON.stringify(json)
 	// 0720 삭제추가
 	document.querySelector("button.delete").addEventListener("click",(e)=>{
 		let className = e.target.className 
+		
+		if(${USER.u_level eq 0} ) {
+			alert("관리자 ID는 삭제할 수 없습니다")
+			return false
+		}
+		
 		if(confirm("삭제하시겠습니까?")) {
 			
 			fetch(`${rootPath}/admin/admin_user/delete/${u_seq}`, {
@@ -133,6 +139,12 @@ let jsonString = JSON.stringify(json)
 	
 	document.querySelector("button.ban").addEventListener("click",(e)=>{
 		let className = e.target.className 
+		
+		if(${USER.u_level eq 0} ) {
+			alert("관리자는 차단할 수 없습니다")
+			return false
+		}
+		
 		if(confirm("회원을 차단하시겠습니까?")) {
 			
 			fetch(`${rootPath}/admin/admin_user/banorlevelup/${u_seq}`, {

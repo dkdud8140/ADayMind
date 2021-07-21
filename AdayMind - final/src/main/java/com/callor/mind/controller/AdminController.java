@@ -96,8 +96,8 @@ public class AdminController {
 		
 		List<WritingVO> writing = wtSer.search(intPageNum, cat, search, model);
 		model.addAttribute("PAGING", "SEARCH");
-		model.addAttribute("WTLIST", writing);
 		model.addAttribute("ADMIN", "admin_write");
+		model.addAttribute("SEARCH", search);
 		return "admin/admin";
 	}
 	
@@ -119,8 +119,9 @@ public class AdminController {
 		
 		List<WritingVO> writing = wtSer.searchDate(intPageNum, stDate, edDate, model);
 		model.addAttribute("PAGING", "SEARCH-DATE");
-		model.addAttribute("WTLIST", writing);
 		model.addAttribute("ADMIN", "admin_write");
+		model.addAttribute("SDATE", stDate);
+		model.addAttribute("EDDATE", edDate);
 		return "admin/admin";
 	}
 	
@@ -151,7 +152,7 @@ public class AdminController {
 		uSer.selectAllPage(intPageNum,model);
 		
 		model.addAttribute("ADMIN", "admin_user");
-		
+		model.addAttribute("PAGING", "MAIN");
 		return "admin/admin";
 	}
 	
@@ -176,18 +177,18 @@ public class AdminController {
 									@RequestParam(name="search",required = false, defaultValue="") String search,
 									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) 
 									throws Exception {
-			
-		log.debug("####파라메터값 확인 : {}, {}",cat,search);
-			
+		
+		int intPageNum = Integer.valueOf(pageNum);
 		if(search.equals("") || search == null) {
 			return this.admin_user(model, session,pageNum);
 		}
 			
 		model.addAttribute("CAT",cat);
 			
-		List<UserVO> users = uSer.search(cat, search, model);
-		model.addAttribute("USERS", users);
+		List<UserVO> users = uSer.search(intPageNum, cat, search, model);
+		model.addAttribute("PAGING", "SEARCH");
 		model.addAttribute("ADMIN", "admin_user");
+		model.addAttribute("SEARCH", search);
 		return "admin/admin";
 	
 	}
@@ -206,13 +207,8 @@ public class AdminController {
 	public String admin_user_ban(@PathVariable("u_seq") Long u_seq) {
 		UserVO userVO = uSer.findBySeq(u_seq);
 		int ret = uSer.banOrLevelUp(userVO);
-		return "admin/admin";
+		return "redirect:/";
 	}
-	
-	
-	
-	
-	
 	
 	
 	
@@ -228,6 +224,7 @@ public class AdminController {
 		
 		wSer.selectAllPage(intPageNum, model);
 		model.addAttribute("ADMIN", "admin_warning");
+		model.addAttribute("PAGING", "MAIN");
 		
 		return "admin/admin";
 	}
@@ -245,8 +242,6 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
-	
-	
 
 	// 0716 신고 전체 목록에서 검색하기
 	@RequestMapping(value = "/warning_search/{CAT}", method=RequestMethod.GET)
@@ -255,9 +250,6 @@ public class AdminController {
 									@RequestParam(name="search",required = false, defaultValue="") String search,
 									@RequestParam(value="pageNum", required = false, defaultValue = "1") String pageNum) 
 											throws Exception {
-		
-		log.debug("####파라메터값 확인 : {}, {}",cat,search);
-		
 
 		int intPageNum = Integer.valueOf(pageNum);
 		
@@ -272,9 +264,10 @@ public class AdminController {
 		
 		model.addAttribute("CAT",cat);
 		
-		List<WarningVO> writing = wSer.search(cat, search, model);
-		model.addAttribute("WARNINGS", writing);
+		List<WarningVO> writing = wSer.search(intPageNum, cat, search, model);
 		model.addAttribute("ADMIN", "admin_warning");
+		model.addAttribute("PAGING", "SEARCH");
+		model.addAttribute("SEARCH", search);
 		return "admin/admin";
 	}
 	
@@ -301,9 +294,11 @@ public class AdminController {
 			return this.admin_warning(model, session,pageNum);
 		}
 		
-		List<WarningVO> writing = wSer.searchDate(stDate, edDate);
-		model.addAttribute("WARNINGS", writing);
+		List<WarningVO> writing = wSer.searchDate(intPageNum, stDate, edDate, model);
 		model.addAttribute("ADMIN", "admin_warning");
+		model.addAttribute("PAGING", "SEARCH-DATE");
+		model.addAttribute("SDATE", stDate);
+		model.addAttribute("EDDATE", edDate);
 		return "admin/admin";
 	}
 	

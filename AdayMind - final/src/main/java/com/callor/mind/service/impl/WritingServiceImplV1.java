@@ -204,6 +204,9 @@ public class WritingServiceImplV1 implements WritingService {
 		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pService.makePage(totalList, pageNum);
+		if(pageDTO == null) {
+			return;
+		}
 		
 		List<WritingVO> pageList = new ArrayList<WritingVO>();
 		
@@ -211,10 +214,10 @@ public class WritingServiceImplV1 implements WritingService {
 			pageList.add(wtList.get(i));
 		}
 		
+		
 		model.addAttribute("PAGE_NAV", pageDTO);
 		model.addAttribute("WTLIST", pageList);
 		
-		log.debug("페이징 DTO 확인 : {}" , pageDTO.toString());
 		
 	}
 

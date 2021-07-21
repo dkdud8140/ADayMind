@@ -39,13 +39,18 @@
 				<div class="heart-box">
 
 					<div class="content">
-						<span id="like_it"> 
-							<c:if test="${CHECK == 0}">
-									<span id="h_black">♡</span>
-							</c:if> 
-							<c:if test="${CHECK == 1}">
-									 <span id="h_red">♥</span>
-							</c:if>
+						<span id="like_it">
+							<c:choose> 
+								<c:when test="${CHECK == 0}">
+										<span id="h_black">♡</span>
+								</c:when> 
+								<c:when test="${CHECK == 1}">
+										 <span id="h_red">♥</span>
+								</c:when>
+								<c:otherwise>
+										<span id="h_black">♡</span>
+								</c:otherwise>
+							</c:choose>
 						</span>
 						<p id="like_it_text">${WRITING.wr_like_count}명이 공감중</p>
 					</div>

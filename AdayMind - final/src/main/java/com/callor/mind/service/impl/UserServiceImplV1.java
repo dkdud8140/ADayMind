@@ -168,7 +168,9 @@ public class UserServiceImplV1 implements UserService {
 		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pSer.makePage(totalList, pageNum);
-		
+		if(pageDTO == null) {
+			return;
+		}
 		List<UserVO> pageList = new ArrayList<UserVO>();
 		
 		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {

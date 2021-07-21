@@ -95,6 +95,11 @@ public class AdminController {
 		model.addAttribute("CAT",cat);
 		
 		List<WritingVO> writing = wtSer.search(intPageNum, cat, search, model);
+		
+		if(writing == null) {
+			return this.admin_write(model, session, pageNum);
+		}
+		
 		model.addAttribute("PAGING", "SEARCH");
 		model.addAttribute("ADMIN", "admin_write");
 		model.addAttribute("SEARCH", search);

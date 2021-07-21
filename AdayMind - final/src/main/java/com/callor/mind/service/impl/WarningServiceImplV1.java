@@ -109,7 +109,9 @@ public class WarningServiceImplV1 implements WarningService {
 		int totalList = wtList.size();
 		
 		PageDTO pageDTO = pSer.makePage(totalList, pageNum);
-		
+		if(pageDTO == null) {
+			return;
+		}
 		List<WarningVO> pageList = new ArrayList<WarningVO>();
 		
 		for(int i = pageDTO.getOffset() ; i <pageDTO.getLimit() ; i ++) {
